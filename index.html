@@ -135,7 +135,7 @@ const auth = getAuth(firebaseApp);
 const db = getFirestore(firebaseApp);
 // After creating Realtime Database, replace this placeholder with the exact URL shown in Firebase.
 // Example formats are https://PROJECT-default-rtdb.firebaseio.com or https://PROJECT.REGION.firebasedatabase.app
-const REALTIME_DATABASE_URL = "PASTE_REALTIME_DATABASE_URL_HERE";
+const REALTIME_DATABASE_URL = "https://hidden-937e5-default-rtdb.firebaseio.com/";
 const rtdb = REALTIME_DATABASE_URL.startsWith("https://") ? getDatabase(firebaseApp, REALTIME_DATABASE_URL) : null;
 const INTERNAL_EMAIL_DOMAIN = "@users.whisper.invalid";
 
