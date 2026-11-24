@@ -4,1837 +4,512 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Whisper - Messaging</title>
-
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-:root {
-    --bg: #0b0e14;
-    --panel: #121722;
-    --panel2: #191f2b;
-    --panel3: #222b39;
-    --border: #283142;
-    --text: #edf1fa;
-    --muted: #8c98aa;
-    --accent: #818cf8;
-    --accent2: #6366f1;
-    --green: #4ade80;
-}
-
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    height: 100vh;
-    overflow: hidden;
-}
-
-button, input {
-    font-family: inherit;
-}
-
-button {
-    cursor: pointer;
-    border: none;
-    color: inherit;
-}
-
-.app {
-    display: flex;
-    height: 100vh;
-    width: 100%;
-}
-
-/* SIDEBAR */
-
-.sidebar {
-    width: 310px;
-    min-width: 310px;
-    background: var(--panel);
-    border-right: 1px solid var(--border);
-    display: flex;
-    flex-direction: column;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 23px;
-    border-bottom: 1px solid var(--border);
-}
-
-.logo-icon {
-    width: 42px;
-    height: 42px;
-    background: linear-gradient(135deg, #818cf8, #6366f1);
-    border-radius: 13px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
-}
-
-.logo h1 {
-    font-size: 23px;
-    letter-spacing: 1px;
-}
-
-.logo small {
-    color: var(--muted);
-    font-size: 11px;
-}
-
-.search {
-    margin: 17px;
-    position: relative;
-}
-
-.search input {
-    width: 100%;
-    padding: 12px 15px;
-    border-radius: 10px;
-    background: var(--panel2);
-    border: 1px solid var(--border);
-    color: white;
-    outline: none;
-}
-
-.search input:focus {
-    border-color: var(--accent);
-}
-
-.sidebar-buttons {
-    display: flex;
-    gap: 8px;
-    padding: 0 17px 17px;
-}
-
-.sidebar-buttons button {
-    flex: 1;
-    padding: 11px 5px;
-    border-radius: 9px;
-    background: var(--accent2);
-    font-size: 12px;
-    font-weight: bold;
-}
-
-.sidebar-buttons button:hover {
-    background: var(--accent);
-}
-
-.section-title {
-    display: flex;
-    justify-content: space-between;
-    padding: 14px 19px;
-    color: var(--muted);
-    font-size: 11px;
-    letter-spacing: 1.5px;
-    font-weight: bold;
-}
-
-.chat-list {
-    flex: 1;
-    overflow-y: auto;
-}
-
-.chat-item {
-    display: flex;
-    gap: 12px;
-    padding: 14px 17px;
-    cursor: pointer;
-    transition: .15s;
-}
-
-.chat-item:hover {
-    background: var(--panel2);
-}
-
-.chat-item.active {
-    background: #242c40;
-    border-left: 3px solid var(--accent);
-}
-
-.avatar {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #475569, #64748b);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 17px;
-    font-weight: bold;
-    flex-shrink: 0;
-    position: relative;
-}
-
-.avatar.purple {
-    background: linear-gradient(135deg, #6d5ce8, #9c7aff);
-}
-
-.avatar.blue {
-    background: linear-gradient(135deg, #0ea5e9, #2563eb);
-}
-
-.avatar.green {
-    background: linear-gradient(135deg, #059669, #34d399);
-}
-
-.avatar.orange {
-    background: linear-gradient(135deg, #ea580c, #fb923c);
-}
-
-.online {
-    position: absolute;
-    width: 11px;
-    height: 11px;
-    bottom: 0;
-    right: 0;
-    background: var(--green);
-    border: 2px solid var(--panel);
-    border-radius: 50%;
-}
-
-.chat-info {
-    flex: 1;
-    min-width: 0;
-}
-
-.chat-info-top {
-    display: flex;
-    justify-content: space-between;
-    gap: 5px;
-}
-
-.chat-name {
-    font-size: 14px;
-    font-weight: bold;
-}
-
-.chat-time {
-    font-size: 10px;
-    color: var(--muted);
-}
-
-.chat-preview {
-    color: var(--muted);
-    font-size: 12px;
-    margin-top: 6px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.sidebar-footer {
-    padding: 15px;
-    border-top: 1px solid var(--border);
-}
-
-.profile {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.profile .avatar {
-    width: 38px;
-    height: 38px;
-}
-
-.profile-info {
-    flex: 1;
-}
-
-.profile-info strong {
-    font-size: 13px;
-}
-
-.profile-info small {
-    display: block;
-    margin-top: 4px;
-    color: var(--green);
-    font-size: 11px;
-}
-
-.settings-button {
-    background: transparent;
-    font-size: 20px;
-    color: var(--muted);
-}
-
-/* CHAT */
-
-.main {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-}
-
-.chat-header {
-    height: 76px;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    padding: 0 24px;
-    gap: 13px;
-    background: var(--panel);
-}
-
-.header-info {
-    flex: 1;
-}
-
-.header-info h2 {
-    font-size: 16px;
-}
-
-.header-info p {
-    color: var(--muted);
-    font-size: 12px;
-    margin-top: 5px;
-}
-
-.header-actions {
-    display: flex;
-    gap: 8px;
-}
-
-.header-actions button {
-    width: 38px;
-    height: 38px;
-    border-radius: 10px;
-    background: var(--panel2);
-    color: var(--muted);
-    font-size: 17px;
-}
-
-.header-actions button:hover {
-    background: var(--panel3);
-    color: white;
-}
-
-.messages {
-    flex: 1;
-    overflow-y: auto;
-    padding: 25px;
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-}
-
-.date-divider {
-    text-align: center;
-    font-size: 11px;
-    color: var(--muted);
-    margin: 10px 0;
-}
-
-.message {
-    display: flex;
-    gap: 10px;
-    max-width: 80%;
-    align-items: flex-end;
-}
-
-.message.mine {
-    align-self: flex-end;
-    flex-direction: row-reverse;
-}
-
-.message-avatar {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: #45536b;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    flex-shrink: 0;
-}
-
-.message-content {
-    min-width: 0;
-}
-
-.message-author {
-    font-size: 11px;
-    color: var(--muted);
-    margin-bottom: 5px;
-}
-
-.message.mine .message-author {
-    text-align: right;
-}
-
-.bubble {
-    background: var(--panel2);
-    padding: 12px 15px;
-    border-radius: 15px 15px 15px 4px;
-    font-size: 14px;
-    line-height: 1.5;
-    word-break: break-word;
-}
-
-.message.mine .bubble {
-    background: var(--accent2);
-    border-radius: 15px 15px 4px 15px;
-}
-
-.message-time {
-    font-size: 10px;
-    color: var(--muted);
-    margin-top: 5px;
-}
-
-.message.mine .message-time {
-    text-align: right;
-}
-
-.reply-preview {
-    background: rgba(0,0,0,.18);
-    border-left: 3px solid var(--accent);
-    padding: 8px;
-    margin-bottom: 8px;
-    border-radius: 4px;
-    font-size: 11px;
-    color: #d0d5ff;
-}
-
-.message-actions {
-    display: flex;
-    gap: 6px;
-    margin-top: 5px;
-    opacity: 0;
-}
-
-.message:hover .message-actions {
-    opacity: 1;
-}
-
-.message-actions button {
-    background: var(--panel3);
-    border-radius: 5px;
-    padding: 4px 7px;
-    font-size: 11px;
-}
-
-.message-actions button:hover {
-    background: var(--accent2);
-}
-
-.message-image {
-    max-width: 220px;
-    max-height: 220px;
-    border-radius: 10px;
-    display: block;
-}
-
-.file-card {
-    background: rgba(0,0,0,.15);
-    padding: 12px;
-    border-radius: 8px;
-    display: flex;
-    gap: 10px;
-    align-items: center;
-}
-
-/* INPUT */
-
-.input-area {
-    padding: 17px 24px 22px;
-    background: var(--panel);
-    border-top: 1px solid var(--border);
-}
-
-.replying-to {
-    display: none;
-    background: var(--panel2);
-    padding: 10px;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    font-size: 12px;
-    color: var(--muted);
-}
-
-.replying-to button {
-    float: right;
-    background: transparent;
-    color: white;
-}
-
-.input-box {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--panel2);
-    border: 1px solid var(--border);
-    border-radius: 13px;
-    padding: 8px;
-}
-
-.input-box input {
-    flex: 1;
-    min-width: 0;
-    border: none;
-    background: transparent;
-    color: white;
-    outline: none;
-    padding: 10px;
-    font-size: 14px;
-}
-
-.input-button {
-    width: 38px;
-    height: 38px;
-    background: transparent;
-    border-radius: 9px;
-    color: var(--muted);
-    font-size: 19px;
-}
-
-.input-button:hover {
-    background: var(--panel3);
-    color: white;
-}
-
-.send-button {
-    background: var(--accent2);
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
-    font-size: 17px;
-}
-
-.send-button:hover {
-    background: var(--accent);
-}
-
-.emoji-picker {
-    display: none;
-    position: absolute;
-    bottom: 90px;
-    background: var(--panel2);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 12px;
-    grid-template-columns: repeat(6, 35px);
-    gap: 5px;
-    box-shadow: 0 10px 30px rgba(0,0,0,.4);
-}
-
-.emoji-picker button {
-    background: transparent;
-    font-size: 23px;
-    padding: 5px;
-}
-
-.emoji-picker button:hover {
-    background: var(--panel3);
-    border-radius: 5px;
-}
-
-.empty {
-    text-align: center;
-    margin: auto;
-    color: var(--muted);
-}
-
-.empty h2 {
-    color: white;
-    margin-bottom: 10px;
-}
-
-.hidden {
-    display: none !important;
-}
-
-/* MODALS */
-
-.modal-backdrop {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,.7);
-    align-items: center;
-    justify-content: center;
-    z-index: 100;
-}
-
-.modal {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    width: 90%;
-    max-width: 400px;
-    border-radius: 18px;
-    padding: 25px;
-}
-
-.modal h2 {
-    margin-bottom: 8px;
-}
-
-.modal p {
-    color: var(--muted);
-    font-size: 13px;
-    margin-bottom: 18px;
-    line-height: 1.5;
-}
-
-.modal input {
-    width: 100%;
-    padding: 13px;
-    margin-bottom: 12px;
-    background: var(--panel2);
-    border: 1px solid var(--border);
-    border-radius: 9px;
-    color: white;
-    outline: none;
-}
-
-.modal input:focus {
-    border-color: var(--accent);
-}
-
-.modal-buttons {
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.modal-buttons button {
-    flex: 1;
-    padding: 12px;
-    border-radius: 9px;
-    background: var(--panel2);
-}
-
-.modal-buttons .primary {
-    background: var(--accent2);
-}
-
-.generated-code {
-    background: var(--panel2);
-    padding: 15px;
-    border-radius: 9px;
-    text-align: center;
-    font-size: 22px;
-    letter-spacing: 4px;
-    margin: 12px 0;
-    color: var(--accent);
-    font-weight: bold;
-}
-
-.toast {
-    position: fixed;
-    bottom: 25px;
-    right: 25px;
-    background: var(--panel3);
-    border: 1px solid var(--border);
-    padding: 15px 20px;
-    border-radius: 10px;
-    display: none;
-    z-index: 200;
-    box-shadow: 0 5px 20px rgba(0,0,0,.4);
-}
-
-.mobile-back {
-    display: none;
-}
-
-/* RESPONSIVE */
-
-@media(max-width: 700px) {
-    .sidebar {
-        width: 100%;
-        min-width: 0;
-    }
-
-    .main {
-        display: none;
-    }
-
-    .app.chat-open .sidebar {
-        display: none;
-    }
-
-    .app.chat-open .main {
-        display: flex;
-    }
-
-    .mobile-back {
-        display: block;
-        background: transparent;
-        font-size: 20px;
-    }
-
-    .chat-header {
-        padding: 0 12px;
-    }
-
-    .messages {
-        padding: 15px;
-    }
-
-    .input-area {
-        padding: 12px;
-    }
-
-    .message {
-        max-width: 90%;
-    }
-}
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0b0e14;--panel:#121722;--panel2:#191f2b;--panel3:#222b39;--border:#283142;--text:#edf1fa;--muted:#8c98aa;--accent:#818cf8;--accent2:#6366f1;--green:#4ade80;--red:#fb7185}
+body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);height:100vh;overflow:hidden}
+button,input{font-family:inherit}button{cursor:pointer;border:0;color:inherit}
+.hidden{display:none!important}
+#authScreen{position:fixed;inset:0;z-index:500;background:radial-gradient(circle at top,#202849 0,#0b0e14 55%);display:flex;align-items:center;justify-content:center;padding:20px}
+.auth-card{width:100%;max-width:410px;background:var(--panel);border:1px solid var(--border);border-radius:20px;padding:30px;box-shadow:0 20px 70px #0008}
+.auth-logo{display:flex;align-items:center;gap:12px;margin-bottom:26px}
+.logo-icon{width:44px;height:44px;border-radius:13px;background:linear-gradient(135deg,#818cf8,#6366f1);display:flex;align-items:center;justify-content:center;font-size:23px}
+.auth-logo h1{font-size:23px;letter-spacing:1px}.auth-logo small{color:var(--muted);font-size:11px}
+.auth-card h2{font-size:21px;margin-bottom:8px}.auth-card>p{color:var(--muted);font-size:13px;line-height:1.5;margin-bottom:20px}
+.auth-card label{display:block;color:var(--muted);font-size:12px;margin:13px 0 7px}
+.auth-card input{width:100%;padding:13px;background:var(--panel2);border:1px solid var(--border);border-radius:9px;color:white;outline:none}
+.auth-card input:focus{border-color:var(--accent)}
+.auth-primary{width:100%;padding:13px;background:var(--accent2);border-radius:9px;font-weight:bold;margin-top:18px}.auth-primary:hover{background:var(--accent)}
+.auth-switch{text-align:center;color:var(--muted);font-size:13px;margin-top:18px}.auth-switch button{background:transparent;color:#a5b4fc;font-weight:bold}
+.auth-note{color:var(--muted);font-size:11px;line-height:1.5;margin-top:16px}
+.auth-error{background:#4c1d2b;border:1px solid #87344b;color:#fecdd3;padding:10px;border-radius:8px;font-size:12px;margin-top:13px;display:none}
+.app{display:flex;height:100vh;width:100%}
+.sidebar{width:310px;min-width:310px;background:var(--panel);border-right:1px solid var(--border);display:flex;flex-direction:column}
+.logo{display:flex;align-items:center;gap:12px;padding:23px;border-bottom:1px solid var(--border)}
+.logo h1{font-size:23px;letter-spacing:1px}.logo small{color:var(--muted);font-size:11px}
+.search{margin:17px}.search input{width:100%;padding:12px 15px;border-radius:10px;background:var(--panel2);border:1px solid var(--border);color:white;outline:none}.search input:focus{border-color:var(--accent)}
+.sidebar-buttons{display:flex;gap:7px;padding:0 12px 15px}.sidebar-buttons button{flex:1;padding:10px 3px;border-radius:9px;background:var(--accent2);font-size:11px;font-weight:bold}.sidebar-buttons button:hover{background:var(--accent)}
+.section-title{display:flex;justify-content:space-between;padding:14px 19px;color:var(--muted);font-size:11px;letter-spacing:1.5px;font-weight:bold}
+.chat-list{flex:1;overflow-y:auto}.chat-item{display:flex;gap:12px;padding:14px 17px;cursor:pointer;transition:.15s}.chat-item:hover{background:var(--panel2)}.chat-item.active{background:#242c40;border-left:3px solid var(--accent)}
+.avatar{width:45px;height:45px;border-radius:50%;background:linear-gradient(135deg,#475569,#64748b);display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:bold;flex-shrink:0;position:relative}.avatar.purple{background:linear-gradient(135deg,#6d5ce8,#9c7aff)}.avatar.blue{background:linear-gradient(135deg,#0ea5e9,#2563eb)}.avatar.green{background:linear-gradient(135deg,#059669,#34d399)}.avatar.orange{background:linear-gradient(135deg,#ea580c,#fb923c)}
+.chat-info{flex:1;min-width:0}.chat-info-top{display:flex;justify-content:space-between;gap:5px}.chat-name{font-size:14px;font-weight:bold}.chat-time{font-size:10px;color:var(--muted)}.chat-preview{color:var(--muted);font-size:12px;margin-top:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sidebar-footer{padding:15px;border-top:1px solid var(--border)}.profile{display:flex;align-items:center;gap:12px}.profile .avatar{width:38px;height:38px}.profile-info{flex:1;min-width:0}.profile-info strong{font-size:13px}.profile-info small{display:block;margin-top:4px;color:var(--green);font-size:11px}.settings-button{background:transparent;font-size:20px;color:var(--muted)}
+.main{flex:1;display:flex;flex-direction:column;min-width:0}.chat-header{height:76px;min-height:76px;border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 24px;gap:13px;background:var(--panel)}.header-info{flex:1;min-width:0}.header-info h2{font-size:16px}.header-info p{color:var(--muted);font-size:12px;margin-top:5px}.header-actions{display:flex;gap:8px}.header-actions button{width:38px;height:38px;border-radius:10px;background:var(--panel2);color:var(--muted);font-size:17px}.header-actions button:hover{background:var(--panel3);color:white}
+.messages{flex:1;overflow-y:auto;padding:25px;display:flex;flex-direction:column;gap:18px}.date-divider{text-align:center;font-size:11px;color:var(--muted);margin:10px 0}.message{display:flex;gap:10px;max-width:80%;align-items:flex-end}.message.mine{align-self:flex-end;flex-direction:row-reverse}.message-avatar{width:32px;height:32px;border-radius:50%;background:#45536b;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}.message-content{min-width:0}.message-author{font-size:11px;color:var(--muted);margin-bottom:5px}.message.mine .message-author{text-align:right}.bubble{background:var(--panel2);padding:12px 15px;border-radius:15px 15px 15px 4px;font-size:14px;line-height:1.5;word-break:break-word;white-space:pre-wrap}.message.mine .bubble{background:var(--accent2);border-radius:15px 15px 4px 15px}.message-time{font-size:10px;color:var(--muted);margin-top:5px}.message.mine .message-time{text-align:right}.reply-preview{background:#0003;border-left:3px solid var(--accent);padding:8px;margin-bottom:8px;border-radius:4px;font-size:11px;color:#d0d5ff}.message-actions{display:flex;gap:6px;margin-top:5px;opacity:.15}.message:hover .message-actions{opacity:1}.message-actions button{background:var(--panel3);border-radius:5px;padding:4px 7px;font-size:11px}.message-actions button:hover{background:var(--accent2)}
+.input-area{padding:17px 24px 22px;background:var(--panel);border-top:1px solid var(--border)}.replying-to{display:none;background:var(--panel2);padding:10px;border-radius:8px;margin-bottom:10px;font-size:12px;color:var(--muted)}.replying-to button{float:right;background:transparent;color:white}.input-box{display:flex;align-items:center;gap:8px;background:var(--panel2);border:1px solid var(--border);border-radius:13px;padding:8px}.input-box input{flex:1;min-width:0;border:0;background:transparent;color:white;outline:none;padding:10px;font-size:14px}.input-button{width:38px;height:38px;background:transparent;border-radius:9px;color:var(--muted);font-size:19px}.input-button:hover{background:var(--panel3);color:white}.send-button{background:var(--accent2);width:40px;height:40px;border-radius:10px;font-size:17px}.send-button:hover{background:var(--accent)}
+.emoji-picker{display:none;position:absolute;bottom:90px;background:var(--panel2);border:1px solid var(--border);border-radius:12px;padding:12px;grid-template-columns:repeat(6,35px);gap:5px;box-shadow:0 10px 30px #0006}.emoji-picker button{background:transparent;font-size:23px;padding:5px}.emoji-picker button:hover{background:var(--panel3);border-radius:5px}.empty{text-align:center;margin:auto;color:var(--muted);max-width:400px;padding:25px}.empty h2{color:white;margin-bottom:10px}.empty p{font-size:13px;line-height:1.5}
+.modal-backdrop{display:none;position:fixed;inset:0;background:#000b;align-items:center;justify-content:center;z-index:100}.modal{background:var(--panel);border:1px solid var(--border);width:90%;max-width:400px;border-radius:18px;padding:25px}.modal h2{margin-bottom:8px}.modal p{color:var(--muted);font-size:13px;margin-bottom:18px;line-height:1.5}.modal input{width:100%;padding:13px;margin-bottom:12px;background:var(--panel2);border:1px solid var(--border);border-radius:9px;color:white;outline:none}.modal input:focus{border-color:var(--accent)}.modal-buttons{display:flex;gap:10px;margin-top:10px}.modal-buttons button{flex:1;padding:12px;border-radius:9px;background:var(--panel2)}.modal-buttons .primary{background:var(--accent2)}.generated-code{background:var(--panel2);padding:15px;border-radius:9px;text-align:center;font-size:22px;letter-spacing:4px;margin:12px 0;color:var(--accent);font-weight:bold}
+.toast{position:fixed;bottom:25px;right:25px;max-width:min(420px,90vw);background:var(--panel3);border:1px solid var(--border);padding:15px 20px;border-radius:10px;display:none;z-index:600;box-shadow:0 5px 20px #0006;font-size:13px}.mobile-back{display:none}
+@media(max-width:700px){.sidebar{width:100%;min-width:0}.main{display:none}.app.chat-open .sidebar{display:none}.app.chat-open .main{display:flex}.mobile-back{display:block;background:transparent;font-size:20px}.chat-header{padding:0 12px}.messages{padding:15px}.input-area{padding:12px}.message{max-width:90%}.header-actions button{width:34px;height:34px}}
 </style>
 </head>
-
 <body>
+<div id="authScreen">
+  <div class="auth-card">
+    <div class="auth-logo"><div class="logo-icon">💬</div><div><h1>WHISPER</h1><small>PRIVATE MESSAGING</small></div></div>
+    <h2 id="authTitle">Welcome back</h2>
+    <p id="authDescription">Sign in with your Whisper username and password.</p>
+    <form id="authForm">
+      <label for="authUsername">Username</label>
+      <input id="authUsername" maxlength="20" autocomplete="username" placeholder="e.g. skywalker" required>
+      <label for="authPassword">Password</label>
+      <input id="authPassword" type="password" minlength="8" autocomplete="current-password" placeholder="At least 8 characters" required>
+      <button class="auth-primary" id="authSubmit" type="submit">Sign in</button>
+    </form>
+    <div class="auth-error" id="authError"></div>
+    <div class="auth-switch"><span id="authSwitchText">New to Whisper?</span> <button id="authSwitchButton" type="button">Create an account</button></div>
+    <div class="auth-note">Usernames must be 3–20 characters using letters, numbers, or underscores. No email address is required. Because accounts use no email, email-based password recovery is unavailable. Keep your password somewhere safe and never reuse a password from another site.</div>
+  </div>
+</div>
 
-<div class="app" id="app">
-
-<!-- SIDEBAR -->
-
-<div class="sidebar">
-
-    <div class="logo">
-        <div class="logo-icon">💬</div>
-        <div>
-            <h1>WHISPER</h1>
-            <small>MESSAGING</small>
-        </div>
-    </div>
-
-    <div class="search">
-        <input id="searchInput"
-               placeholder="🔍 Search conversations..."
-               oninput="searchChats()">
-    </div>
-
+<div class="app hidden" id="app">
+  <aside class="sidebar">
+    <div class="logo"><div class="logo-icon">💬</div><div><h1>WHISPER</h1><small>MESSAGING</small></div></div>
+    <div class="search"><input id="searchInput" placeholder="🔍 Search conversations..."></div>
     <div class="sidebar-buttons">
-        <button onclick="openModal('newChatModal')">＋ New Chat</button>
-        <button onclick="openModal('groupModal')">＋ Group</button>
+      <button onclick="openModal('newChatModal')">＋ New Chat</button>
+      <button onclick="openModal('groupModal')">＋ Group</button>
+      <button onclick="openModal('joinModal')">Join</button>
     </div>
-
-    <div class="section-title">
-        <span>CONVERSATIONS</span>
-        <span id="chatCount">3</span>
-    </div>
-
+    <div class="section-title"><span>CONVERSATIONS</span><span id="chatCount">0</span></div>
     <div class="chat-list" id="chatList"></div>
+    <div class="sidebar-footer"><div class="profile"><div class="avatar purple" id="profileAvatar">U</div><div class="profile-info"><strong id="currentUsername">You</strong><small>● Signed in</small></div><button class="settings-button" onclick="signOutUser()" title="Sign out">⇥</button></div></div>
+  </aside>
 
-    <div class="sidebar-footer">
-        <div class="profile">
-            <div class="avatar purple">Y</div>
-            <div class="profile-info">
-                <strong id="currentUsername">You</strong>
-                <small>● Online</small>
-            </div>
-            <button class="settings-button"
-                    onclick="openModal('profileModal')">⚙</button>
-        </div>
-    </div>
-
-</div>
-
-<!-- MAIN CHAT -->
-
-<div class="main">
-
+  <main class="main">
     <div class="chat-header">
-
-        <button class="mobile-back" onclick="goBack()">←</button>
-
-        <div class="avatar purple" id="headerAvatar">J</div>
-
-        <div class="header-info">
-            <h2 id="headerName">Jordan</h2>
-            <p id="headerStatus">Online</p>
-        </div>
-
-        <div class="header-actions">
-            <button title="Voice call"
-                    onclick="showToast('Voice calls will be added in a future version.')">
-                📞
-            </button>
-
-            <button title="Video call"
-                    onclick="showToast('Video calls will be added in a future version.')">
-                📹
-            </button>
-
-            <button title="Group information"
-                    onclick="showGroupInfo()">
-                ⓘ
-            </button>
-        </div>
-
+      <button class="mobile-back" onclick="goBack()">←</button>
+      <div class="avatar purple" id="headerAvatar">W</div>
+      <div class="header-info"><h2 id="headerName">Whisper</h2><p id="headerStatus">Choose a conversation</p></div>
+      <div class="header-actions">
+        <button title="Voice call" onclick="showToast('Voice calls are not connected yet.')">📞</button>
+        <button title="Video call" onclick="showToast('Video calls are not connected yet.')">📹</button>
+        <button title="Conversation info" onclick="showGroupInfo()">ⓘ</button>
+      </div>
     </div>
-
-    <div class="messages" id="messages"></div>
-
+    <div class="messages" id="messages"><div class="empty"><h2>Welcome to Whisper</h2><p>Start a private conversation or create a group. Your messages will sync through Firebase.</p></div></div>
     <div class="input-area">
-
-        <div class="replying-to" id="replyBox">
-            Replying to: <span id="replyText"></span>
-            <button onclick="cancelReply()">✕</button>
-        </div>
-
-        <div class="input-box">
-
-            <button class="input-button"
-                    onclick="toggleEmoji()"
-                    title="Emojis">😊</button>
-
-            <button class="input-button"
-                    onclick="document.getElementById('imageInput').click()"
-                    title="Send image">🖼</button>
-
-            <button class="input-button"
-                    onclick="document.getElementById('fileInput').click()"
-                    title="Send file">📎</button>
-
-            <input id="messageInput"
-                   placeholder="Write a message..."
-                   autocomplete="off"
-                   onkeydown="if(event.key==='Enter')sendMessage()">
-
-            <button class="send-button"
-                    onclick="sendMessage()">➤</button>
-
-        </div>
-
-        <div class="emoji-picker" id="emojiPicker"></div>
-
-        <input type="file"
-               id="imageInput"
-               accept="image/*"
-               hidden
-               onchange="sendImage(this)">
-
-        <input type="file"
-               id="fileInput"
-               hidden
-               onchange="sendFile(this)">
-
+      <div class="replying-to" id="replyBox">Replying to: <span id="replyText"></span><button onclick="cancelReply()">✕</button></div>
+      <div class="input-box">
+        <button class="input-button" onclick="toggleEmoji()" title="Emojis">😊</button>
+        <button class="input-button" onclick="showToast('Image sharing is not set up yet. Firebase Storage needs to be enabled first.')" title="Send image">🖼</button>
+        <button class="input-button" onclick="showToast('File sharing is not set up yet. Firebase Storage needs to be enabled first.')" title="Send file">📎</button>
+        <input id="messageInput" placeholder="Write a message..." autocomplete="off">
+        <button class="send-button" onclick="sendMessage()">➤</button>
+      </div>
+      <div class="emoji-picker" id="emojiPicker"></div>
     </div>
-
+  </main>
 </div>
 
-</div>
-
-<!-- NEW CHAT MODAL -->
-
-<div class="modal-backdrop" id="newChatModal">
-    <div class="modal">
-        <h2>New conversation</h2>
-        <p>Enter the username of the person you want to message.</p>
-
-        <input id="newChatUsername"
-               placeholder="Username">
-
-        <div class="modal-buttons">
-            <button onclick="closeModal('newChatModal')">Cancel</button>
-            <button class="primary" onclick="createChat()">Start chat</button>
-        </div>
-    </div>
-</div>
-
-<!-- GROUP MODAL -->
-
-<div class="modal-backdrop" id="groupModal">
-    <div class="modal">
-        <h2>Create a group</h2>
-        <p>Create a group and generate a join code.</p>
-
-        <input id="groupName"
-               placeholder="Group name">
-
-        <div class="modal-buttons">
-            <button onclick="closeModal('groupModal')">Cancel</button>
-            <button class="primary" onclick="createGroup()">Create group</button>
-        </div>
-    </div>
-</div>
-
-<!-- JOIN GROUP MODAL -->
-
-<div class="modal-backdrop" id="joinModal">
-    <div class="modal">
-        <h2>Join a group</h2>
-        <p>Enter the join code for a group.</p>
-
-        <input id="joinCode"
-               placeholder="Enter join code">
-
-        <div class="modal-buttons">
-            <button onclick="closeModal('joinModal')">Cancel</button>
-            <button class="primary" onclick="joinGroup()">Join group</button>
-        </div>
-    </div>
-</div>
-
-<!-- CODE MODAL -->
-
-<div class="modal-backdrop" id="codeModal">
-    <div class="modal">
-        <h2>Group created!</h2>
-        <p>Share this join code with your friends.</p>
-
-        <div class="generated-code" id="generatedCode"></div>
-
-        <div class="modal-buttons">
-            <button onclick="copyCode()">📋 Copy code</button>
-            <button class="primary" onclick="closeModal('codeModal')">Done</button>
-        </div>
-    </div>
-</div>
-
-<!-- PROFILE MODAL -->
-
-<div class="modal-backdrop" id="profileModal">
-    <div class="modal">
-        <h2>Your profile</h2>
-        <p>Change your display username.</p>
-
-        <input id="profileUsername"
-               placeholder="Username">
-
-        <div class="modal-buttons">
-            <button onclick="closeModal('profileModal')">Cancel</button>
-            <button class="primary" onclick="saveProfile()">Save</button>
-        </div>
-    </div>
-</div>
-
-<!-- TOAST -->
-
+<div class="modal-backdrop" id="newChatModal"><div class="modal"><h2>New conversation</h2><p>Enter the exact Whisper username of the person you want to message.</p><input id="newChatUsername" maxlength="20" placeholder="Username"><div class="modal-buttons"><button onclick="closeModal('newChatModal')">Cancel</button><button class="primary" onclick="createPrivateChat()">Start chat</button></div></div></div>
+<div class="modal-backdrop" id="groupModal"><div class="modal"><h2>Create a group</h2><p>Create a group and share its private join code with people you trust.</p><input id="groupName" maxlength="40" placeholder="Group name"><div class="modal-buttons"><button onclick="closeModal('groupModal')">Cancel</button><button class="primary" onclick="createGroup()">Create group</button></div></div></div>
+<div class="modal-backdrop" id="joinModal"><div class="modal"><h2>Join a group</h2><p>Enter the group join code shared with you.</p><input id="joinCode" maxlength="12" placeholder="Enter join code"><div class="modal-buttons"><button onclick="closeModal('joinModal')">Cancel</button><button class="primary" onclick="joinGroup()">Join group</button></div></div></div>
+<div class="modal-backdrop" id="codeModal"><div class="modal"><h2>Group created!</h2><p>Share this join code privately with the people you want to invite.</p><div class="generated-code" id="generatedCode"></div><div class="modal-buttons"><button onclick="copyCode()">📋 Copy code</button><button class="primary" onclick="closeModal('codeModal')">Done</button></div></div></div>
 <div class="toast" id="toast"></div>
 
-<script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
+import { getFirestore, collection, doc, getDoc, setDoc, addDoc, updateDoc, arrayUnion, serverTimestamp, query, where, onSnapshot, orderBy, limit } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-firestore.js";
 
-// ======================================
-// WHISPER DEMO
-// ======================================
+const firebaseConfig = {
+  apiKey: "AIzaSyCp3j9EjAL8nGvLbiKqJPW3311w3DeIrxs",
+  authDomain: "hidden-937e5.firebaseapp.com",
+  projectId: "hidden-937e5",
+  storageBucket: "hidden-937e5.firebasestorage.app",
+  messagingSenderId: "65226741080",
+  appId: "1:65226741080:web:5fa85b7f2476cbecbd012d"
+};
 
-let username = "You";
+const firebaseApp = initializeApp(firebaseConfig);
+const auth = getAuth(firebaseApp);
+const db = getFirestore(firebaseApp);
+const INTERNAL_EMAIL_DOMAIN = "@users.whisper.invalid";
+
+let currentUser = null;
+let username = "";
+let chats = [];
 let currentChat = null;
+let currentMessages = [];
 let replyingTo = null;
+let chatsUnsubscribe = null;
+let messagesUnsubscribe = null;
+let authMode = "login";
 let generatedJoinCode = "";
 
-let chats = [
+const $ = (id) => document.getElementById(id);
+const normalizeUsername = (value) => value.trim().toLowerCase();
+const usernameIsValid = (value) => /^[a-z0-9_]{3,20}$/.test(value);
+const internalEmail = (value) => normalizeUsername(value) + INTERNAL_EMAIL_DOMAIN;
 
-    {
-        id: "jordan",
-        name: "Jordan",
-        type: "private",
-        avatar: "J",
-        color: "purple",
-        status: "Online",
-        messages: [
-            {
-                sender: "Jordan",
-                text: "Hey! What's up?",
-                time: "4:32 PM"
-            },
-            {
-                sender: "You",
-                text: "Not much, just working on this app!",
-                time: "4:33 PM"
-            },
-            {
-                sender: "Jordan",
-                text: "That looks pretty cool 👀",
-                time: "4:34 PM"
-            }
-        ]
-    },
-
-    {
-        id: "gaming",
-        name: "Gaming Group",
-        type: "group",
-        avatar: "G",
-        color: "blue",
-        status: "3 members",
-        code: "GAME42",
-        messages: [
-            {
-                sender: "Alex",
-                text: "Anyone online?",
-                time: "4:29 PM"
-            },
-            {
-                sender: "Jordan",
-                text: "I'm free later 🎮",
-                time: "4:30 PM"
-            },
-            {
-                sender: "You",
-                text: "Sounds good!",
-                time: "4:31 PM"
-            }
-        ]
-    },
-
-    {
-        id: "alex",
-        name: "Alex",
-        type: "private",
-        avatar: "A",
-        color: "green",
-        status: "Offline",
-        messages: [
-            {
-                sender: "Alex",
-                text: "Did you finish the project?",
-                time: "Yesterday"
-            }
-        ]
-    }
-
-];
-
-
-// ======================================
-// INITIALIZATION
-// ======================================
-
-function initialize() {
-
-    currentChat = chats[0];
-
-    renderChatList();
-    renderMessages();
-    updateHeader();
-
-    initializeEmojis();
-
-    document.getElementById("currentUsername").textContent = username;
-    document.getElementById("profileUsername").value = username;
-
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[ch]));
+}
+function timestampDate(value) {
+  if (!value) return null;
+  if (typeof value.toDate === "function") return value.toDate();
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? null : date;
+}
+function formatTime(value) {
+  const date = timestampDate(value);
+  return date ? date.toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"}) : "";
+}
+function latestMessagePreview(message) {
+  if (!message) return "No messages yet";
+  return message.text || "Message";
+}
+function showToast(message) {
+  const toast = $("toast");
+  toast.textContent = message;
+  toast.style.display = "block";
+  clearTimeout(showToast.timer);
+  showToast.timer = setTimeout(() => { toast.style.display = "none"; }, 3500);
+}
+function showAuthError(message) {
+  const box = $("authError");
+  box.textContent = message;
+  box.style.display = "block";
+}
+function friendlyAuthError(error) {
+  const code = error?.code || "";
+  if (code.includes("email-already-in-use")) return "That username is already taken. Try another one.";
+  if (code.includes("invalid-credential") || code.includes("wrong-password") || code.includes("user-not-found")) return "Username or password is incorrect.";
+  if (code.includes("weak-password")) return "Choose a stronger password with at least 8 characters.";
+  if (code.includes("network-request-failed")) return "Network error. Check your internet connection and try again.";
+  if (code.includes("operation-not-allowed")) return "Email/Password sign-in is not enabled in Firebase Authentication yet.";
+  return error?.message || "Something went wrong. Please try again.";
 }
 
-initialize();
+function switchAuthMode() {
+  authMode = authMode === "login" ? "register" : "login";
+  $("authTitle").textContent = authMode === "login" ? "Welcome back" : "Create your account";
+  $("authDescription").textContent = authMode === "login" ? "Sign in with your Whisper username and password." : "Choose a unique username and a password for Whisper.";
+  $("authSubmit").textContent = authMode === "login" ? "Sign in" : "Create account";
+  $("authSwitchText").textContent = authMode === "login" ? "New to Whisper?" : "Already have an account?";
+  $("authSwitchButton").textContent = authMode === "login" ? "Create an account" : "Sign in instead";
+  $("authPassword").setAttribute("autocomplete", authMode === "login" ? "current-password" : "new-password");
+  $("authError").style.display = "none";
+}
 
+async function submitAuth(event) {
+  event.preventDefault();
+  $("authError").style.display = "none";
+  const name = normalizeUsername($("authUsername").value);
+  const password = $("authPassword").value;
+  if (!usernameIsValid(name)) {
+    showAuthError("Use 3–20 characters: lowercase letters, numbers, or underscores.");
+    return;
+  }
+  if (password.length < 8) {
+    showAuthError("Your password must be at least 8 characters long.");
+    return;
+  }
+  const submit = $("authSubmit");
+  submit.disabled = true;
+  submit.textContent = authMode === "login" ? "Signing in..." : "Creating account...";
+  try {
+    if (authMode === "register") {
+      await createUserWithEmailAndPassword(auth, internalEmail(name), password);
+    } else {
+      await signInWithEmailAndPassword(auth, internalEmail(name), password);
+    }
+  } catch (error) {
+    showAuthError(friendlyAuthError(error));
+    submit.disabled = false;
+    submit.textContent = authMode === "login" ? "Sign in" : "Create account";
+  }
+}
 
-// ======================================
-// CHAT LIST
-// ======================================
+async function ensureUsernameRecord(user) {
+  const email = user.email || "";
+  if (!email.endsWith(INTERNAL_EMAIL_DOMAIN)) throw new Error("This account is not configured as a Whisper username account.");
+  const name = email.slice(0, -INTERNAL_EMAIL_DOMAIN.length);
+  if (!usernameIsValid(name)) throw new Error("The username on this account is not valid.");
+  const usernameRef = doc(db, "usernames", name);
+  const existing = await getDoc(usernameRef);
+  if (existing.exists()) {
+    if (existing.data().uid !== user.uid) throw new Error("Username record mismatch. Contact the app administrator.");
+  } else {
+    await setDoc(usernameRef, {uid:user.uid, username:name, usernameLower:name, createdAt:serverTimestamp()});
+  }
+  return name;
+}
+
+function stopRealtimeListeners() {
+  if (chatsUnsubscribe) chatsUnsubscribe();
+  if (messagesUnsubscribe) messagesUnsubscribe();
+  chatsUnsubscribe = null;
+  messagesUnsubscribe = null;
+}
+
+async function handleAuthState(user) {
+  stopRealtimeListeners();
+  currentUser = user;
+  if (!user) {
+    username = ""; chats = []; currentChat = null; currentMessages = [];
+    $("app").classList.add("hidden");
+    $("authScreen").classList.remove("hidden");
+    $("authSubmit").disabled = false;
+    $("authSubmit").textContent = authMode === "login" ? "Sign in" : "Create account";
+    return;
+  }
+  try {
+    username = await ensureUsernameRecord(user);
+    $("authScreen").classList.add("hidden");
+    $("app").classList.remove("hidden");
+    $("currentUsername").textContent = username;
+    $("profileAvatar").textContent = username.charAt(0).toUpperCase();
+    startChatsListener();
+  } catch (error) {
+    showAuthError(friendlyAuthError(error));
+    showToast("Could not load your Whisper profile: " + error.message);
+    await signOut(auth);
+  }
+}
+
+function startChatsListener() {
+  const chatsQuery = query(collection(db, "chats"), where("members", "array-contains", currentUser.uid));
+  chatsUnsubscribe = onSnapshot(chatsQuery, snapshot => {
+    chats = snapshot.docs.map(item => ({id:item.id, ...item.data()}));
+    chats.sort((a,b) => (timestampDate(b.updatedAt)?.getTime() || 0) - (timestampDate(a.updatedAt)?.getTime() || 0));
+    renderChatList();
+    if (currentChat) {
+      const refreshed = chats.find(chat => chat.id === currentChat.id);
+      if (refreshed) currentChat = refreshed;
+      else { currentChat = null; currentMessages = []; if (messagesUnsubscribe) messagesUnsubscribe(); messagesUnsubscribe = null; }
+    }
+    if (!currentChat && chats.length) selectChat(chats[0].id, false);
+    if (!currentChat && chats.length === 0) renderEmptyChat();
+    if (currentChat) updateHeader();
+  }, error => showToast("Couldn't load conversations: " + error.message));
+}
 
 function renderChatList() {
-
-    const list = document.getElementById("chatList");
-
-    list.innerHTML = "";
-
-    chats.forEach(chat => {
-
-        const lastMessage =
-            chat.messages.length > 0
-            ? chat.messages[chat.messages.length - 1].text || "Attachment"
-            : "No messages yet";
-
-        const item = document.createElement("div");
-
-        item.className =
-            "chat-item" +
-            (currentChat && currentChat.id === chat.id
-                ? " active"
-                : "");
-
-        item.dataset.id = chat.id;
-
-        item.innerHTML = `
-            <div class="avatar ${chat.color}">
-                ${escapeHTML(chat.avatar)}
-                ${chat.type === "private" && chat.status === "Online"
-                    ? '<div class="online"></div>'
-                    : ''}
-            </div>
-
-            <div class="chat-info">
-
-                <div class="chat-info-top">
-                    <span class="chat-name">
-                        ${escapeHTML(chat.name)}
-                    </span>
-
-                    <span class="chat-time">
-                        ${chat.messages.length
-                            ? chat.messages[chat.messages.length - 1].time
-                            : ""}
-                    </span>
-                </div>
-
-                <div class="chat-preview">
-                    ${escapeHTML(lastMessage)}
-                </div>
-
-            </div>
-        `;
-
-        item.onclick = () => selectChat(chat.id);
-
-        list.appendChild(item);
-
-    });
-
-    document.getElementById("chatCount").textContent = chats.length;
-
+  const list = $("chatList");
+  const search = $("searchInput").value.trim().toLowerCase();
+  list.innerHTML = "";
+  const filtered = chats.filter(chat => chatDisplayName(chat).toLowerCase().includes(search));
+  filtered.forEach(chat => {
+    const isGroup = chat.type === "group";
+    const name = chatDisplayName(chat);
+    const item = document.createElement("div");
+    item.className = "chat-item" + (currentChat?.id === chat.id ? " active" : "");
+    item.innerHTML = `<div class="avatar ${isGroup ? "blue" : "purple"}">${escapeHTML(name.charAt(0).toUpperCase())}</div><div class="chat-info"><div class="chat-info-top"><span class="chat-name">${escapeHTML(name)}</span><span class="chat-time">${escapeHTML(formatTime(chat.updatedAt))}</span></div><div class="chat-preview">${isGroup ? "Group" : "Private conversation"}</div></div>`;
+    item.addEventListener("click", () => selectChat(chat.id));
+    list.appendChild(item);
+  });
+  $("chatCount").textContent = chats.length;
+  if (!filtered.length) {
+    const empty = document.createElement("div");
+    empty.className = "empty";
+    empty.innerHTML = `<p>${chats.length ? "No matching conversations." : "No conversations yet. Create a new chat or group to get started."}</p>`;
+    list.appendChild(empty);
+  }
 }
 
+function chatDisplayName(chat) {
+  if (chat.type === "group") return chat.groupName || "Group";
+  const otherUid = (chat.members || []).find(id => id !== currentUser?.uid);
+  return chat.memberNames?.[otherUid] || "Private conversation";
+}
 
-// ======================================
-// SELECT CHAT
-// ======================================
-
-function selectChat(id) {
-
-    currentChat = chats.find(chat => chat.id === id);
-
-    if (!currentChat) return;
-
-    renderChatList();
+function selectChat(id, addMobileClass = true) {
+  const selected = chats.find(chat => chat.id === id);
+  if (!selected) return;
+  currentChat = selected;
+  currentMessages = [];
+  if (messagesUnsubscribe) messagesUnsubscribe();
+  updateHeader();
+  renderChatList();
+  $("app").classList.toggle("chat-open", addMobileClass);
+  const messagesQuery = query(collection(db, "chats", id, "messages"), orderBy("createdAt", "asc"), limit(150));
+  messagesUnsubscribe = onSnapshot(messagesQuery, snapshot => {
+    currentMessages = snapshot.docs.map(item => ({id:item.id, ...item.data()}));
     renderMessages();
-    updateHeader();
-
-    document.getElementById("app").classList.add("chat-open");
-
+  }, error => showToast("Couldn't load messages: " + error.message));
 }
 
 function updateHeader() {
-
-    if (!currentChat) return;
-
-    document.getElementById("headerName").textContent =
-        currentChat.name;
-
-    document.getElementById("headerAvatar").textContent =
-        currentChat.avatar;
-
-    document.getElementById("headerStatus").textContent =
-        currentChat.status;
-
+  if (!currentChat) return;
+  const name = chatDisplayName(currentChat);
+  $("headerName").textContent = name;
+  $("headerAvatar").textContent = name.charAt(0).toUpperCase();
+  $("headerStatus").textContent = currentChat.type === "group" ? `${(currentChat.members || []).length} member(s)` : "Private conversation";
 }
 
-
-// ======================================
-// RENDER MESSAGES
-// ======================================
+function renderEmptyChat() {
+  $("headerName").textContent = "Whisper";
+  $("headerAvatar").textContent = "W";
+  $("headerStatus").textContent = "Choose a conversation";
+  $("messages").innerHTML = '<div class="empty"><h2>Welcome to Whisper</h2><p>Start a private conversation or create a group. Your messages will sync through Firebase.</p></div>';
+}
 
 function renderMessages() {
-
-    const container = document.getElementById("messages");
-
-    container.innerHTML = "";
-
-    if (!currentChat) {
-
-        container.innerHTML = `
-            <div class="empty">
-                <h2>Select a conversation</h2>
-                <p>Choose a chat to start messaging.</p>
-            </div>
-        `;
-
-        return;
-
-    }
-
-    const date = document.createElement("div");
-
-    date.className = "date-divider";
-    date.textContent = "TODAY";
-
-    container.appendChild(date);
-
-    currentChat.messages.forEach((message, index) => {
-
-        const mine = message.sender === username;
-
-        const element = document.createElement("div");
-
-        element.className =
-            "message" + (mine ? " mine" : "");
-
-        let content = "";
-
-        if (message.reply) {
-
-            content += `
-                <div class="reply-preview">
-                    ${escapeHTML(message.reply)}
-                </div>
-            `;
-
-        }
-
-        if (message.image) {
-
-            content += `
-                <img
-                    class="message-image"
-                    src="${message.image}"
-                    alt="Shared image">
-            `;
-
-        }
-
-        if (message.file) {
-
-            content += `
-                <div class="file-card">
-                    📎 ${escapeHTML(message.file)}
-                </div>
-            `;
-
-        }
-
-        if (message.text) {
-
-            content += escapeHTML(message.text);
-
-        }
-
-        element.innerHTML = `
-
-            <div class="message-avatar">
-                ${escapeHTML(message.sender.charAt(0).toUpperCase())}
-            </div>
-
-            <div class="message-content">
-
-                <div class="message-author">
-                    ${mine ? "You" : escapeHTML(message.sender)}
-                </div>
-
-                <div class="bubble">
-                    ${content}
-                </div>
-
-                <div class="message-time">
-                    ${message.time || ""}
-                </div>
-
-                <div class="message-actions">
-
-                    <button onclick="replyToMessage(${index})">
-                        ↩ Reply
-                    </button>
-
-                    <button onclick="reactToMessage(${index})">
-                        😊 React
-                    </button>
-
-                </div>
-
-            </div>
-
-        `;
-
-        container.appendChild(element);
-
-    });
-
-    container.scrollTop = container.scrollHeight;
-
+  const container = $("messages");
+  container.innerHTML = "";
+  if (!currentChat) { renderEmptyChat(); return; }
+  if (!currentMessages.length) {
+    container.innerHTML = '<div class="empty"><h2>No messages yet</h2><p>Send the first message to start the conversation.</p></div>';
+    return;
+  }
+  const date = document.createElement("div");
+  date.className = "date-divider"; date.textContent = "MESSAGES"; container.appendChild(date);
+  currentMessages.forEach(message => {
+    const mine = message.senderUid === currentUser.uid;
+    const element = document.createElement("div");
+    element.className = "message" + (mine ? " mine" : "");
+    const reply = message.replyText ? `<div class="reply-preview">${escapeHTML(message.replyText)}</div>` : "";
+    element.innerHTML = `<div class="message-avatar">${escapeHTML((message.senderName || "?").charAt(0).toUpperCase())}</div><div class="message-content"><div class="message-author">${mine ? "You" : escapeHTML(message.senderName || "User")}</div><div class="bubble">${reply}${escapeHTML(message.text)}</div><div class="message-time">${escapeHTML(formatTime(message.createdAt))}</div><div class="message-actions"><button type="button" data-reply-id="${escapeHTML(message.id)}">↩ Reply</button></div></div>`;
+    element.querySelector("[data-reply-id]").addEventListener("click", () => replyToMessage(message.id));
+    container.appendChild(element);
+  });
+  container.scrollTop = container.scrollHeight;
 }
 
-
-// ======================================
-// SEND MESSAGE
-// ======================================
-
-function sendMessage() {
-
-    const input = document.getElementById("messageInput");
-
-    const text = input.value.trim();
-
-    if (!text || !currentChat) return;
-
-    const message = {
-
-        sender: username,
-
-        text: text,
-
-        time: getTime(),
-
-        reply: replyingTo
-            ? replyingTo.text
-            : null
-
-    };
-
-    currentChat.messages.push(message);
-
-    input.value = "";
-
-    cancelReply();
-
-    renderMessages();
-    renderChatList();
-
+async function sendMessage() {
+  const input = $("messageInput");
+  const text = input.value.trim();
+  if (!text || !currentChat || !currentUser) return;
+  if (text.length > 2000) { showToast("Messages are limited to 2,000 characters."); return; }
+  const data = {senderUid:currentUser.uid, senderName:username, text, createdAt:serverTimestamp()};
+  if (replyingTo) data.replyText = replyingTo.text.slice(0,1000);
+  input.disabled = true;
+  try {
+    await addDoc(collection(db, "chats", currentChat.id, "messages"), data);
+    await updateDoc(doc(db, "chats", currentChat.id), {updatedAt:serverTimestamp()});
+    input.value = ""; cancelReply();
+  } catch (error) {
+    showToast("Message could not be sent: " + error.message);
+  } finally { input.disabled = false; input.focus(); }
 }
 
-
-// ======================================
-// REPLY
-// ======================================
-
-function replyToMessage(index) {
-
-    const message = currentChat.messages[index];
-
-    replyingTo = message;
-
-    document.getElementById("replyText").textContent =
-        message.text || "Attachment";
-
-    document.getElementById("replyBox").style.display =
-        "block";
-
-    document.getElementById("messageInput").focus();
-
+function replyToMessage(id) {
+  const message = currentMessages.find(item => item.id === id);
+  if (!message) return;
+  replyingTo = message;
+  $("replyText").textContent = message.text || "Message";
+  $("replyBox").style.display = "block";
+  $("messageInput").focus();
 }
+function cancelReply() { replyingTo = null; $("replyBox").style.display = "none"; }
 
-function cancelReply() {
-
-    replyingTo = null;
-
-    document.getElementById("replyBox").style.display =
-        "none";
-
-}
-
-
-// ======================================
-// EMOJI
-// ======================================
-
+const emojis = ["😀","😂","🤣","😊","😍","🥰","😎","🤔","😭","😮","😡","👍","👎","❤️","💔","🔥","🎉","✨","🚀","🎮","💯","🙌","👏","🤝","👀","🥹","🤩","😴","💬","🙏"];
 function initializeEmojis() {
-
-    const emojis = [
-        "😀","😂","🤣","😊","😍","🥰",
-        "😎","🤔","😭","😮","😡","👍",
-        "👎","❤️","💔","🔥","🎉","✨",
-        "🚀","🎮","💯","🙌","👏","🤝",
-        "👀","💀","🥹","🤩","😴","💬"
-    ];
-
-    const picker = document.getElementById("emojiPicker");
-
-    emojis.forEach(emoji => {
-
-        const button = document.createElement("button");
-
-        button.textContent = emoji;
-
-        button.onclick = () => {
-
-            const input =
-                document.getElementById("messageInput");
-
-            input.value += emoji;
-
-            input.focus();
-
-        };
-
-        picker.appendChild(button);
-
-    });
-
+  const picker = $("emojiPicker");
+  emojis.forEach(emoji => { const button = document.createElement("button"); button.type="button"; button.textContent=emoji; button.addEventListener("click", () => { $("messageInput").value += emoji; $("messageInput").focus(); }); picker.appendChild(button); });
 }
+function toggleEmoji() { const picker = $("emojiPicker"); picker.style.display = picker.style.display === "grid" ? "none" : "grid"; }
 
-function toggleEmoji() {
-
-    const picker = document.getElementById("emojiPicker");
-
-    picker.style.display =
-        picker.style.display === "grid"
-        ? "none"
-        : "grid";
-
-}
-
-
-// ======================================
-// REACTIONS
-// ======================================
-
-function reactToMessage(index) {
-
-    const reactions = [
-        "❤️","😂","👍","🔥","😮","🎉"
-    ];
-
-    const reaction =
-        reactions[Math.floor(Math.random() * reactions.length)];
-
-    currentChat.messages[index].text += " " + reaction;
-
-    renderMessages();
-
-}
-
-
-// ======================================
-// NEW PRIVATE CHAT
-// ======================================
-
-function createChat() {
-
-    const name =
-        document.getElementById("newChatUsername")
-        .value.trim();
-
-    if (!name) {
-
-        showToast("Enter a username first.");
-
-        return;
-
+async function createPrivateChat() {
+  const targetName = normalizeUsername($("newChatUsername").value);
+  if (!usernameIsValid(targetName)) { showToast("Enter a valid username (3–20 letters, numbers, or underscores)."); return; }
+  if (targetName === username) { showToast("You can't start a chat with yourself."); return; }
+  try {
+    const targetSnapshot = await getDoc(doc(db, "usernames", targetName));
+    if (!targetSnapshot.exists()) { showToast("That username wasn't found."); return; }
+    const target = targetSnapshot.data();
+    const members = [currentUser.uid, target.uid].sort();
+    const chatId = "p_" + members.join("_");
+    const chatRef = doc(db, "chats", chatId);
+    const existing = await getDoc(chatRef);
+    if (!existing.exists()) {
+      const memberNames = {};
+      memberNames[currentUser.uid] = username;
+      memberNames[target.uid] = target.username;
+      try {
+        await setDoc(chatRef, {type:"private", members, memberNames, createdBy:currentUser.uid, createdAt:serverTimestamp(), updatedAt:serverTimestamp()});
+      } catch (writeError) {
+        const raced = await getDoc(chatRef);
+        if (!raced.exists()) throw writeError;
+      }
     }
-
-    const existing = chats.find(chat =>
-        chat.name.toLowerCase() === name.toLowerCase()
-    );
-
-    if (existing) {
-
-        closeModal("newChatModal");
-
-        selectChat(existing.id);
-
-        return;
-
-    }
-
-    const id =
-        "chat_" + Date.now();
-
-    const newChat = {
-
-        id: id,
-
-        name: name,
-
-        type: "private",
-
-        avatar: name.charAt(0).toUpperCase(),
-
-        color: "purple",
-
-        status: "Offline",
-
-        messages: []
-
-    };
-
-    chats.unshift(newChat);
-
-    document.getElementById("newChatUsername").value = "";
-
+    $("newChatUsername").value = "";
     closeModal("newChatModal");
-
-    selectChat(id);
-
-    showToast("Conversation created!");
-
+    showToast("Conversation ready.");
+    const found = chats.find(chat => chat.id === chatId);
+    if (found) selectChat(chatId);
+  } catch (error) { showToast("Couldn't create conversation: " + error.message); }
 }
 
-
-// ======================================
-// CREATE GROUP
-// ======================================
-
-function createGroup() {
-
-    const name =
-        document.getElementById("groupName")
-        .value.trim();
-
-    if (!name) {
-
-        showToast("Enter a group name.");
-
-        return;
-
+function makeJoinCode() {
+  const alphabet = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+  const bytes = new Uint8Array(8);
+  crypto.getRandomValues(bytes);
+  return Array.from(bytes, byte => alphabet[byte % alphabet.length]).join("");
+}
+async function createGroup() {
+  const groupName = $("groupName").value.trim();
+  if (!groupName || groupName.length > 40) { showToast("Enter a group name up to 40 characters."); return; }
+  try {
+    let code = makeJoinCode();
+    for (let attempt=0; attempt<5; attempt++) {
+      const codeDoc = await getDoc(doc(db, "groupCodes", code));
+      if (!codeDoc.exists()) break;
+      code = makeJoinCode();
     }
-
-    const code =
-        Math.random()
-        .toString(36)
-        .substring(2, 8)
-        .toUpperCase();
-
-    const group = {
-
-        id: "group_" + Date.now(),
-
-        name: name,
-
-        type: "group",
-
-        avatar: name.charAt(0).toUpperCase(),
-
-        color: "blue",
-
-        status: "1 member",
-
-        code: code,
-
-        messages: []
-
-    };
-
-    chats.unshift(group);
-
+    const chatRef = doc(collection(db, "chats"));
+    const memberNames = {}; memberNames[currentUser.uid] = username;
+    await setDoc(chatRef, {type:"group", groupName, members:[currentUser.uid], memberNames, createdBy:currentUser.uid, joinCode:code, createdAt:serverTimestamp(), updatedAt:serverTimestamp()});
+    await setDoc(doc(db, "groupCodes", code), {chatId:chatRef.id, createdBy:currentUser.uid, createdAt:serverTimestamp()});
     generatedJoinCode = code;
-
-    document.getElementById("generatedCode").textContent =
-        code;
-
-    document.getElementById("groupName").value = "";
-
-    closeModal("groupModal");
-
-    openModal("codeModal");
-
-    selectChat(group.id);
-
+    $("generatedCode").textContent = code;
+    $("groupName").value = "";
+    closeModal("groupModal"); openModal("codeModal");
+    showToast("Group created.");
+  } catch (error) { showToast("Couldn't create group: " + error.message); }
 }
-
-
-// ======================================
-// JOIN GROUP
-// ======================================
-
-function joinGroup() {
-
-    const code =
-        document.getElementById("joinCode")
-        .value.trim().toUpperCase();
-
-    if (!code) {
-
-        showToast("Enter a join code.");
-
-        return;
-
+async function joinGroup() {
+  const code = $("joinCode").value.trim().toUpperCase();
+  if (!/^[A-Z0-9]{8}$/.test(code)) { showToast("Enter the 8-character group code."); return; }
+  try {
+    const codeSnapshot = await getDoc(doc(db, "groupCodes", code));
+    if (!codeSnapshot.exists()) { showToast("That group code wasn't found."); return; }
+    const chatId = codeSnapshot.data().chatId;
+    const chatRef = doc(db, "chats", chatId);
+    const nameField = `memberNames.${currentUser.uid}`;
+    await updateDoc(chatRef, {members:arrayUnion(currentUser.uid), [nameField]:username, updatedAt:serverTimestamp()});
+    const joinedSnapshot = await getDoc(chatRef);
+    if (joinedSnapshot.exists()) {
+      const joinedChat = {id:chatId, ...joinedSnapshot.data()};
+      const existingIndex = chats.findIndex(chat => chat.id === chatId);
+      if (existingIndex >= 0) chats[existingIndex] = joinedChat;
+      else chats.unshift(joinedChat);
+      renderChatList();
+      selectChat(chatId);
     }
-
-    const group = chats.find(chat =>
-        chat.type === "group" &&
-        chat.code === code
-    );
-
-    if (!group) {
-
-        showToast("Group not found in this demo.");
-
-        return;
-
-    }
-
-    closeModal("joinModal");
-
-    selectChat(group.id);
-
-    showToast("Joined group!");
-
+    $("joinCode").value = ""; closeModal("joinModal");
+    showToast("You joined the group.");
+  } catch (error) {
+    showToast("Couldn't join that group. Check the code, or see whether you're already a member.");
+  }
 }
-
-
-// ======================================
-// COPY JOIN CODE
-// ======================================
-
 function copyCode() {
-
-    if (!generatedJoinCode) return;
-
-    if (navigator.clipboard) {
-
-        navigator.clipboard.writeText(generatedJoinCode)
-            .then(() => showToast("Code copied!"))
-            .catch(() => showToast("Code: " + generatedJoinCode));
-
-    } else {
-
-        showToast("Code: " + generatedJoinCode);
-
-    }
-
+  if (!generatedJoinCode) return;
+  if (navigator.clipboard?.writeText) navigator.clipboard.writeText(generatedJoinCode).then(() => showToast("Join code copied.")).catch(() => showToast("Join code: " + generatedJoinCode));
+  else showToast("Join code: " + generatedJoinCode);
 }
-
-
-// ======================================
-// IMAGE SHARING DEMO
-// ======================================
-
-function sendImage(input) {
-
-    const file = input.files[0];
-
-    if (!file || !currentChat) return;
-
-    if (!file.type.startsWith("image/")) {
-
-        showToast("Please select an image.");
-
-        return;
-
-    }
-
-    const reader = new FileReader();
-
-    reader.onload = function(event) {
-
-        currentChat.messages.push({
-
-            sender: username,
-
-            image: event.target.result,
-
-            text: "",
-
-            time: getTime()
-
-        });
-
-        renderMessages();
-        renderChatList();
-
-    };
-
-    reader.readAsDataURL(file);
-
-    input.value = "";
-
-}
-
-
-// ======================================
-// FILE SHARING DEMO
-// ======================================
-
-function sendFile(input) {
-
-    const file = input.files[0];
-
-    if (!file || !currentChat) return;
-
-    currentChat.messages.push({
-
-        sender: username,
-
-        file: file.name,
-
-        text: "",
-
-        time: getTime()
-
-    });
-
-    renderMessages();
-    renderChatList();
-
-    showToast("File preview added.");
-
-    input.value = "";
-
-}
-
-
-// ======================================
-// SEARCH
-// ======================================
-
-function searchChats() {
-
-    const query =
-        document.getElementById("searchInput")
-        .value.toLowerCase();
-
-    document.querySelectorAll(".chat-item")
-        .forEach(item => {
-
-            const chat = chats.find(c =>
-                c.id === item.dataset.id
-            );
-
-            if (!chat) return;
-
-            item.style.display =
-                chat.name.toLowerCase().includes(query)
-                ? "flex"
-                : "none";
-
-        });
-
-}
-
-
-// ======================================
-// PROFILE
-// ======================================
-
-function saveProfile() {
-
-    const newName =
-        document.getElementById("profileUsername")
-        .value.trim();
-
-    if (!newName) {
-
-        showToast("Enter a username.");
-
-        return;
-
-    }
-
-    username = newName;
-
-    document.getElementById("currentUsername")
-        .textContent = username;
-
-    closeModal("profileModal");
-
-    renderMessages();
-
-    showToast("Username updated!");
-
-}
-
-
-// ======================================
-// GROUP INFORMATION
-// ======================================
-
 function showGroupInfo() {
-
-    if (!currentChat) return;
-
-    if (currentChat.type === "group") {
-
-        showToast(
-            "Group: " +
-            currentChat.name +
-            " | Join code: " +
-            currentChat.code
-        );
-
-    } else {
-
-        showToast(
-            "Conversation with " +
-            currentChat.name
-        );
-
-    }
-
+  if (!currentChat) { showToast("Choose a conversation first."); return; }
+  if (currentChat.type === "group") showToast(`Group: ${currentChat.groupName} · Join code: ${currentChat.joinCode}`);
+  else showToast("Private conversation with " + chatDisplayName(currentChat));
 }
+function searchChats() { renderChatList(); }
+function openModal(id) { $(id).style.display = "flex"; }
+function closeModal(id) { $(id).style.display = "none"; }
+function goBack() { $("app").classList.remove("chat-open"); }
+async function signOutUser() { if (confirm("Sign out of Whisper?")) { try { await signOut(auth); } catch (error) { showToast("Couldn't sign out: " + error.message); } } }
 
+$("authForm").addEventListener("submit", submitAuth);
+$("authSwitchButton").addEventListener("click", switchAuthMode);
+$("searchInput").addEventListener("input", searchChats);
+$("messageInput").addEventListener("keydown", event => { if (event.key === "Enter" && !event.shiftKey) { event.preventDefault(); sendMessage(); } });
+document.querySelectorAll(".modal-backdrop").forEach(modal => modal.addEventListener("click", event => { if (event.target === modal) modal.style.display = "none"; }));
+initializeEmojis();
 
-// ======================================
-// MODALS
-// ======================================
-
-function openModal(id) {
-
-    document.getElementById(id).style.display =
-        "flex";
-
-}
-
-function closeModal(id) {
-
-    document.getElementById(id).style.display =
-        "none";
-
-}
-
-
-// ======================================
-// UTILITIES
-// ======================================
-
-function getTime() {
-
-    return new Date().toLocaleTimeString([], {
-
-        hour: "2-digit",
-
-        minute: "2-digit"
-
-    });
-
-}
-
-function escapeHTML(text) {
-
-    return String(text)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-
-}
-
-function showToast(message) {
-
-    const toast =
-        document.getElementById("toast");
-
-    toast.textContent = message;
-
-    toast.style.display = "block";
-
-    setTimeout(() => {
-
-        toast.style.display = "none";
-
-    }, 3000);
-
-}
-
-function goBack() {
-
-    document.getElementById("app")
-        .classList.remove("chat-open");
-
-}
-
-
-// ======================================
-// CLOSE MODALS WHEN CLICKING OUTSIDE
-// ======================================
-
-document.querySelectorAll(".modal-backdrop")
-    .forEach(modal => {
-
-        modal.addEventListener("click", event => {
-
-            if (event.target === modal) {
-
-                modal.style.display = "none";
-
-            }
-
-        });
-
-    });
-
+Object.assign(window, {openModal, closeModal, createPrivateChat, createGroup, joinGroup, copyCode, sendMessage, replyToMessage, cancelReply, toggleEmoji, showGroupInfo, showToast, searchChats, goBack, signOutUser});
+onAuthStateChanged(auth, handleAuthState);
 </script>
-
 </body>
 </html>
