@@ -35,8 +35,13 @@ button,input{font-family:inherit}button{cursor:pointer;border:0;color:inherit}
 .chat-info{flex:1;min-width:0}.chat-info-top{display:flex;justify-content:space-between;gap:5px}.chat-name{font-size:14px;font-weight:bold}.chat-time{font-size:10px;color:var(--muted)}.chat-preview{color:var(--muted);font-size:12px;margin-top:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .sidebar-footer{padding:15px;border-top:1px solid var(--border)}.profile{display:flex;align-items:center;gap:12px}.profile .avatar{width:38px;height:38px}.profile-info{flex:1;min-width:0}.profile-info strong{font-size:13px}.profile-info small{display:block;margin-top:4px;color:var(--green);font-size:11px}.settings-button{background:transparent;font-size:20px;color:var(--muted)}
 .main{flex:1;display:flex;flex-direction:column;min-width:0}.chat-header{height:76px;min-height:76px;border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 24px;gap:13px;background:var(--panel)}.header-info{flex:1;min-width:0}.header-info h2{font-size:16px}.header-info p{color:var(--muted);font-size:12px;margin-top:5px}.header-actions{display:flex;gap:8px}.header-actions button{width:38px;height:38px;border-radius:10px;background:var(--panel2);color:var(--muted);font-size:17px}.header-actions button:hover{background:var(--panel3);color:white}
-.messages{flex:1;overflow-y:auto;padding:25px;display:flex;flex-direction:column;gap:18px}.date-divider{text-align:center;font-size:11px;color:var(--muted);margin:10px 0}.message{display:flex;gap:10px;max-width:80%;align-items:flex-end}.message.mine{align-self:flex-end;flex-direction:row-reverse}.message-avatar{width:32px;height:32px;border-radius:50%;background:#45536b;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}.message-content{min-width:0}.message-author{font-size:11px;color:var(--muted);margin-bottom:5px}.message.mine .message-author{text-align:right}.bubble{background:var(--panel2);padding:12px 15px;border-radius:15px 15px 15px 4px;font-size:14px;line-height:1.5;word-break:break-word;white-space:pre-wrap}.message.mine .bubble{background:var(--accent2);border-radius:15px 15px 4px 15px}.message-time{font-size:10px;color:var(--muted);margin-top:5px}.message.mine .message-time{text-align:right}.reply-preview{background:#0003;border-left:3px solid var(--accent);padding:8px;margin-bottom:8px;border-radius:4px;font-size:11px;color:#d0d5ff}.message-actions{display:flex;gap:6px;margin-top:5px;opacity:.15}.message:hover .message-actions{opacity:1}.message-actions button{background:var(--panel3);border-radius:5px;padding:4px 7px;font-size:11px}.message-actions button:hover{background:var(--accent2)}
-.input-area{padding:17px 24px 22px;background:var(--panel);border-top:1px solid var(--border)}.replying-to{display:none;background:var(--panel2);padding:10px;border-radius:8px;margin-bottom:10px;font-size:12px;color:var(--muted)}.replying-to button{float:right;background:transparent;color:white}.input-box{display:flex;align-items:center;gap:8px;background:var(--panel2);border:1px solid var(--border);border-radius:13px;padding:8px}.input-box input{flex:1;min-width:0;border:0;background:transparent;color:white;outline:none;padding:10px;font-size:14px}.input-button{width:38px;height:38px;background:transparent;border-radius:9px;color:var(--muted);font-size:19px}.input-button:hover{background:var(--panel3);color:white}.send-button{background:var(--accent2);width:40px;height:40px;border-radius:10px;font-size:17px}.send-button:hover{background:var(--accent)}
+.messages{flex:1;overflow-y:auto;padding:25px;display:flex;flex-direction:column;gap:18px}.date-divider{text-align:center;font-size:11px;color:var(--muted);margin:10px 0}.message{display:flex;gap:10px;max-width:80%;align-items:flex-end}.message.mine{align-self:flex-end;flex-direction:row-reverse}.message-avatar{width:32px;height:32px;border-radius:50%;background:#45536b;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}.message-content{min-width:0}.message-author{font-size:11px;color:var(--muted);margin-bottom:5px}.message.mine .message-author{text-align:right}.bubble{background:var(--panel2);padding:12px 15px;border-radius:15px 15px 15px 4px;font-size:14px;line-height:1.5;word-break:break-word;white-space:pre-wrap}.message.mine .bubble{background:var(--accent2);border-radius:15px 15px 4px 15px}.message-time{font-size:10px;color:var(--muted);margin-top:5px}.message.mine .message-time{text-align:right}.reply-preview{background:#0003;border-left:3px solid var(--accent);padding:8px;margin-bottom:8px;border-radius:4px;font-size:11px;color:#d0d5ff}.message-actions{display:flex;gap:6px;margin-top:5px;opacity:.15}.message:hover .message-actions{opacity:1}.message-actions button{background:var(--panel3);border-radius:5px;padding:4px 7px;font-size:11px}.message-actions button:hover{background:var(--accent2)}.message-reactions{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px}.message-reactions button{background:#30384a;border:1px solid #46516a;color:#f4f5fb;border-radius:999px;padding:4px 8px;font-size:12px}.message-reactions button:hover{border-color:var(--accent);background:#3b4560}
+ .input-area{padding:17px 24px 22px;background:var(--panel);border-top:1px solid var(--border)}
+.typing-indicator{min-height:18px;padding:0 3px 7px;color:var(--muted);font-size:11px;font-style:italic}
+.status-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);margin-right:5px;vertical-align:middle}
+.group-member-list{background:var(--panel2);border:1px solid var(--border);border-radius:9px;padding:12px;margin:10px 0 14px;font-size:13px;line-height:1.8;white-space:pre-line;max-height:180px;overflow:auto}
+.modal input:disabled{opacity:.55}
+.replying-to{display:none;background:var(--panel2);padding:10px;border-radius:8px;margin-bottom:10px;font-size:12px;color:var(--muted)}.replying-to button{float:right;background:transparent;color:white}.input-box{display:flex;align-items:center;gap:8px;background:var(--panel2);border:1px solid var(--border);border-radius:13px;padding:8px}.input-box input{flex:1;min-width:0;border:0;background:transparent;color:white;outline:none;padding:10px;font-size:14px}.input-button{width:38px;height:38px;background:transparent;border-radius:9px;color:var(--muted);font-size:19px}.input-button:hover{background:var(--panel3);color:white}.send-button{background:var(--accent2);width:40px;height:40px;border-radius:10px;font-size:17px}.send-button:hover{background:var(--accent)}
 .emoji-picker{display:none;position:absolute;bottom:90px;background:var(--panel2);border:1px solid var(--border);border-radius:12px;padding:12px;grid-template-columns:repeat(6,35px);gap:5px;box-shadow:0 10px 30px #0006}.emoji-picker button{background:transparent;font-size:23px;padding:5px}.emoji-picker button:hover{background:var(--panel3);border-radius:5px}.empty{text-align:center;margin:auto;color:var(--muted);max-width:400px;padding:25px}.empty h2{color:white;margin-bottom:10px}.empty p{font-size:13px;line-height:1.5}
 .modal-backdrop{display:none;position:fixed;inset:0;background:#000b;align-items:center;justify-content:center;z-index:100}.modal{background:var(--panel);border:1px solid var(--border);width:90%;max-width:400px;border-radius:18px;padding:25px}.modal h2{margin-bottom:8px}.modal p{color:var(--muted);font-size:13px;margin-bottom:18px;line-height:1.5}.modal input{width:100%;padding:13px;margin-bottom:12px;background:var(--panel2);border:1px solid var(--border);border-radius:9px;color:white;outline:none}.modal input:focus{border-color:var(--accent)}.modal-buttons{display:flex;gap:10px;margin-top:10px}.modal-buttons button{flex:1;padding:12px;border-radius:9px;background:var(--panel2)}.modal-buttons .primary{background:var(--accent2)}.generated-code{background:var(--panel2);padding:15px;border-radius:9px;text-align:center;font-size:22px;letter-spacing:4px;margin:12px 0;color:var(--accent);font-weight:bold}
 .toast{position:fixed;bottom:25px;right:25px;max-width:min(420px,90vw);background:var(--panel3);border:1px solid var(--border);padding:15px 20px;border-radius:10px;display:none;z-index:600;box-shadow:0 5px 20px #0006;font-size:13px}.mobile-back{display:none}
@@ -73,7 +78,7 @@ button,input{font-family:inherit}button{cursor:pointer;border:0;color:inherit}
     </div>
     <div class="section-title"><span>CONVERSATIONS</span><span id="chatCount">0</span></div>
     <div class="chat-list" id="chatList"></div>
-    <div class="sidebar-footer"><div class="profile"><div class="avatar purple" id="profileAvatar">U</div><div class="profile-info"><strong id="currentUsername">You</strong><small>● Signed in</small></div><button class="settings-button" onclick="signOutUser()" title="Sign out">⇥</button></div></div>
+    <div class="sidebar-footer"><div class="profile"><div class="avatar purple" id="profileAvatar">U</div><div class="profile-info"><strong id="currentUsername">You</strong><small id="currentStatus">● Signed in</small></div><button class="settings-button" onclick="enableNotifications()" title="Enable browser notifications">🔔</button><button class="settings-button" onclick="signOutUser()" title="Sign out">⇥</button></div></div>
   </aside>
 
   <main class="main">
@@ -89,6 +94,7 @@ button,input{font-family:inherit}button{cursor:pointer;border:0;color:inherit}
     </div>
     <div class="messages" id="messages"><div class="empty"><h2>Welcome to Whisper</h2><p>Start a private conversation or create a group. Your messages will sync through Firebase.</p></div></div>
     <div class="input-area">
+      <div class="typing-indicator" id="typingIndicator" aria-live="polite"></div>
       <div class="replying-to" id="replyBox">Replying to: <span id="replyText"></span><button onclick="cancelReply()">✕</button></div>
       <div class="input-box">
         <button class="input-button" onclick="toggleEmoji()" title="Emojis">😊</button>
@@ -106,12 +112,14 @@ button,input{font-family:inherit}button{cursor:pointer;border:0;color:inherit}
 <div class="modal-backdrop" id="groupModal"><div class="modal"><h2>Create a group</h2><p>Create a group and share its private join code with people you trust.</p><input id="groupName" maxlength="40" placeholder="Group name"><div class="modal-buttons"><button onclick="closeModal('groupModal')">Cancel</button><button class="primary" onclick="createGroup()">Create group</button></div></div></div>
 <div class="modal-backdrop" id="joinModal"><div class="modal"><h2>Join a group</h2><p>Enter the group join code shared with you.</p><input id="joinCode" maxlength="12" placeholder="Enter join code"><div class="modal-buttons"><button onclick="closeModal('joinModal')">Cancel</button><button class="primary" onclick="joinGroup()">Join group</button></div></div></div>
 <div class="modal-backdrop" id="codeModal"><div class="modal"><h2>Group created!</h2><p>Share this join code privately with the people you want to invite.</p><div class="generated-code" id="generatedCode"></div><div class="modal-buttons"><button onclick="copyCode()">📋 Copy code</button><button class="primary" onclick="closeModal('codeModal')">Done</button></div></div></div>
+<div class="modal-backdrop" id="groupInfoModal"><div class="modal"><h2 id="groupInfoTitle">Group information</h2><p id="groupInfoSummary">Group details</p><div class="group-member-list" id="groupMembers"></div><div id="groupOwnerControls"><input id="renameGroupInput" maxlength="40" placeholder="New group name"><div class="modal-buttons"><button onclick="closeModal('groupInfoModal')">Close</button><button class="primary" onclick="renameGroup()">Rename group</button></div></div><div class="modal-buttons" id="groupInfoButtons"><button onclick="copyCurrentGroupCode()">📋 Copy invite code</button><button onclick="leaveGroup()">Leave group</button></div><div class="modal-buttons" id="privateInfoButtons"><button class="primary" onclick="closeModal('groupInfoModal')">Close</button></div></div></div>
 <div class="toast" id="toast"></div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
-import { getFirestore, collection, doc, getDoc, setDoc, addDoc, updateDoc, arrayUnion, serverTimestamp, query, where, onSnapshot, orderBy, limit } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-firestore.js";
+import { getFirestore, collection, doc, getDoc, setDoc, addDoc, updateDoc, deleteDoc, deleteField, arrayUnion, serverTimestamp, query, where, onSnapshot, orderBy, limit } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-firestore.js";
+import { getDatabase, ref, push, set, remove, onValue, onDisconnect, serverTimestamp as rtdbServerTimestamp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-database.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCp3j9EjAL8nGvLbiKqJPW3311w3DeIrxs",
@@ -125,6 +133,10 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig);
 const auth = getAuth(firebaseApp);
 const db = getFirestore(firebaseApp);
+// After creating Realtime Database, replace this placeholder with the exact URL shown in Firebase.
+// Example formats are https://PROJECT-default-rtdb.firebaseio.com or https://PROJECT.REGION.firebasedatabase.app
+const REALTIME_DATABASE_URL = "PASTE_REALTIME_DATABASE_URL_HERE";
+const rtdb = REALTIME_DATABASE_URL.startsWith("https://") ? getDatabase(firebaseApp, REALTIME_DATABASE_URL) : null;
 const INTERNAL_EMAIL_DOMAIN = "@users.whisper.invalid";
 
 let currentUser = null;
@@ -137,6 +149,18 @@ let chatsUnsubscribe = null;
 let messagesUnsubscribe = null;
 let authMode = "login";
 let generatedJoinCode = "";
+let typingUnsubscribe = null;
+let typingActiveChatId = null;
+let typingStopTimer = null;
+let typingHeartbeatTimer = null;
+let typingExpiryTimer = null;
+let typingEntries = [];
+let presenceConnectionUnsubscribe = null;
+let myPresenceConnections = [];
+let presenceUnsubscribers = [];
+let chatPresence = new Map();
+let initialChatsSnapshot = true;
+let seenLastMessageIds = new Map();
 
 const $ = (id) => document.getElementById(id);
 const normalizeUsername = (value) => value.trim().toLowerCase();
@@ -240,8 +264,15 @@ async function ensureUsernameRecord(user) {
 function stopRealtimeListeners() {
   if (chatsUnsubscribe) chatsUnsubscribe();
   if (messagesUnsubscribe) messagesUnsubscribe();
+  if (typingUnsubscribe) typingUnsubscribe();
+  if (presenceConnectionUnsubscribe) presenceConnectionUnsubscribe();
+  presenceConnectionUnsubscribe = null;
   chatsUnsubscribe = null;
   messagesUnsubscribe = null;
+  typingUnsubscribe = null;
+  clearTimeout(typingExpiryTimer);
+  stopLocalTyping();
+  stopChatPresenceListeners();
 }
 
 async function handleAuthState(user) {
@@ -253,6 +284,7 @@ async function handleAuthState(user) {
     $("authScreen").classList.remove("hidden");
     $("authSubmit").disabled = false;
     $("authSubmit").textContent = authMode === "login" ? "Sign in" : "Create account";
+    $("currentStatus").textContent = "● Signed out";
     return;
   }
   try {
@@ -261,6 +293,8 @@ async function handleAuthState(user) {
     $("app").classList.remove("hidden");
     $("currentUsername").textContent = username;
     $("profileAvatar").textContent = username.charAt(0).toUpperCase();
+    $("currentStatus").textContent = rtdb ? "● Connecting..." : "● Signed in";
+    startPresence();
     startChatsListener();
   } catch (error) {
     showAuthError(friendlyAuthError(error));
@@ -271,14 +305,43 @@ async function handleAuthState(user) {
 
 function startChatsListener() {
   const chatsQuery = query(collection(db, "chats"), where("members", "array-contains", currentUser.uid));
+  initialChatsSnapshot = true;
+  seenLastMessageIds = new Map();
   chatsUnsubscribe = onSnapshot(chatsQuery, snapshot => {
+    if (initialChatsSnapshot) {
+      snapshot.docs.forEach(item => seenLastMessageIds.set(item.id, item.data().lastMessageId || ""));
+      initialChatsSnapshot = false;
+    } else {
+      snapshot.docChanges().forEach(change => {
+        if (change.type === "added") {
+          seenLastMessageIds.set(change.doc.id, change.doc.data().lastMessageId || "");
+          return;
+        }
+        if (change.type !== "modified") return;
+        const data = change.doc.data();
+        const previousId = seenLastMessageIds.get(change.doc.id) || "";
+        const latestId = data.lastMessageId || "";
+        if (latestId && latestId !== previousId && data.lastSenderUid !== currentUser.uid) {
+          const matchingChat = chats.find(item => item.id === change.doc.id);
+          const title = matchingChat ? chatDisplayName(matchingChat) : (data.groupName || data.memberNames?.[data.lastSenderUid] || "New message");
+          if (document.hidden || currentChat?.id !== change.doc.id) showBrowserNotification(title, data.lastMessage || "New message", change.doc.id);
+        }
+        seenLastMessageIds.set(change.doc.id, latestId);
+      });
+    }
     chats = snapshot.docs.map(item => ({id:item.id, ...item.data()}));
     chats.sort((a,b) => (timestampDate(b.updatedAt)?.getTime() || 0) - (timestampDate(a.updatedAt)?.getTime() || 0));
     renderChatList();
     if (currentChat) {
       const refreshed = chats.find(chat => chat.id === currentChat.id);
       if (refreshed) currentChat = refreshed;
-      else { currentChat = null; currentMessages = []; if (messagesUnsubscribe) messagesUnsubscribe(); messagesUnsubscribe = null; }
+      else {
+        currentChat = null; currentMessages = [];
+        if (messagesUnsubscribe) messagesUnsubscribe(); messagesUnsubscribe = null;
+        if (typingUnsubscribe) typingUnsubscribe(); typingUnsubscribe = null;
+        stopChatPresenceListeners();
+        $("typingIndicator").textContent = "";
+      }
     }
     if (!currentChat && chats.length) selectChat(chats[0].id, false);
     if (!currentChat && chats.length === 0) renderEmptyChat();
@@ -296,7 +359,8 @@ function renderChatList() {
     const name = chatDisplayName(chat);
     const item = document.createElement("div");
     item.className = "chat-item" + (currentChat?.id === chat.id ? " active" : "");
-    item.innerHTML = `<div class="avatar ${isGroup ? "blue" : "purple"}">${escapeHTML(name.charAt(0).toUpperCase())}</div><div class="chat-info"><div class="chat-info-top"><span class="chat-name">${escapeHTML(name)}</span><span class="chat-time">${escapeHTML(formatTime(chat.updatedAt))}</span></div><div class="chat-preview">${isGroup ? "Group" : "Private conversation"}</div></div>`;
+    const preview = chat.lastMessage ? chat.lastMessage : (isGroup ? "Group chat" : "Private conversation");
+    item.innerHTML = `<div class="avatar ${isGroup ? "blue" : "purple"}">${escapeHTML(name.charAt(0).toUpperCase())}</div><div class="chat-info"><div class="chat-info-top"><span class="chat-name">${escapeHTML(name)}</span><span class="chat-time">${escapeHTML(formatTime(chat.updatedAt))}</span></div><div class="chat-preview">${escapeHTML(preview)}</div></div>`;
     item.addEventListener("click", () => selectChat(chat.id));
     list.appendChild(item);
   });
@@ -318,9 +382,15 @@ function chatDisplayName(chat) {
 function selectChat(id, addMobileClass = true) {
   const selected = chats.find(chat => chat.id === id);
   if (!selected) return;
+  stopLocalTyping();
   currentChat = selected;
   currentMessages = [];
   if (messagesUnsubscribe) messagesUnsubscribe();
+  if (typingUnsubscribe) typingUnsubscribe();
+  typingUnsubscribe = null;
+  typingEntries = [];
+  startTypingListener(id);
+  startChatPresenceListeners();
   updateHeader();
   renderChatList();
   $("app").classList.toggle("chat-open", addMobileClass);
@@ -336,7 +406,19 @@ function updateHeader() {
   const name = chatDisplayName(currentChat);
   $("headerName").textContent = name;
   $("headerAvatar").textContent = name.charAt(0).toUpperCase();
-  $("headerStatus").textContent = currentChat.type === "group" ? `${(currentChat.members || []).length} member(s)` : "Private conversation";
+  if (!rtdb) {
+    $("headerStatus").textContent = currentChat.type === "group" ? `${(currentChat.members || []).length} members` : "Private conversation";
+  } else if (currentChat.type === "group") {
+    const memberIds = currentChat.members || [];
+    const onlineOthers = memberIds.filter(uid => uid !== currentUser.uid && chatPresence.get(uid) === true).length;
+    const knownOthers = memberIds.filter(uid => uid !== currentUser.uid && chatPresence.has(uid)).length;
+    const selfCount = $("currentStatus").textContent.includes("Online") ? 1 : 0;
+    $("headerStatus").textContent = `${onlineOthers + selfCount} online · ${memberIds.length} members${knownOthers < memberIds.length - 1 ? " · checking" : ""}`;
+  } else {
+    const peerUid = (currentChat.members || []).find(uid => uid !== currentUser.uid);
+    const peerOnline = chatPresence.get(peerUid);
+    $("headerStatus").textContent = peerOnline === true ? "● Online" : peerOnline === false ? "Offline" : "Checking status...";
+  }
 }
 
 function renderEmptyChat() {
@@ -361,8 +443,13 @@ function renderMessages() {
     const element = document.createElement("div");
     element.className = "message" + (mine ? " mine" : "");
     const reply = message.replyText ? `<div class="reply-preview">${escapeHTML(message.replyText)}</div>` : "";
-    element.innerHTML = `<div class="message-avatar">${escapeHTML((message.senderName || "?").charAt(0).toUpperCase())}</div><div class="message-content"><div class="message-author">${mine ? "You" : escapeHTML(message.senderName || "User")}</div><div class="bubble">${reply}${escapeHTML(message.text)}</div><div class="message-time">${escapeHTML(formatTime(message.createdAt))}</div><div class="message-actions"><button type="button" data-reply-id="${escapeHTML(message.id)}">↩ Reply</button></div></div>`;
+    const reactionCounts = {};
+    Object.values(message.reactions || {}).forEach(emoji => { reactionCounts[emoji] = (reactionCounts[emoji] || 0) + 1; });
+    const reactionsHtml = Object.entries(reactionCounts).map(([emoji, count]) => `<button type="button" data-reaction-id="${escapeHTML(message.id)}" title="Change your reaction">${escapeHTML(emoji)} ${count}</button>`).join("");
+    element.innerHTML = `<div class="message-avatar">${escapeHTML((message.senderName || "?").charAt(0).toUpperCase())}</div><div class="message-content"><div class="message-author">${mine ? "You" : escapeHTML(message.senderName || "User")}</div><div class="bubble">${reply}${escapeHTML(message.text)}</div><div class="message-reactions">${reactionsHtml}</div><div class="message-time">${escapeHTML(formatTime(message.createdAt))}</div><div class="message-actions"><button type="button" data-reply-id="${escapeHTML(message.id)}">↩ Reply</button><button type="button" data-react-id="${escapeHTML(message.id)}">😊 React</button></div></div>`;
     element.querySelector("[data-reply-id]").addEventListener("click", () => replyToMessage(message.id));
+    element.querySelector("[data-react-id]").addEventListener("click", () => reactToMessage(message.id));
+    element.querySelectorAll("[data-reaction-id]").forEach(button => button.addEventListener("click", () => reactToMessage(message.id)));
     container.appendChild(element);
   });
   container.scrollTop = container.scrollHeight;
@@ -377,12 +464,148 @@ async function sendMessage() {
   if (replyingTo) data.replyText = replyingTo.text.slice(0,1000);
   input.disabled = true;
   try {
-    await addDoc(collection(db, "chats", currentChat.id, "messages"), data);
-    await updateDoc(doc(db, "chats", currentChat.id), {updatedAt:serverTimestamp()});
-    input.value = ""; cancelReply();
+    const sentMessage = await addDoc(collection(db, "chats", currentChat.id, "messages"), data);
+    await updateDoc(doc(db, "chats", currentChat.id), {
+      updatedAt:serverTimestamp(),
+      lastMessage:text,
+      lastSenderUid:currentUser.uid,
+      lastMessageId:sentMessage.id
+    });
+    input.value = "";
+    await stopLocalTyping();
+    cancelReply();
   } catch (error) {
     showToast("Message could not be sent: " + error.message);
   } finally { input.disabled = false; input.focus(); }
+}
+
+function startTypingListener(chatId) {
+  if (typingUnsubscribe) typingUnsubscribe();
+  typingEntries = [];
+  $("typingIndicator").textContent = "";
+  const typingQuery = collection(db, "chats", chatId, "typing");
+  typingUnsubscribe = onSnapshot(typingQuery, snapshot => {
+    typingEntries = snapshot.docs.map(item => ({uid:item.id, ...item.data()})).filter(item => item.uid !== currentUser.uid && item.typing === true);
+    renderTypingIndicator();
+  }, error => console.warn("Typing indicator unavailable:", error.message));
+}
+
+function renderTypingIndicator() {
+  clearTimeout(typingExpiryTimer);
+  const now = Date.now();
+  const active = typingEntries.filter(item => {
+    const updated = timestampDate(item.updatedAt)?.getTime() || 0;
+    return updated && now - updated < 8500;
+  });
+  const names = active.map(item => item.username).filter(Boolean);
+  $("typingIndicator").textContent = names.length === 1 ? `${names[0]} is typing…` : names.length > 1 ? `${names.slice(0,3).join(", ")}${names.length > 3 ? " and others" : ""} are typing…` : "";
+  if (active.length) {
+    const oldestExpiry = Math.min(...active.map(item => (timestampDate(item.updatedAt)?.getTime() || now) + 8500));
+    typingExpiryTimer = setTimeout(renderTypingIndicator, Math.max(500, oldestExpiry - now + 100));
+  }
+}
+
+async function publishTypingState(chatId, typing) {
+  if (!currentUser || !chatId) return;
+  const typingRef = doc(db, "chats", chatId, "typing", currentUser.uid);
+  try {
+    if (typing) await setDoc(typingRef, {username, typing:true, updatedAt:serverTimestamp()});
+    else await deleteDoc(typingRef);
+  } catch (error) {
+    console.warn("Typing state could not be updated:", error.message);
+  }
+}
+
+function handleLocalTyping() {
+  if (!currentChat || !currentUser) return;
+  const chatId = currentChat.id;
+  if (typingActiveChatId !== chatId) {
+    stopLocalTyping();
+    typingActiveChatId = chatId;
+    publishTypingState(chatId, true);
+    typingHeartbeatTimer = setInterval(() => publishTypingState(chatId, true), 5000);
+  }
+  clearTimeout(typingStopTimer);
+  typingStopTimer = setTimeout(() => stopLocalTyping(), 1800);
+}
+
+async function stopLocalTyping() {
+  clearTimeout(typingStopTimer);
+  clearInterval(typingHeartbeatTimer);
+  typingStopTimer = null;
+  typingHeartbeatTimer = null;
+  const oldChatId = typingActiveChatId;
+  typingActiveChatId = null;
+  if (oldChatId && currentUser) await publishTypingState(oldChatId, false);
+}
+
+function showBrowserNotification(title, body, chatId) {
+  if (!("Notification" in window) || Notification.permission !== "granted") return;
+  try {
+    const notification = new Notification(`Whisper · ${title}`, {body:String(body || "New message").slice(0,150), tag:`whisper-${chatId}`});
+    notification.onclick = () => {
+      window.focus();
+      if (chats.some(chat => chat.id === chatId)) selectChat(chatId);
+      notification.close();
+    };
+  } catch (error) { console.warn("Browser notification unavailable:", error); }
+}
+
+async function enableNotifications() {
+  if (!("Notification" in window)) { showToast("This browser does not support desktop notifications."); return; }
+  if (Notification.permission === "granted") { showToast("Browser notifications are already enabled."); return; }
+  if (Notification.permission === "denied") { showToast("Notifications are blocked in browser settings. You can change that in site permissions."); return; }
+  const permission = await Notification.requestPermission();
+  showToast(permission === "granted" ? "Browser notifications enabled while Whisper is open." : "Notification permission was not granted.");
+}
+
+function startPresence() {
+  if (!rtdb || !currentUser) return;
+  if (presenceConnectionUnsubscribe) presenceConnectionUnsubscribe();
+  const connectedRef = ref(rtdb, ".info/connected");
+  presenceConnectionUnsubscribe = onValue(connectedRef, async snapshot => {
+    if (snapshot.val() !== true || !currentUser) {
+      if (currentUser) $("currentStatus").textContent = "● Reconnecting...";
+      return;
+    }
+    const connectionRef = push(ref(rtdb, `status/${currentUser.uid}/connections`));
+    try {
+      await onDisconnect(connectionRef).remove();
+      await set(connectionRef, {state:"online", last_changed:rtdbServerTimestamp()});
+      myPresenceConnections.push(connectionRef);
+      $("currentStatus").innerHTML = '<span class="status-dot"></span>Online';
+      updateHeader();
+    } catch (error) {
+      $("currentStatus").textContent = "● Signed in";
+      showToast("Online status could not connect. Messaging will still work.");
+      console.warn("Presence setup failed:", error.message);
+    }
+  }, error => {
+    $("currentStatus").textContent = "● Signed in";
+    console.warn("Presence listener failed:", error.message);
+  });
+}
+
+function stopChatPresenceListeners() {
+  presenceUnsubscribers.forEach(unsubscribe => unsubscribe());
+  presenceUnsubscribers = [];
+  chatPresence.clear();
+}
+
+function startChatPresenceListeners() {
+  stopChatPresenceListeners();
+  if (!rtdb || !currentChat || !currentUser) return;
+  const memberIds = (currentChat.members || []).filter(uid => uid !== currentUser.uid);
+  memberIds.forEach(uid => {
+    const statusRef = ref(rtdb, `status/${uid}/connections`);
+    const unsubscribe = onValue(statusRef, snapshot => {
+      const connections = snapshot.val();
+      chatPresence.set(uid, !!connections && Object.keys(connections).length > 0);
+      updateHeader();
+    }, error => console.warn("Could not read member presence:", error.message));
+    presenceUnsubscribers.push(unsubscribe);
+  });
+  updateHeader();
 }
 
 function replyToMessage(id) {
@@ -394,6 +617,26 @@ function replyToMessage(id) {
   $("messageInput").focus();
 }
 function cancelReply() { replyingTo = null; $("replyBox").style.display = "none"; }
+
+const reactionChoices = ["❤️", "😂", "👍", "🔥", "🎉"];
+async function reactToMessage(id) {
+  if (!currentChat || !currentUser) return;
+  const message = currentMessages.find(item => item.id === id);
+  if (!message) return;
+  const currentReaction = message.reactions?.[currentUser.uid];
+  const currentIndex = reactionChoices.indexOf(currentReaction);
+  const field = `reactions.${currentUser.uid}`;
+  try {
+    if (currentIndex === reactionChoices.length - 1) {
+      await updateDoc(doc(db, "chats", currentChat.id, "messages", id), { [field]: deleteField() });
+    } else {
+      const nextReaction = reactionChoices[currentIndex + 1] || reactionChoices[0];
+      await updateDoc(doc(db, "chats", currentChat.id, "messages", id), { [field]: nextReaction });
+    }
+  } catch (error) {
+    showToast("Couldn't update reaction: " + error.message);
+  }
+}
 
 const emojis = ["😀","😂","🤣","😊","😍","🥰","😎","🤔","😭","😮","😡","👍","👎","❤️","💔","🔥","🎉","✨","🚀","🎮","💯","🙌","👏","🤝","👀","🥹","🤩","😴","💬","🙏"];
 function initializeEmojis() {
@@ -492,23 +735,90 @@ function copyCode() {
 }
 function showGroupInfo() {
   if (!currentChat) { showToast("Choose a conversation first."); return; }
-  if (currentChat.type === "group") showToast(`Group: ${currentChat.groupName} · Join code: ${currentChat.joinCode}`);
-  else showToast("Private conversation with " + chatDisplayName(currentChat));
+  if (currentChat.type !== "group") {
+    $("groupInfoTitle").textContent = "Private conversation";
+    $("groupInfoSummary").textContent = "Chatting with " + chatDisplayName(currentChat);
+    $("groupMembers").textContent = "Only the two conversation members can read these messages.";
+    $("groupOwnerControls").classList.add("hidden");
+    $("groupInfoButtons").classList.add("hidden");
+    $("privateInfoButtons").classList.remove("hidden");
+    openModal("groupInfoModal");
+    return;
+  }
+  $("groupInfoTitle").textContent = currentChat.groupName || "Group information";
+  $("groupInfoSummary").textContent = `Invite code: ${currentChat.joinCode || "Unavailable"}`;
+  const names = Object.values(currentChat.memberNames || {});
+  $("groupMembers").textContent = names.length ? `Members (${names.length}):\n${names.map(name => "• " + name).join("\n")}` : "No member list available.";
+  $("renameGroupInput").value = currentChat.groupName || "";
+  $("groupOwnerControls").classList.toggle("hidden", currentChat.createdBy !== currentUser.uid);
+  $("groupInfoButtons").classList.remove("hidden");
+  $("privateInfoButtons").classList.add("hidden");
+  openModal("groupInfoModal");
+}
+
+async function renameGroup() {
+  if (!currentChat || currentChat.type !== "group" || currentChat.createdBy !== currentUser.uid) return;
+  const newName = $("renameGroupInput").value.trim();
+  if (!newName || newName.length > 40) { showToast("Enter a group name up to 40 characters."); return; }
+  try {
+    await updateDoc(doc(db, "chats", currentChat.id), {groupName:newName, updatedAt:serverTimestamp()});
+    closeModal("groupInfoModal");
+    showToast("Group name updated.");
+  } catch (error) { showToast("Couldn't rename group: " + error.message); }
+}
+
+async function copyCurrentGroupCode() {
+  if (!currentChat || currentChat.type !== "group") return;
+  const code = currentChat.joinCode || "";
+  if (!code) return;
+  try { await navigator.clipboard.writeText(code); showToast("Invite code copied."); }
+  catch { showToast("Invite code: " + code); }
+}
+
+async function leaveGroup() {
+  if (!currentChat || currentChat.type !== "group") return;
+  const group = currentChat;
+  if ((group.members || []).length <= 1) { showToast("This is the last member. A group owner cannot leave an empty group yet."); return; }
+  if (!confirm(`Leave ${group.groupName}? You will lose access to its messages.`)) return;
+  const remainingMembers = (group.members || []).filter(uid => uid !== currentUser.uid);
+  const remainingNames = {...(group.memberNames || {})};
+  delete remainingNames[currentUser.uid];
+  const changes = {members:remainingMembers, memberNames:remainingNames, updatedAt:serverTimestamp()};
+  if (group.createdBy === currentUser.uid) changes.createdBy = remainingMembers[0];
+  try {
+    await updateDoc(doc(db, "chats", group.id), changes);
+    closeModal("groupInfoModal");
+    currentChat = null;
+    currentMessages = [];
+    if (messagesUnsubscribe) messagesUnsubscribe();
+    messagesUnsubscribe = null;
+    if (typingUnsubscribe) typingUnsubscribe();
+    typingUnsubscribe = null;
+    await stopLocalTyping();
+    stopChatPresenceListeners();
+    $("typingIndicator").textContent = "";
+    renderEmptyChat();
+    showToast("You left the group.");
+  } catch (error) { showToast("Couldn't leave group: " + error.message); }
 }
 function searchChats() { renderChatList(); }
 function openModal(id) { $(id).style.display = "flex"; }
 function closeModal(id) { $(id).style.display = "none"; }
 function goBack() { $("app").classList.remove("chat-open"); }
-async function signOutUser() { if (confirm("Sign out of Whisper?")) { try { await signOut(auth); } catch (error) { showToast("Couldn't sign out: " + error.message); } } }
+async function signOutUser() { if (confirm("Sign out of Whisper?")) { try { await Promise.allSettled(myPresenceConnections.map(connectionRef => remove(connectionRef))); myPresenceConnections = []; await signOut(auth); } catch (error) { showToast("Couldn't sign out: " + error.message); } } }
+window.addEventListener("pagehide", () => { stopLocalTyping(); });
+document.addEventListener("visibilitychange", () => { if (document.hidden) stopLocalTyping(); });
 
 $("authForm").addEventListener("submit", submitAuth);
 $("authSwitchButton").addEventListener("click", switchAuthMode);
 $("searchInput").addEventListener("input", searchChats);
 $("messageInput").addEventListener("keydown", event => { if (event.key === "Enter" && !event.shiftKey) { event.preventDefault(); sendMessage(); } });
+$("messageInput").addEventListener("input", handleLocalTyping);
+$("messageInput").addEventListener("blur", () => stopLocalTyping());
 document.querySelectorAll(".modal-backdrop").forEach(modal => modal.addEventListener("click", event => { if (event.target === modal) modal.style.display = "none"; }));
 initializeEmojis();
 
-Object.assign(window, {openModal, closeModal, createPrivateChat, createGroup, joinGroup, copyCode, sendMessage, replyToMessage, cancelReply, toggleEmoji, showGroupInfo, showToast, searchChats, goBack, signOutUser});
+Object.assign(window, {openModal, closeModal, createPrivateChat, createGroup, joinGroup, copyCode, sendMessage, replyToMessage, cancelReply, toggleEmoji, showGroupInfo, showToast, searchChats, goBack, signOutUser, enableNotifications, renameGroup, leaveGroup, copyCurrentGroupCode});
 onAuthStateChanged(auth, handleAuthState);
 </script>
 </body>
