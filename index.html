@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Whisper - Messaging</title>
+<title>Whisper Math</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--bg:#0b0e14;--panel:#121722;--panel2:#191f2b;--panel3:#222b39;--border:#283142;--text:#edf1fa;--muted:#8c98aa;--accent:#818cf8;--accent2:#6366f1;--green:#4ade80;--red:#fb7185}
@@ -35,7 +35,7 @@ button,input{font-family:inherit}button{cursor:pointer;border:0;color:inherit}
 .chat-info{flex:1;min-width:0}.chat-info-top{display:flex;justify-content:space-between;gap:5px}.chat-name{font-size:14px;font-weight:bold}.chat-time{font-size:10px;color:var(--muted)}.chat-preview{color:var(--muted);font-size:12px;margin-top:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .sidebar-footer{padding:15px;border-top:1px solid var(--border)}.profile{display:flex;align-items:center;gap:12px}.profile .avatar{width:38px;height:38px}.profile-info{flex:1;min-width:0}.profile-info strong{font-size:13px}.profile-info small{display:block;margin-top:4px;color:var(--green);font-size:11px}.settings-button{background:transparent;font-size:20px;color:var(--muted)}
 .main{flex:1;display:flex;flex-direction:column;min-width:0}.chat-header{height:76px;min-height:76px;border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 24px;gap:13px;background:var(--panel)}.header-info{flex:1;min-width:0}.header-info h2{font-size:16px}.header-info p{color:var(--muted);font-size:12px;margin-top:5px}.header-actions{display:flex;gap:8px}.header-actions button{width:38px;height:38px;border-radius:10px;background:var(--panel2);color:var(--muted);font-size:17px}.header-actions button:hover{background:var(--panel3);color:white}
-.messages{flex:1;overflow-y:auto;padding:25px;display:flex;flex-direction:column;gap:18px}.date-divider{text-align:center;font-size:11px;color:var(--muted);margin:10px 0}.message{display:flex;gap:10px;max-width:80%;align-items:flex-end}.message.mine{align-self:flex-end;flex-direction:row-reverse}.message-avatar{width:32px;height:32px;border-radius:50%;background:#45536b;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}.message-content{min-width:0}.message-author{font-size:11px;color:var(--muted);margin-bottom:5px}.message.mine .message-author{text-align:right}.bubble{background:var(--panel2);padding:12px 15px;border-radius:15px 15px 15px 4px;font-size:14px;line-height:1.5;word-break:break-word;white-space:pre-wrap}.message.mine .bubble{background:var(--accent2);border-radius:15px 15px 4px 15px}.message-time{font-size:10px;color:var(--muted);margin-top:5px}.message.mine .message-time{text-align:right}.reply-preview{background:#0003;border-left:3px solid var(--accent);padding:8px;margin-bottom:8px;border-radius:4px;font-size:11px;color:#d0d5ff}.message-actions{display:flex;gap:6px;margin-top:5px;opacity:.15}.message:hover .message-actions{opacity:1}.message-actions button{background:var(--panel3);border-radius:5px;padding:4px 7px;font-size:11px}.message-actions button:hover{background:var(--accent2)}.message-reactions{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px}.message-reactions button{background:#30384a;border:1px solid #46516a;color:#f4f5fb;border-radius:999px;padding:4px 8px;font-size:12px}.message-reactions button:hover{border-color:var(--accent);background:#3b4560}
+.messages{flex:1;overflow-y:auto;padding:25px;display:flex;flex-direction:column;gap:18px}.date-divider{text-align:center;font-size:11px;color:var(--muted);margin:10px 0}.message{display:flex;gap:10px;max-width:80%;align-items:flex-end}.message.mine{align-self:flex-end;flex-direction:row-reverse}.message-avatar{width:32px;height:32px;border-radius:50%;background:#45536b;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}.message-content{min-width:0}.message-author{font-size:11px;color:var(--muted);margin-bottom:5px}.message.mine .message-author{text-align:right}.bubble{background:var(--panel2);padding:12px 15px;border-radius:15px 15px 15px 4px;font-size:14px;line-height:1.5;word-break:break-word;white-space:pre-wrap}.message.mine .bubble{background:var(--accent2);border-radius:15px 15px 4px 15px}.message-time{font-size:10px;color:var(--muted);margin-top:5px}.message.mine .message-time{text-align:right}.reply-preview{background:#0003;border-left:3px solid var(--accent);padding:8px;margin-bottom:8px;border-radius:4px;font-size:11px;color:#d0d5ff}.message-actions{display:flex;gap:6px;margin-top:5px;opacity:.4}.message:hover .message-actions{opacity:1}.message-actions button{background:var(--panel3);border-radius:5px;padding:4px 7px;font-size:11px}.message-actions button:hover{background:var(--accent2)}.message-reactions{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px}.message-reactions button{background:#30384a;border:1px solid #46516a;color:#f4f5fb;border-radius:999px;padding:4px 8px;font-size:12px}.message-reactions button:hover{border-color:var(--accent);background:#3b4560}.message-reactions button.selected{border-color:var(--accent);background:#45406f}.message-reaction-picker{display:none;flex-wrap:wrap;gap:4px;max-width:290px;margin-top:8px;padding:9px;background:var(--panel);border:1px solid var(--border);border-radius:12px;box-shadow:0 8px 24px #0006}.message-reaction-picker.open{display:flex}.message-reaction-picker button{width:34px;height:34px;background:var(--panel2);border-radius:8px;font-size:20px}.message-reaction-picker button:hover{background:var(--panel3);transform:scale(1.08)}.message-reaction-picker button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
  .input-area{padding:17px 24px 22px;background:var(--panel);border-top:1px solid var(--border)}
 .typing-indicator{min-height:18px;padding:0 3px 7px;color:var(--muted);font-size:11px;font-style:italic}
 .status-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);margin-right:5px;vertical-align:middle}
@@ -45,15 +45,43 @@ button,input{font-family:inherit}button{cursor:pointer;border:0;color:inherit}
 .emoji-picker{display:none;position:absolute;bottom:90px;background:var(--panel2);border:1px solid var(--border);border-radius:12px;padding:12px;grid-template-columns:repeat(6,35px);gap:5px;box-shadow:0 10px 30px #0006}.emoji-picker button{background:transparent;font-size:23px;padding:5px}.emoji-picker button:hover{background:var(--panel3);border-radius:5px}.empty{text-align:center;margin:auto;color:var(--muted);max-width:400px;padding:25px}.empty h2{color:white;margin-bottom:10px}.empty p{font-size:13px;line-height:1.5}
 .modal-backdrop{display:none;position:fixed;inset:0;background:#000b;align-items:center;justify-content:center;z-index:100}.modal{background:var(--panel);border:1px solid var(--border);width:90%;max-width:400px;border-radius:18px;padding:25px}.modal h2{margin-bottom:8px}.modal p{color:var(--muted);font-size:13px;margin-bottom:18px;line-height:1.5}.modal input{width:100%;padding:13px;margin-bottom:12px;background:var(--panel2);border:1px solid var(--border);border-radius:9px;color:white;outline:none}.modal input:focus{border-color:var(--accent)}.modal-buttons{display:flex;gap:10px;margin-top:10px}.modal-buttons button{flex:1;padding:12px;border-radius:9px;background:var(--panel2)}.modal-buttons .primary{background:var(--accent2)}.generated-code{background:var(--panel2);padding:15px;border-radius:9px;text-align:center;font-size:22px;letter-spacing:4px;margin:12px 0;color:var(--accent);font-weight:bold}
 .toast{position:fixed;bottom:25px;right:25px;max-width:min(420px,90vw);background:var(--panel3);border:1px solid var(--border);padding:15px 20px;border-radius:10px;display:none;z-index:600;box-shadow:0 5px 20px #0006;font-size:13px}.mobile-back{display:none}
+@media(hover:none){.message-actions{opacity:1}}
 @media(max-width:700px){.sidebar{width:100%;min-width:0}.main{display:none}.app.chat-open .sidebar{display:none}.app.chat-open .main{display:flex}.mobile-back{display:block;background:transparent;font-size:20px}.chat-header{padding:0 12px}.messages{padding:15px}.input-area{padding:12px}.message{max-width:90%}.header-actions button{width:34px;height:34px}}
+
+.site-gate{position:fixed;inset:0;z-index:1000;background:radial-gradient(circle at top,#202849 0,#0b0e14 58%);display:flex;align-items:center;justify-content:center;padding:20px}
+.site-gate-card{width:100%;max-width:400px;background:var(--panel);border:1px solid var(--border);border-radius:20px;padding:30px;box-shadow:0 20px 70px #0008}
+.site-gate-card h1{font-size:23px;letter-spacing:1px;margin-bottom:8px}.site-gate-card p{color:var(--muted);font-size:13px;line-height:1.6;margin-bottom:18px}
+.site-gate-card input{width:100%;padding:13px;background:var(--panel2);border:1px solid var(--border);border-radius:9px;color:white;outline:none}
+.site-gate-card button{width:100%;padding:13px;margin-top:12px;background:var(--accent2);border-radius:9px;font-weight:bold}
+.site-gate-error{display:none;margin-top:12px;color:#fecdd3;background:#4c1d2b;border:1px solid #87344b;padding:10px;border-radius:8px;font-size:12px}
+.settings-section{padding:12px 0;border-top:1px solid var(--border);margin-top:12px}
+.settings-row{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--text);margin:12px 0}
+.settings-row input[type=checkbox]{width:18px;height:18px;accent-color:var(--accent2)}
+.modal .setting-input{width:100%;padding:12px;margin:7px 0;background:var(--panel2);border:1px solid var(--border);border-radius:9px;color:white}
+.admin-code-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px;background:var(--panel2);border-radius:8px;margin:7px 0;font-size:12px}
+.admin-code-row button{padding:7px 10px;background:#4c1d2b;border-radius:7px;font-size:11px}
+.admin-note{font-size:11px;color:var(--muted);line-height:1.5;margin:10px 0}
+
 </style>
 </head>
 <body>
+<div class="site-gate" id="siteGate">
+  <div class="site-gate-card">
+    <h1>WHISPER MATH</h1>
+    <p>Members area. Enter the access code provided by the administrator to continue.</p>
+    <form id="siteGateForm">
+      <input id="siteGateCode" maxlength="32" autocomplete="off" placeholder="Access code" aria-label="Access code">
+      <button type="submit" id="siteGateSubmit">Continue</button>
+    </form>
+    <div class="site-gate-error" id="siteGateError"></div>
+  </div>
+</div>
+
 <div id="authScreen">
   <div class="auth-card">
-    <div class="auth-logo"><div class="logo-icon">💬</div><div><h1>WHISPER</h1><small>PRIVATE MESSAGING</small></div></div>
+    <div class="auth-logo"><div class="logo-icon">💬</div><div><h1>WHISPER MATH</h1><small>MEMBERS ACCESS</small></div></div>
     <h2 id="authTitle">Welcome back</h2>
-    <p id="authDescription">Sign in with your Whisper username and password.</p>
+    <p id="authDescription">Sign in with your Whisper Math username and password.</p>
     <form id="authForm">
       <label for="authUsername">Username</label>
       <input id="authUsername" maxlength="20" autocomplete="username" placeholder="e.g. skywalker" required>
@@ -62,14 +90,14 @@ button,input{font-family:inherit}button{cursor:pointer;border:0;color:inherit}
       <button class="auth-primary" id="authSubmit" type="submit">Sign in</button>
     </form>
     <div class="auth-error" id="authError"></div>
-    <div class="auth-switch"><span id="authSwitchText">New to Whisper?</span> <button id="authSwitchButton" type="button">Create an account</button></div>
+    <div class="auth-switch"><span id="authSwitchText">New to Whisper Math?</span> <button id="authSwitchButton" type="button">Create an account</button></div>
     <div class="auth-note">Usernames must be 3–20 characters using letters, numbers, or underscores. No email address is required. Because accounts use no email, email-based password recovery is unavailable. Keep your password somewhere safe and never reuse a password from another site.</div>
   </div>
 </div>
 
 <div class="app hidden" id="app">
   <aside class="sidebar">
-    <div class="logo"><div class="logo-icon">💬</div><div><h1>WHISPER</h1><small>MESSAGING</small></div></div>
+    <div class="logo"><div class="logo-icon">💬</div><div><h1>WHISPER MATH</h1><small>MEMBERS AREA</small></div></div>
     <div class="search"><input id="searchInput" placeholder="🔍 Search conversations..."></div>
     <div class="sidebar-buttons">
       <button onclick="openModal('newChatModal')">＋ New Chat</button>
@@ -78,28 +106,24 @@ button,input{font-family:inherit}button{cursor:pointer;border:0;color:inherit}
     </div>
     <div class="section-title"><span>CONVERSATIONS</span><span id="chatCount">0</span></div>
     <div class="chat-list" id="chatList"></div>
-    <div class="sidebar-footer"><div class="profile"><div class="avatar purple" id="profileAvatar">U</div><div class="profile-info"><strong id="currentUsername">You</strong><small id="currentStatus">● Signed in</small></div><button class="settings-button" onclick="enableNotifications()" title="Enable browser notifications">🔔</button><button class="settings-button" onclick="signOutUser()" title="Sign out">⇥</button></div></div>
+    <div class="sidebar-footer"><div class="profile"><div class="avatar purple" id="profileAvatar">U</div><div class="profile-info"><strong id="currentUsername">You</strong><small id="currentStatus">● Signed in</small></div><button class="settings-button" onclick="openSettings()" title="Settings">⚙</button><button class="settings-button hidden" id="adminPortalButton" onclick="openAdminPortal()" title="Admin portal">⌘</button><button class="settings-button" onclick="signOutUser()" title="Sign out">⇥</button></div></div>
   </aside>
 
   <main class="main">
     <div class="chat-header">
       <button class="mobile-back" onclick="goBack()">←</button>
       <div class="avatar purple" id="headerAvatar">W</div>
-      <div class="header-info"><h2 id="headerName">Whisper</h2><p id="headerStatus">Choose a conversation</p></div>
+      <div class="header-info"><h2 id="headerName">Whisper Math</h2><p id="headerStatus">Choose a conversation</p></div>
       <div class="header-actions">
-        <button title="Voice call" onclick="showToast('Voice calls are not connected yet.')">📞</button>
-        <button title="Video call" onclick="showToast('Video calls are not connected yet.')">📹</button>
-        <button title="Conversation info" onclick="showGroupInfo()">ⓘ</button>
+        <button title="Information" onclick="showGroupInfo()">ⓘ</button>
       </div>
     </div>
-    <div class="messages" id="messages"><div class="empty"><h2>Welcome to Whisper</h2><p>Start a private conversation or create a group. Your messages will sync through Firebase.</p></div></div>
+    <div class="messages" id="messages"><div class="empty"><h2>Welcome to Whisper Math</h2><p>Start a private conversation or create a group. Your messages will sync through Firebase.</p></div></div>
     <div class="input-area">
       <div class="typing-indicator" id="typingIndicator" aria-live="polite"></div>
       <div class="replying-to" id="replyBox">Replying to: <span id="replyText"></span><button onclick="cancelReply()">✕</button></div>
       <div class="input-box">
         <button class="input-button" onclick="toggleEmoji()" title="Emojis">😊</button>
-        <button class="input-button" onclick="showToast('Image sharing is not set up yet. Firebase Storage needs to be enabled first.')" title="Send image">🖼</button>
-        <button class="input-button" onclick="showToast('File sharing is not set up yet. Firebase Storage needs to be enabled first.')" title="Send file">📎</button>
         <input id="messageInput" placeholder="Write a message..." autocomplete="off">
         <button class="send-button" onclick="sendMessage()">➤</button>
       </div>
@@ -108,17 +132,49 @@ button,input{font-family:inherit}button{cursor:pointer;border:0;color:inherit}
   </main>
 </div>
 
-<div class="modal-backdrop" id="newChatModal"><div class="modal"><h2>New conversation</h2><p>Enter the exact Whisper username of the person you want to message.</p><input id="newChatUsername" maxlength="20" placeholder="Username"><div class="modal-buttons"><button onclick="closeModal('newChatModal')">Cancel</button><button class="primary" onclick="createPrivateChat()">Start chat</button></div></div></div>
+<div class="modal-backdrop" id="newChatModal"><div class="modal"><h2>New conversation</h2><p>Enter the exact Whisper Math username of the person you want to message.</p><input id="newChatUsername" maxlength="20" placeholder="Username"><div class="modal-buttons"><button onclick="closeModal('newChatModal')">Cancel</button><button class="primary" onclick="createPrivateChat()">Start chat</button></div></div></div>
 <div class="modal-backdrop" id="groupModal"><div class="modal"><h2>Create a group</h2><p>Create a group and share its private join code with people you trust.</p><input id="groupName" maxlength="40" placeholder="Group name"><div class="modal-buttons"><button onclick="closeModal('groupModal')">Cancel</button><button class="primary" onclick="createGroup()">Create group</button></div></div></div>
 <div class="modal-backdrop" id="joinModal"><div class="modal"><h2>Join a group</h2><p>Enter the group join code shared with you.</p><input id="joinCode" maxlength="12" placeholder="Enter join code"><div class="modal-buttons"><button onclick="closeModal('joinModal')">Cancel</button><button class="primary" onclick="joinGroup()">Join group</button></div></div></div>
 <div class="modal-backdrop" id="codeModal"><div class="modal"><h2>Group created!</h2><p>Share this join code privately with the people you want to invite.</p><div class="generated-code" id="generatedCode"></div><div class="modal-buttons"><button onclick="copyCode()">📋 Copy code</button><button class="primary" onclick="closeModal('codeModal')">Done</button></div></div></div>
 <div class="modal-backdrop" id="groupInfoModal"><div class="modal"><h2 id="groupInfoTitle">Group information</h2><p id="groupInfoSummary">Group details</p><div class="group-member-list" id="groupMembers"></div><div id="groupOwnerControls"><input id="renameGroupInput" maxlength="40" placeholder="New group name"><div class="modal-buttons"><button onclick="closeModal('groupInfoModal')">Close</button><button class="primary" onclick="renameGroup()">Rename group</button></div></div><div class="modal-buttons" id="groupInfoButtons"><button onclick="copyCurrentGroupCode()">📋 Copy invite code</button><button onclick="leaveGroup()">Leave group</button></div><div class="modal-buttons" id="privateInfoButtons"><button class="primary" onclick="closeModal('groupInfoModal')">Close</button></div></div></div>
+
+<div class="modal-backdrop" id="settingsModal"><div class="modal">
+  <h2>Settings</h2><p>Manage your notifications and account password.</p>
+  <div class="settings-section">
+    <strong>Notifications</strong>
+    <label class="settings-row"><input type="checkbox" id="notificationsToggle"> Enable browser notifications on this device</label>
+    <div class="admin-note">Turning this off stops Whisper Math from showing browser notifications on this device. It does not change the browser's site permission.</div>
+  </div>
+  <div class="settings-section">
+    <strong>Change password</strong>
+    <input class="setting-input" id="currentPasswordInput" type="password" autocomplete="current-password" placeholder="Current password">
+    <input class="setting-input" id="newPasswordInput" type="password" autocomplete="new-password" placeholder="New password (at least 8 characters)">
+    <input class="setting-input" id="confirmPasswordInput" type="password" autocomplete="new-password" placeholder="Confirm new password">
+    <div class="modal-buttons"><button onclick="closeModal('settingsModal')">Close</button><button class="primary" onclick="changeAccountPassword()">Update password</button></div>
+  </div>
+</div></div>
+
+<div class="modal-backdrop" id="adminModal"><div class="modal" style="max-width:480px;max-height:85vh;overflow:auto">
+  <h2>Admin portal</h2><p>Manage the site-wide invitation codes. Keep codes private and use long codes.</p>
+  <div class="settings-section">
+    <strong>Create an access code</strong>
+    <input class="setting-input" id="newSiteCodeInput" maxlength="32" placeholder="Choose a code (10–32 letters, numbers, or hyphens)">
+    <div class="modal-buttons"><button onclick="closeModal('adminModal')">Close</button><button class="primary" onclick="createSiteAccessCode()">Create code</button></div>
+    <div class="admin-note">The code is required before users can register or sign in when access-code protection is enabled. Use a hard-to-guess code.</div>
+  </div>
+  <div class="settings-section">
+    <strong>Access protection</strong>
+    <label class="settings-row"><input type="checkbox" id="requireSiteCodeToggle"> Require an access code to enter</label>
+  </div>
+  <div class="settings-section"><strong>Existing access codes</strong><div id="adminCodeList" class="admin-note">Loading codes…</div></div>
+</div></div>
+
 <div class="toast" id="toast"></div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
-import { getFirestore, collection, doc, getDoc, setDoc, addDoc, updateDoc, deleteDoc, deleteField, arrayUnion, serverTimestamp, query, where, onSnapshot, orderBy, limit } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-firestore.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, EmailAuthProvider, reauthenticateWithCredential, updatePassword } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
+import { getFirestore, collection, doc, getDoc, getDocs, setDoc, addDoc, updateDoc, deleteDoc, deleteField, arrayUnion, serverTimestamp, query, where, onSnapshot, orderBy, limit } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-firestore.js";
 import { getDatabase, ref, push, set, remove, onValue, onDisconnect, serverTimestamp as rtdbServerTimestamp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-database.js";
 
 const firebaseConfig = {
@@ -135,9 +191,14 @@ const auth = getAuth(firebaseApp);
 const db = getFirestore(firebaseApp);
 // After creating Realtime Database, replace this placeholder with the exact URL shown in Firebase.
 // Example formats are https://PROJECT-default-rtdb.firebaseio.com or https://PROJECT.REGION.firebasedatabase.app
-const REALTIME_DATABASE_URL = "https://hidden-937e5-default-rtdb.firebaseio.com/";
+const REALTIME_DATABASE_URL = "PASTE_REALTIME_DATABASE_URL_HERE";
 const rtdb = REALTIME_DATABASE_URL.startsWith("https://") ? getDatabase(firebaseApp, REALTIME_DATABASE_URL) : null;
 const INTERNAL_EMAIL_DOMAIN = "@users.whisper.invalid";
+// Replace this placeholder with the Firebase Authentication UID of the account named "hidden".
+const ADMIN_UID = "REPLACE_WITH_HIDDEN_ACCOUNT_UID";
+const NOTIFICATIONS_STORAGE_KEY = "whisperMathNotificationsEnabled";
+let siteGatePassed = sessionStorage.getItem("whisperMathAccessPassed") === "yes";
+let pendingAuthUser = undefined;
 
 let currentUser = null;
 let username = "";
@@ -191,6 +252,59 @@ function showToast(message) {
   clearTimeout(showToast.timer);
   showToast.timer = setTimeout(() => { toast.style.display = "none"; }, 3500);
 }
+async function sha256Hex(value) {
+  const bytes = new TextEncoder().encode(value);
+  const digest = await crypto.subtle.digest("SHA-256", bytes);
+  return Array.from(new Uint8Array(digest), byte => byte.toString(16).padStart(2, "0")).join("");
+}
+
+async function siteAccessIsRequired() {
+  const settingsSnapshot = await getDoc(doc(db, "siteSettings", "access"));
+  return settingsSnapshot.exists() && settingsSnapshot.data().requireCode === true;
+}
+
+async function validateSiteAccessCode(code) {
+  const required = await siteAccessIsRequired();
+  if (!required) return {valid:true, codeHash:""};
+  const normalized = String(code || "").trim().toUpperCase();
+  if (!normalized) return {valid:false, codeHash:""};
+  const hash = await sha256Hex(normalized);
+  const codeSnapshot = await getDoc(doc(db, "siteAccessCodes", hash));
+  return {valid:codeSnapshot.exists() && codeSnapshot.data().active === true, codeHash:hash};
+}
+
+async function submitSiteGate(event) {
+  event.preventDefault();
+  const button = $("siteGateSubmit");
+  const code = $("siteGateCode").value.trim();
+  button.disabled = true;
+  button.textContent = "Checking…";
+  $("siteGateError").style.display = "none";
+  try {
+    const access = await validateSiteAccessCode(code);
+    if (!access.valid) throw new Error("That access code is not valid or has been turned off.");
+    siteGatePassed = true;
+    sessionStorage.setItem("whisperMathAccessPassed", "yes");
+    if (access.codeHash) sessionStorage.setItem("whisperMathAccessCodeHash", access.codeHash);
+    else sessionStorage.removeItem("whisperMathAccessCodeHash");
+    $("siteGate").classList.add("hidden");
+    $("siteGateCode").value = "";
+    if (pendingAuthUser !== undefined) {
+      const user = pendingAuthUser;
+      pendingAuthUser = undefined;
+      await handleAuthState(user);
+    } else if (!auth.currentUser) {
+      $("authScreen").classList.remove("hidden");
+    }
+  } catch (error) {
+    $("siteGateError").textContent = error.message || "Couldn't verify the access code.";
+    $("siteGateError").style.display = "block";
+  } finally {
+    button.disabled = false;
+    button.textContent = "Continue";
+  }
+}
+
 function showAuthError(message) {
   const box = $("authError");
   box.textContent = message;
@@ -209,9 +323,9 @@ function friendlyAuthError(error) {
 function switchAuthMode() {
   authMode = authMode === "login" ? "register" : "login";
   $("authTitle").textContent = authMode === "login" ? "Welcome back" : "Create your account";
-  $("authDescription").textContent = authMode === "login" ? "Sign in with your Whisper username and password." : "Choose a unique username and a password for Whisper.";
+  $("authDescription").textContent = authMode === "login" ? "Sign in with your Whisper Math username and password." : "Choose a unique username and a password for Whisper Math.";
   $("authSubmit").textContent = authMode === "login" ? "Sign in" : "Create account";
-  $("authSwitchText").textContent = authMode === "login" ? "New to Whisper?" : "Already have an account?";
+  $("authSwitchText").textContent = authMode === "login" ? "New to Whisper Math?" : "Already have an account?";
   $("authSwitchButton").textContent = authMode === "login" ? "Create an account" : "Sign in instead";
   $("authPassword").setAttribute("autocomplete", authMode === "login" ? "current-password" : "new-password");
   $("authError").style.display = "none";
@@ -246,9 +360,31 @@ async function submitAuth(event) {
   }
 }
 
+async function ensureApprovedUser(user) {
+  const approvalRef = doc(db, "approvedUsers", user.uid);
+  const existing = await getDoc(approvalRef);
+  const required = await siteAccessIsRequired();
+  const codeHash = sessionStorage.getItem("whisperMathAccessCodeHash") || "";
+  if (existing.exists()) {
+    // When an administrator turns off an old code, members can re-approve with a new active code.
+    if (required && codeHash && existing.data().codeHash !== codeHash) {
+      await updateDoc(approvalRef, {codeHash});
+    } else if (required && !codeHash) {
+      throw new Error("Enter a valid site access code before signing in.");
+    }
+    return;
+  }
+  const approvalData = {approvedAt:serverTimestamp()};
+  if (required) {
+    if (!codeHash) throw new Error("Enter a valid site access code before signing in.");
+    approvalData.codeHash = codeHash;
+  }
+  await setDoc(approvalRef, approvalData);
+}
+
 async function ensureUsernameRecord(user) {
   const email = user.email || "";
-  if (!email.endsWith(INTERNAL_EMAIL_DOMAIN)) throw new Error("This account is not configured as a Whisper username account.");
+  if (!email.endsWith(INTERNAL_EMAIL_DOMAIN)) throw new Error("This account is not configured as a Whisper Math username account.");
   const name = email.slice(0, -INTERNAL_EMAIL_DOMAIN.length);
   if (!usernameIsValid(name)) throw new Error("The username on this account is not valid.");
   const usernameRef = doc(db, "usernames", name);
@@ -281,24 +417,28 @@ async function handleAuthState(user) {
   if (!user) {
     username = ""; chats = []; currentChat = null; currentMessages = [];
     $("app").classList.add("hidden");
-    $("authScreen").classList.remove("hidden");
+    if (siteGatePassed) $("authScreen").classList.remove("hidden");
     $("authSubmit").disabled = false;
     $("authSubmit").textContent = authMode === "login" ? "Sign in" : "Create account";
     $("currentStatus").textContent = "● Signed out";
+    $("adminPortalButton").classList.add("hidden");
     return;
   }
   try {
+    await ensureApprovedUser(user);
     username = await ensureUsernameRecord(user);
+    await ensureCommunityChat();
     $("authScreen").classList.add("hidden");
     $("app").classList.remove("hidden");
     $("currentUsername").textContent = username;
     $("profileAvatar").textContent = username.charAt(0).toUpperCase();
+    $("adminPortalButton").classList.toggle("hidden", !isConfiguredAdmin());
     $("currentStatus").textContent = rtdb ? "● Connecting..." : "● Signed in";
     startPresence();
     startChatsListener();
   } catch (error) {
     showAuthError(friendlyAuthError(error));
-    showToast("Could not load your Whisper profile: " + error.message);
+    showToast("Could not load your Whisper Math profile: " + error.message);
     await signOut(auth);
   }
 }
@@ -422,10 +562,10 @@ function updateHeader() {
 }
 
 function renderEmptyChat() {
-  $("headerName").textContent = "Whisper";
+  $("headerName").textContent = "Whisper Math";
   $("headerAvatar").textContent = "W";
   $("headerStatus").textContent = "Choose a conversation";
-  $("messages").innerHTML = '<div class="empty"><h2>Welcome to Whisper</h2><p>Start a private conversation or create a group. Your messages will sync through Firebase.</p></div>';
+  $("messages").innerHTML = '<div class="empty"><h2>Welcome to Whisper Math</h2><p>Start a private conversation or create a group. Your messages will sync through Firebase.</p></div>';
 }
 
 function renderMessages() {
@@ -445,11 +585,22 @@ function renderMessages() {
     const reply = message.replyText ? `<div class="reply-preview">${escapeHTML(message.replyText)}</div>` : "";
     const reactionCounts = {};
     Object.values(message.reactions || {}).forEach(emoji => { reactionCounts[emoji] = (reactionCounts[emoji] || 0) + 1; });
-    const reactionsHtml = Object.entries(reactionCounts).map(([emoji, count]) => `<button type="button" data-reaction-id="${escapeHTML(message.id)}" title="Change your reaction">${escapeHTML(emoji)} ${count}</button>`).join("");
-    element.innerHTML = `<div class="message-avatar">${escapeHTML((message.senderName || "?").charAt(0).toUpperCase())}</div><div class="message-content"><div class="message-author">${mine ? "You" : escapeHTML(message.senderName || "User")}</div><div class="bubble">${reply}${escapeHTML(message.text)}</div><div class="message-reactions">${reactionsHtml}</div><div class="message-time">${escapeHTML(formatTime(message.createdAt))}</div><div class="message-actions"><button type="button" data-reply-id="${escapeHTML(message.id)}">↩ Reply</button><button type="button" data-react-id="${escapeHTML(message.id)}">😊 React</button></div></div>`;
+    const myReaction = message.reactions?.[currentUser.uid];
+    const reactionsHtml = Object.entries(reactionCounts).map(([emoji, count]) => `<button type="button" data-reaction-emoji="${escapeHTML(emoji)}" class="${myReaction === emoji ? "selected" : ""}" title="React with ${escapeHTML(emoji)}">${escapeHTML(emoji)} ${count}</button>`).join("");
+    const pickerHtml = reactionChoices.map(emoji => `<button type="button" data-pick-reaction="${escapeHTML(emoji)}" aria-label="React with ${escapeHTML(emoji)}">${emoji}</button>`).join("");
+    element.innerHTML = `<div class="message-avatar">${escapeHTML((message.senderName || "?").charAt(0).toUpperCase())}</div><div class="message-content"><div class="message-author">${mine ? "You" : escapeHTML(message.senderName || "User")}</div><div class="bubble">${reply}${escapeHTML(message.text)}</div><div class="message-reactions">${reactionsHtml}</div><div class="message-time">${escapeHTML(formatTime(message.createdAt))}</div><div class="message-actions"><button type="button" data-reply-id="${escapeHTML(message.id)}">↩ Reply</button><button type="button" data-react-id="${escapeHTML(message.id)}" aria-expanded="false">😊 React</button></div><div class="message-reaction-picker" aria-label="Choose a reaction">${pickerHtml}</div></div>`;
     element.querySelector("[data-reply-id]").addEventListener("click", () => replyToMessage(message.id));
-    element.querySelector("[data-react-id]").addEventListener("click", () => reactToMessage(message.id));
-    element.querySelectorAll("[data-reaction-id]").forEach(button => button.addEventListener("click", () => reactToMessage(message.id)));
+    element.querySelector("[data-react-id]").addEventListener("click", event => {
+      const clickedButton = event.currentTarget;
+      const picker = element.querySelector(".message-reaction-picker");
+      document.querySelectorAll(".message-reaction-picker.open").forEach(openPicker => {
+        if (openPicker !== picker) openPicker.classList.remove("open");
+      });
+      const isOpen = picker.classList.toggle("open");
+      clickedButton.setAttribute("aria-expanded", String(isOpen));
+    });
+    element.querySelectorAll("[data-pick-reaction]").forEach(button => button.addEventListener("click", () => setMessageReaction(message.id, button.dataset.pickReaction)));
+    element.querySelectorAll("[data-reaction-emoji]").forEach(button => button.addEventListener("click", () => setMessageReaction(message.id, button.dataset.reactionEmoji)));
     container.appendChild(element);
   });
   container.scrollTop = container.scrollHeight;
@@ -540,9 +691,9 @@ async function stopLocalTyping() {
 }
 
 function showBrowserNotification(title, body, chatId) {
-  if (!("Notification" in window) || Notification.permission !== "granted") return;
+  if (!notificationsEnabled() || !("Notification" in window) || Notification.permission !== "granted") return;
   try {
-    const notification = new Notification(`Whisper · ${title}`, {body:String(body || "New message").slice(0,150), tag:`whisper-${chatId}`});
+    const notification = new Notification(`Whisper Math · ${title}`, {body:String(body || "New message").slice(0,150), tag:`whisper-${chatId}`});
     notification.onclick = () => {
       window.focus();
       if (chats.some(chat => chat.id === chatId)) selectChat(chatId);
@@ -551,12 +702,169 @@ function showBrowserNotification(title, body, chatId) {
   } catch (error) { console.warn("Browser notification unavailable:", error); }
 }
 
-async function enableNotifications() {
-  if (!("Notification" in window)) { showToast("This browser does not support desktop notifications."); return; }
-  if (Notification.permission === "granted") { showToast("Browser notifications are already enabled."); return; }
-  if (Notification.permission === "denied") { showToast("Notifications are blocked in browser settings. You can change that in site permissions."); return; }
-  const permission = await Notification.requestPermission();
-  showToast(permission === "granted" ? "Browser notifications enabled while Whisper is open." : "Notification permission was not granted.");
+function notificationsEnabled() {
+  return localStorage.getItem(NOTIFICATIONS_STORAGE_KEY) === "on";
+}
+
+function openSettings() {
+  $("notificationsToggle").checked = notificationsEnabled();
+  $("currentPasswordInput").value = "";
+  $("newPasswordInput").value = "";
+  $("confirmPasswordInput").value = "";
+  openModal("settingsModal");
+}
+
+async function saveNotificationPreference(enabled) {
+  if (enabled) {
+    if (!("Notification" in window)) {
+      $("notificationsToggle").checked = false;
+      localStorage.setItem(NOTIFICATIONS_STORAGE_KEY, "off");
+      showToast("This browser does not support notifications.");
+      return;
+    }
+    if (Notification.permission === "denied") {
+      $("notificationsToggle").checked = false;
+      localStorage.setItem(NOTIFICATIONS_STORAGE_KEY, "off");
+      showToast("Notifications are blocked in browser settings. Change site permissions to enable them.");
+      return;
+    }
+    if (Notification.permission === "default") {
+      const permission = await Notification.requestPermission();
+      if (permission !== "granted") {
+        $("notificationsToggle").checked = false;
+        localStorage.setItem(NOTIFICATIONS_STORAGE_KEY, "off");
+        showToast("Notification permission was not granted.");
+        return;
+      }
+    }
+    localStorage.setItem(NOTIFICATIONS_STORAGE_KEY, "on");
+    showToast("Browser notifications enabled on this device.");
+  } else {
+    localStorage.setItem(NOTIFICATIONS_STORAGE_KEY, "off");
+    showToast("Browser notifications turned off on this device.");
+  }
+}
+
+async function changeAccountPassword() {
+  const currentPassword = $("currentPasswordInput").value;
+  const newPassword = $("newPasswordInput").value;
+  const confirmPassword = $("confirmPasswordInput").value;
+  if (!currentPassword || !newPassword) { showToast("Enter your current password and a new password."); return; }
+  if (newPassword.length < 8) { showToast("Your new password must be at least 8 characters."); return; }
+  if (newPassword !== confirmPassword) { showToast("The new passwords do not match."); return; }
+  try {
+    const credential = EmailAuthProvider.credential(currentUser.email, currentPassword);
+    await reauthenticateWithCredential(currentUser, credential);
+    await updatePassword(currentUser, newPassword);
+    $("currentPasswordInput").value = "";
+    $("newPasswordInput").value = "";
+    $("confirmPasswordInput").value = "";
+    showToast("Your password has been updated.");
+  } catch (error) {
+    const code = error?.code || "";
+    showToast(code.includes("wrong-password") || code.includes("invalid-credential") ? "Your current password is incorrect." : "Couldn't update password: " + (error.message || "Please try again."));
+  }
+}
+
+function isConfiguredAdmin() {
+  return !!currentUser && username === "hidden" && ADMIN_UID !== "REPLACE_WITH_HIDDEN_ACCOUNT_UID" && currentUser.uid === ADMIN_UID;
+}
+
+function openAdminPortal() {
+  if (!isConfiguredAdmin()) { showToast("This account is not configured as an administrator."); return; }
+  loadAdminPortal();
+  openModal("adminModal");
+}
+
+async function loadAdminPortal() {
+  if (!isConfiguredAdmin()) return;
+  try {
+    const settingsSnapshot = await getDoc(doc(db, "siteSettings", "access"));
+    $("requireSiteCodeToggle").checked = settingsSnapshot.exists() && settingsSnapshot.data().requireCode === true;
+    const snapshot = await getDocs(query(collection(db, "siteAccessCodes"), orderBy("createdAt", "desc"), limit(50)));
+    const list = $("adminCodeList");
+    list.innerHTML = "";
+    if (snapshot.empty) {
+      list.textContent = "No access codes yet. Create one above.";
+      return;
+    }
+    snapshot.forEach(item => {
+      const data = item.data();
+      const row = document.createElement("div");
+      row.className = "admin-code-row";
+      const label = document.createElement("span");
+      label.textContent = `${data.code || "Access code"} · ${data.active ? "Active" : "Off"}`;
+      const button = document.createElement("button");
+      button.type = "button";
+      button.textContent = data.active ? "Turn off" : "Enable";
+      button.addEventListener("click", async () => {
+        try {
+          await updateDoc(doc(db, "siteAccessCodes", item.id), {active:!data.active});
+          await loadAdminPortal();
+        } catch (error) { showToast("Couldn't update code: " + error.message); }
+      });
+      row.append(label, button);
+      list.appendChild(row);
+    });
+  } catch (error) {
+    $("adminCodeList").textContent = "Couldn't load access codes: " + error.message;
+  }
+}
+
+async function createSiteAccessCode() {
+  if (!isConfiguredAdmin()) return;
+  const code = $("newSiteCodeInput").value.trim().toUpperCase();
+  if (!/^[A-Z0-9-]{10,32}$/.test(code)) {
+    showToast("Use 10–32 characters: letters, numbers, or hyphens.");
+    return;
+  }
+  try {
+    const hash = await sha256Hex(code);
+    await setDoc(doc(db, "siteAccessCodes", hash), {code, active:true, createdBy:currentUser.uid, createdAt:serverTimestamp()});
+    // Link the administrator's own account to the new active code before enabling the gate.
+    await updateDoc(doc(db, "approvedUsers", currentUser.uid), {codeHash:hash});
+    sessionStorage.setItem("whisperMathAccessCodeHash", hash);
+    await setDoc(doc(db, "siteSettings", "access"), {requireCode:true, updatedAt:serverTimestamp()}, {merge:true});
+    $("newSiteCodeInput").value = "";
+    $("requireSiteCodeToggle").checked = true;
+    showToast("Access code created. Share it privately with approved members.");
+    await loadAdminPortal();
+  } catch (error) {
+    showToast("Couldn't create access code: " + error.message);
+  }
+}
+
+async function updateSiteCodeRequirement(enabled) {
+  if (!isConfiguredAdmin()) return;
+  try {
+    await setDoc(doc(db, "siteSettings", "access"), {requireCode:!!enabled, updatedAt:serverTimestamp()}, {merge:true});
+    showToast(enabled ? "Access codes are now required." : "Access-code requirement turned off.");
+  } catch (error) {
+    $("requireSiteCodeToggle").checked = !enabled;
+    showToast("Couldn't update access settings: " + error.message);
+  }
+}
+
+async function ensureCommunityChat() {
+  const chatRef = doc(db, "chats", "community");
+  let snapshot = await getDoc(chatRef);
+  if (!snapshot.exists()) {
+    const memberNames = {};
+    memberNames[currentUser.uid] = username;
+    try {
+      await setDoc(chatRef, {type:"group", groupName:"Community", isGlobal:true, members:[currentUser.uid], memberNames, createdBy:currentUser.uid, createdAt:serverTimestamp(), updatedAt:serverTimestamp()});
+    } catch (error) {
+      // Another member may have created the shared room at the same time.
+      snapshot = await getDoc(chatRef);
+      if (!snapshot.exists()) throw error;
+    }
+  }
+  snapshot = await getDoc(chatRef);
+  if (!snapshot.exists()) throw new Error("The Community room could not be created.");
+  const data = snapshot.data();
+  if (!data.members?.includes(currentUser.uid)) {
+    await updateDoc(chatRef, {members:arrayUnion(currentUser.uid), [`memberNames.${currentUser.uid}`]:username, updatedAt:serverTimestamp()});
+  }
 }
 
 function startPresence() {
@@ -618,20 +926,18 @@ function replyToMessage(id) {
 }
 function cancelReply() { replyingTo = null; $("replyBox").style.display = "none"; }
 
-const reactionChoices = ["❤️", "😂", "👍", "🔥", "🎉"];
-async function reactToMessage(id) {
-  if (!currentChat || !currentUser) return;
+const reactionChoices = ["❤️", "😂", "🤣", "😊", "😍", "🥰", "😎", "🤔", "😭", "😮", "😡", "👍", "👎", "💔", "🔥", "🎉", "✨", "🚀", "🎮", "💯", "🙌", "👏", "🤝", "👀", "🥹", "🤩", "😴", "💬", "🙏", "✅", "⭐", "💀", "🥳", "🤯", "🫶"];
+async function setMessageReaction(id, emoji) {
+  if (!currentChat || !currentUser || !reactionChoices.includes(emoji)) return;
   const message = currentMessages.find(item => item.id === id);
   if (!message) return;
   const currentReaction = message.reactions?.[currentUser.uid];
-  const currentIndex = reactionChoices.indexOf(currentReaction);
   const field = `reactions.${currentUser.uid}`;
   try {
-    if (currentIndex === reactionChoices.length - 1) {
+    if (currentReaction === emoji) {
       await updateDoc(doc(db, "chats", currentChat.id, "messages", id), { [field]: deleteField() });
     } else {
-      const nextReaction = reactionChoices[currentIndex + 1] || reactionChoices[0];
-      await updateDoc(doc(db, "chats", currentChat.id, "messages", id), { [field]: nextReaction });
+      await updateDoc(doc(db, "chats", currentChat.id, "messages", id), { [field]: emoji });
     }
   } catch (error) {
     showToast("Couldn't update reaction: " + error.message);
@@ -746,13 +1052,13 @@ function showGroupInfo() {
     return;
   }
   $("groupInfoTitle").textContent = currentChat.groupName || "Group information";
-  $("groupInfoSummary").textContent = `Invite code: ${currentChat.joinCode || "Unavailable"}`;
+  $("groupInfoSummary").textContent = currentChat.isGlobal ? "Shared Community room for approved members of this site." : `Invite code: ${currentChat.joinCode || "Unavailable"}`;
   const names = Object.values(currentChat.memberNames || {});
-  $("groupMembers").textContent = names.length ? `Members (${names.length}):\n${names.map(name => "• " + name).join("\n")}` : "No member list available.";
+  $("groupMembers").textContent = names.length ? `Members (${(currentChat.members || []).length}):\n${names.map(name => "• " + name).join("\n")}` : "No member list available.";
   $("renameGroupInput").value = currentChat.groupName || "";
-  $("groupOwnerControls").classList.toggle("hidden", currentChat.createdBy !== currentUser.uid);
-  $("groupInfoButtons").classList.remove("hidden");
-  $("privateInfoButtons").classList.add("hidden");
+  $("groupOwnerControls").classList.toggle("hidden", currentChat.isGlobal || currentChat.createdBy !== currentUser.uid);
+  $("groupInfoButtons").classList.toggle("hidden", !!currentChat.isGlobal);
+  $("privateInfoButtons").classList.toggle("hidden", !currentChat.isGlobal);
   openModal("groupInfoModal");
 }
 
@@ -777,6 +1083,7 @@ async function copyCurrentGroupCode() {
 
 async function leaveGroup() {
   if (!currentChat || currentChat.type !== "group") return;
+  if (currentChat.isGlobal) { showToast("The Community room is shared by all members and cannot be left."); return; }
   const group = currentChat;
   if ((group.members || []).length <= 1) { showToast("This is the last member. A group owner cannot leave an empty group yet."); return; }
   if (!confirm(`Leave ${group.groupName}? You will lose access to its messages.`)) return;
@@ -805,21 +1112,35 @@ function searchChats() { renderChatList(); }
 function openModal(id) { $(id).style.display = "flex"; }
 function closeModal(id) { $(id).style.display = "none"; }
 function goBack() { $("app").classList.remove("chat-open"); }
-async function signOutUser() { if (confirm("Sign out of Whisper?")) { try { await Promise.allSettled(myPresenceConnections.map(connectionRef => remove(connectionRef))); myPresenceConnections = []; await signOut(auth); } catch (error) { showToast("Couldn't sign out: " + error.message); } } }
+async function signOutUser() { if (confirm("Sign out of Whisper Math?")) { try { await Promise.allSettled(myPresenceConnections.map(connectionRef => remove(connectionRef))); myPresenceConnections = []; sessionStorage.removeItem("whisperMathAccessPassed"); sessionStorage.removeItem("whisperMathAccessCodeHash"); siteGatePassed = false; await signOut(auth); $("siteGate").classList.remove("hidden"); } catch (error) { showToast("Couldn't sign out: " + error.message); } } }
 window.addEventListener("pagehide", () => { stopLocalTyping(); });
 document.addEventListener("visibilitychange", () => { if (document.hidden) stopLocalTyping(); });
 
+$("siteGateForm").addEventListener("submit", submitSiteGate);
 $("authForm").addEventListener("submit", submitAuth);
 $("authSwitchButton").addEventListener("click", switchAuthMode);
+$("notificationsToggle").addEventListener("change", event => saveNotificationPreference(event.target.checked));
+$("requireSiteCodeToggle").addEventListener("change", event => updateSiteCodeRequirement(event.target.checked));
 $("searchInput").addEventListener("input", searchChats);
 $("messageInput").addEventListener("keydown", event => { if (event.key === "Enter" && !event.shiftKey) { event.preventDefault(); sendMessage(); } });
 $("messageInput").addEventListener("input", handleLocalTyping);
 $("messageInput").addEventListener("blur", () => stopLocalTyping());
 document.querySelectorAll(".modal-backdrop").forEach(modal => modal.addEventListener("click", event => { if (event.target === modal) modal.style.display = "none"; }));
 initializeEmojis();
+$("adminPortalButton").classList.add("hidden");
 
-Object.assign(window, {openModal, closeModal, createPrivateChat, createGroup, joinGroup, copyCode, sendMessage, replyToMessage, cancelReply, toggleEmoji, showGroupInfo, showToast, searchChats, goBack, signOutUser, enableNotifications, renameGroup, leaveGroup, copyCurrentGroupCode});
-onAuthStateChanged(auth, handleAuthState);
+Object.assign(window, {openModal, closeModal, createPrivateChat, createGroup, joinGroup, copyCode, sendMessage, replyToMessage, cancelReply, toggleEmoji, showGroupInfo, showToast, searchChats, goBack, signOutUser, renameGroup, leaveGroup, copyCurrentGroupCode, openSettings, changeAccountPassword, openAdminPortal, createSiteAccessCode});
+if (siteGatePassed) $("siteGate").classList.add("hidden");
+onAuthStateChanged(auth, user => {
+  if (!siteGatePassed) {
+    pendingAuthUser = user;
+    $("siteGate").classList.remove("hidden");
+    $("authScreen").classList.add("hidden");
+    $("app").classList.add("hidden");
+    return;
+  }
+  handleAuthState(user);
+});
 </script>
 </body>
 </html>
