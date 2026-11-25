@@ -151,11 +151,12 @@ body.theme-light .message-reaction-picker{box-shadow:0 8px 24px #0002}
   <div class="site-gate-card">
     <h1>WHISPER MATH</h1>
     <p>Enter the current site access code to continue.</p>
-    <form id="siteGateForm">
+    <form id="siteGateForm" onsubmit="event.preventDefault(); window.dispatchEvent(new Event('whisper-site-gate-submit'));">
       <input id="siteGateCode" maxlength="32" autocomplete="off" placeholder="Access code" aria-label="Access code">
       <button type="submit" id="siteGateSubmit">Continue</button>
     </form>
     <div class="site-gate-error" id="siteGateError"></div>
+    <noscript><p style="color:#ff9b9b">JavaScript must be enabled to verify the access code.</p></noscript>
   </div>
 </div>
 
@@ -521,8 +522,7 @@ async function validateSiteAccessCode(code) {
   return {valid:codeSnapshot.exists() && codeSnapshot.data().active === true, codeHash:hash};
 }
 
-async function submitSiteGate(event) {
-  event.preventDefault();
+async function submitSiteGate() {
   const button = $("siteGateSubmit");
   const code = $("siteGateCode").value.trim();
   button.disabled = true;
@@ -1157,7 +1157,7 @@ async function changeAccountPassword() {
 }
 
 function isConfiguredAdmin() {
-  return !!currentUser && username === "hidden" && ADMIN_UID !== 's21NkBldYCdmKHIlBJMR5uh9RVQ2' && currentUser.uid === ADMIN_UID;
+  return !!currentUser && username === "hidden" && ADMIN_UID !== "REPLACE_WITH_HIDDEN_ACCOUNT_UID" && currentUser.uid === ADMIN_UID;
 }
 
 function openAdminPortal() {
@@ -1961,7 +1961,9 @@ async function signOutUser() { if (confirm("Sign out of Whisper Math?")) { try {
 window.addEventListener("pagehide", () => { stopLocalTyping(); gameKeys.clear(); });
 document.addEventListener("visibilitychange", () => { if (document.hidden) stopLocalTyping(); });
 
-$("siteGateForm").addEventListener("submit", submitSiteGate);
+window.addEventListener("whisper-site-gate-submit", () => {
+  if (typeof submitSiteGate === "function") submitSiteGate();
+});
 $("authForm").addEventListener("submit", submitAuth);
 $("authSwitchButton").addEventListener("click", switchAuthMode);
 $("notificationsToggle").addEventListener("change", event => saveNotificationPreference(event.target.checked));
