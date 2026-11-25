@@ -91,6 +91,53 @@ body.theme-light .reply-preview{color:#39435c;background:#e9edf7}
 body.theme-light .message-reaction-picker{box-shadow:0 8px 24px #0002}
 @media(max-width:520px){.customization-grid,.custom-checks{grid-template-columns:1fr}.settings-modal{max-height:94vh;padding:18px}}
 
+
+/* Announcements and multiplayer platformer */
+.sidebar-extra-actions{display:grid;grid-template-columns:1fr 1fr;gap:7px;padding:0 12px 14px}
+.sidebar-extra-actions button{padding:10px 6px;border-radius:9px;background:var(--panel3);border:1px solid var(--border);font-size:11px;font-weight:bold}
+.sidebar-extra-actions button:hover{border-color:var(--accent);background:var(--panel2)}
+.announcement-banner{display:none;align-items:center;gap:12px;padding:12px 18px;background:linear-gradient(90deg,#373064,#24253d);border-bottom:1px solid #6960b8;color:#fff}
+.announcement-banner.show{display:flex}
+.announcement-banner .announcement-banner-copy{flex:1;min-width:0}
+.announcement-banner strong{display:block;font-size:13px;margin-bottom:3px}
+.announcement-banner span{font-size:12px;white-space:pre-wrap;overflow-wrap:anywhere}
+.announcement-banner button{background:#ffffff18;border-radius:7px;padding:6px 9px}
+.announcement-list{max-height:55vh;overflow:auto;display:flex;flex-direction:column;gap:10px}
+.announcement-card{padding:12px;background:var(--panel2);border:1px solid var(--border);border-radius:10px}
+.announcement-card strong{display:block;margin-bottom:5px}
+.announcement-card p{font-size:13px;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere;color:var(--text)}
+.announcement-card small{display:block;color:var(--muted);font-size:10px;margin-top:7px}
+.announcement-compose textarea{width:100%;min-height:88px;resize:vertical;padding:12px;border-radius:9px;background:var(--panel2);border:1px solid var(--border);color:var(--text);font:inherit;margin-top:8px}
+.game-backdrop{display:none;position:fixed;inset:0;z-index:600;background:#05070cf2;align-items:center;justify-content:center;padding:14px}
+.game-window{width:min(1400px,100%);height:min(900px,96vh);background:var(--panel);border:1px solid var(--border);border-radius:16px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 25px 90px #000b}
+.game-topbar{display:flex;align-items:center;gap:12px;padding:13px 16px;border-bottom:1px solid var(--border);background:var(--panel2)}
+.game-topbar-copy{flex:1;min-width:0}.game-topbar h2{font-size:17px}.game-topbar p{font-size:11px;color:var(--muted);margin-top:4px}
+.game-close{width:36px;height:36px;border-radius:9px;background:var(--panel3);font-size:18px}
+.game-layout{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:0;min-height:0;flex:1}
+.game-main{padding:14px;display:flex;flex-direction:column;gap:10px;min-width:0;min-height:0}
+.game-hud{display:flex;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:12px}
+.game-hud strong{color:var(--text)}
+#platformerCanvas{display:block;width:100%;height:auto;max-height:calc(100% - 95px);aspect-ratio:16/9;background:#10192b;border:1px solid var(--border);border-radius:12px;image-rendering:pixelated;touch-action:none}
+.game-help{font-size:11px;color:var(--muted);line-height:1.4}
+.game-touch-controls{display:none;gap:10px;justify-content:center;align-items:center}
+.game-touch-controls button{min-width:56px;height:46px;border-radius:10px;background:var(--panel3);border:1px solid var(--border);font-size:18px;touch-action:none;user-select:none}
+.game-touch-controls button:active{background:var(--accent2)}
+.game-sidebar{border-left:1px solid var(--border);display:flex;flex-direction:column;min-height:0;background:var(--panel2)}
+.game-side-section{padding:13px;border-bottom:1px solid var(--border);min-height:0}
+.game-side-section h3{font-size:13px;margin-bottom:9px}
+#gameLeaderboard{display:flex;flex-direction:column;gap:6px;max-height:210px;overflow:auto}
+.game-leader-row{display:flex;align-items:center;gap:8px;font-size:12px;padding:6px 8px;background:var(--panel);border-radius:7px}
+.game-leader-row .rank{color:var(--muted);width:20px}.game-leader-row strong{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.game-leader-row span:last-child{color:#fbbf24;font-weight:bold}
+.game-chat-section{flex:1;display:flex;flex-direction:column;overflow:hidden}
+#gameChatList{display:flex;flex-direction:column;gap:8px;overflow:auto;flex:1;min-height:80px;padding-right:3px}
+.game-chat-message{font-size:12px;line-height:1.4;overflow-wrap:anywhere}.game-chat-message strong{color:#a5b4fc;margin-right:5px}.game-chat-message time{font-size:9px;color:var(--muted);margin-left:5px}
+#gameChatForm{display:flex;gap:6px;margin-top:10px}
+#gameChatInput{min-width:0;flex:1;padding:10px;background:var(--panel);border:1px solid var(--border);border-radius:8px;color:var(--text);outline:none}
+#gameChatForm button{padding:0 12px;border-radius:8px;background:var(--accent2)}
+.game-side-note{color:var(--muted);font-size:10px;line-height:1.4;margin-top:8px}
+@media(max-width:850px){.game-layout{grid-template-columns:1fr;grid-template-rows:minmax(250px,1fr) 250px;overflow:auto}.game-sidebar{border-left:0;border-top:1px solid var(--border);display:grid;grid-template-columns:1fr 1.2fr}.game-sidebar .game-side-section:first-child{border-right:1px solid var(--border)}#gameLeaderboard{max-height:180px}.game-chat-section{min-height:230px}.game-window{height:96vh}.game-touch-controls{display:flex}.game-help{display:none}}
+@media(max-width:520px){.game-backdrop{padding:0}.game-window{height:100vh;width:100%;border-radius:0}.game-main{padding:9px}.game-sidebar{grid-template-columns:1fr}.game-sidebar .game-side-section:first-child{border-right:0;border-bottom:1px solid var(--border)}#gameLeaderboard{max-height:100px}.game-chat-section{min-height:220px}.sidebar-extra-actions{grid-template-columns:1fr 1fr}}
+
 </style>
 </head>
 <body>
@@ -133,12 +180,20 @@ body.theme-light .message-reaction-picker{box-shadow:0 8px 24px #0002}
       <button onclick="openModal('groupModal')">＋ Group</button>
       <button onclick="openModal('joinModal')">Join</button>
     </div>
+    <div class="sidebar-extra-actions">
+      <button type="button" onclick="openAnnouncements()">📢 Announcements</button>
+      <button type="button" onclick="openGame()">🎮 Shared World</button>
+    </div>
     <div class="section-title"><span>CONVERSATIONS</span><span id="chatCount">0</span></div>
     <div class="chat-list" id="chatList"></div>
     <div class="sidebar-footer"><div class="profile"><div class="avatar purple" id="profileAvatar">U</div><div class="profile-info"><strong id="currentUsername">You</strong><small id="currentStatus">● Signed in</small></div><button class="settings-button" onclick="openSettings()" title="Settings">⚙</button><button class="settings-button hidden" id="adminPortalButton" onclick="openAdminPortal()" title="Admin portal">⌘</button><button class="settings-button" onclick="signOutUser()" title="Sign out">⇥</button></div></div>
   </aside>
 
   <main class="main">
+    <div class="announcement-banner" id="announcementBanner">
+      <div class="announcement-banner-copy"><strong id="announcementBannerTitle">Announcement</strong><span id="announcementBannerText"></span></div>
+      <button type="button" onclick="dismissAnnouncementBanner()" aria-label="Dismiss announcement">✕</button>
+    </div>
     <div class="chat-header">
       <button class="mobile-back" onclick="goBack()">←</button>
       <div class="avatar purple" id="headerAvatar">W</div>
@@ -256,7 +311,34 @@ body.theme-light .message-reaction-picker{box-shadow:0 8px 24px #0002}
     <div class="admin-note">Replacing the code turns off all previous codes. Members must enter the new code the next time they open the site. The initial access code is <strong>hidden</strong>.</div>
   </div>
   <div class="settings-section"><strong>Access codes</strong><div id="adminCodeList" class="admin-note">Loading codes…</div></div>
+  <div class="settings-section announcement-compose">
+    <strong>Send an announcement to everyone</strong>
+    <input class="setting-input" id="announcementTitleInput" maxlength="70" placeholder="Announcement title">
+    <textarea id="announcementTextInput" maxlength="600" placeholder="Write an announcement (up to 600 characters)…"></textarea>
+    <div class="modal-buttons"><button class="primary" onclick="publishAnnouncement()">Publish announcement</button></div>
+    <div class="admin-note">All signed-in users can read announcements. Only the configured hidden administrator can publish them.</div>
+  </div>
 </div></div>
+
+<div class="modal-backdrop" id="announcementsModal"><div class="modal" style="max-width:560px;max-height:85vh;overflow:auto"><h2>Announcements</h2><p>Updates published by the Whisper Math administrator.</p><div class="announcement-list" id="announcementList"><div class="admin-note">Loading announcements…</div></div><div class="modal-buttons"><button class="primary" onclick="closeModal('announcementsModal')">Close</button></div></div></div>
+
+<div class="game-backdrop" id="gameModal" aria-label="Shared platformer game">
+  <div class="game-window">
+    <div class="game-topbar"><div class="game-topbar-copy"><h2>Shared World Platformer</h2><p>One shared map · Live players · Collect stars · Chat together</p></div><button class="game-close" type="button" onclick="exitGame()" title="Exit game">✕</button></div>
+    <div class="game-layout">
+      <div class="game-main">
+        <div class="game-hud"><span><strong id="gameScore">Score: 0</strong></span><span id="gameOnline">Players online: 0</span><span id="gameConnection">Connecting…</span></div>
+        <canvas id="platformerCanvas" width="960" height="540" aria-label="Platformer game world"></canvas>
+        <div class="game-help">Move: A / D or ← / → · Jump: W / ↑ / Space · Collect the gold stars. Everyone uses the same world coordinates.</div>
+        <div class="game-touch-controls"><button type="button" data-game-key="ArrowLeft">◀</button><button type="button" data-game-key="Space">⬆ Jump</button><button type="button" data-game-key="ArrowRight">▶</button></div>
+      </div>
+      <aside class="game-sidebar">
+        <section class="game-side-section"><h3>🏆 Leaderboard</h3><div id="gameLeaderboard"><div class="game-side-note">Loading scores…</div></div><p class="game-side-note">Scores are stored on the free client-side setup and are not cheat-proof.</p></section>
+        <section class="game-side-section game-chat-section"><h3>💬 Game chat</h3><div id="gameChatList" aria-live="polite"><div class="game-side-note">Joining game chat…</div></div><form id="gameChatForm"><input id="gameChatInput" maxlength="180" autocomplete="off" placeholder="Say something…"><button type="submit">Send</button></form><p class="game-side-note">Keep chat friendly. Don't share personal information.</p></section>
+      </aside>
+    </div>
+  </div>
+</div>
 
 <div class="toast" id="toast"></div>
 
@@ -264,7 +346,7 @@ body.theme-light .message-reaction-picker{box-shadow:0 8px 24px #0002}
 import { initializeApp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, EmailAuthProvider, reauthenticateWithCredential, updatePassword } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
 import { getFirestore, collection, doc, getDoc, getDocs, setDoc, addDoc, updateDoc, deleteDoc, deleteField, arrayUnion, serverTimestamp, query, where, onSnapshot, orderBy, limit } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-firestore.js";
-import { getDatabase, ref, push, set, remove, onValue, onDisconnect, serverTimestamp as rtdbServerTimestamp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-database.js";
+import { getDatabase, ref, push, set, remove, onValue, onDisconnect, query as rtdbQuery, orderByChild, limitToLast, serverTimestamp as rtdbServerTimestamp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-database.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCp3j9EjAL8nGvLbiKqJPW3311w3DeIrxs",
@@ -280,7 +362,7 @@ const auth = getAuth(firebaseApp);
 const db = getFirestore(firebaseApp);
 // After creating Realtime Database, replace this placeholder with the exact URL shown in Firebase.
 // Example formats are https://PROJECT-default-rtdb.firebaseio.com or https://PROJECT.REGION.firebasedatabase.app
-const REALTIME_DATABASE_URL = "https://hidden-937e5-default-rtdb.firebaseio.com/";
+const REALTIME_DATABASE_URL = "https://hidden-937e5-default-rtdb.firebaseio.com";
 const rtdb = REALTIME_DATABASE_URL.startsWith("https://") ? getDatabase(firebaseApp, REALTIME_DATABASE_URL) : null;
 const INTERNAL_EMAIL_DOMAIN = "@users.whisper.invalid";
 // Replace this placeholder with the Firebase Authentication UID of the account named "hidden".
@@ -312,6 +394,28 @@ let chatPresence = new Map();
 let initialChatsSnapshot = true;
 let seenLastMessageIds = new Map();
 const pendingReadReceipts = new Set();
+let announcementsUnsubscribe = null;
+let announcementsInitialized = false;
+let announcementIds = new Set();
+let announcementsCache = [];
+let gameActive = false;
+let gameAnimationFrame = null;
+let gameSyncInterval = null;
+let gamePlayersUnsubscribe = null;
+let gameLeaderboardUnsubscribe = null;
+let gameChatUnsubscribe = null;
+let gamePlayerDisconnectRef = null;
+let gameRemotePlayers = {};
+let gameLeaderboardData = {};
+let gameChatData = {};
+let gameKeys = new Set();
+let gamePlayer = null;
+let gameLastSync = 0;
+let gameWriteBusy = false;
+let gameLastLeaderboardScore = -1;
+let gameCoinCooldowns = new Map();
+let gameLastFrameTime = 0;
+let gameLastJumpDown = false;
 
 const $ = (id) => document.getElementById(id);
 const normalizeUsername = (value) => value.trim().toLowerCase();
@@ -529,6 +633,10 @@ async function ensureUsernameRecord(user) {
 }
 
 function stopRealtimeListeners() {
+  if (announcementsUnsubscribe) announcementsUnsubscribe();
+  announcementsUnsubscribe = null;
+  announcementsInitialized = false;
+  if (gameActive) exitGame();
   if (chatsUnsubscribe) chatsUnsubscribe();
   if (messagesUnsubscribe) messagesUnsubscribe();
   if (typingUnsubscribe) typingUnsubscribe();
@@ -566,6 +674,7 @@ async function handleAuthState(user) {
     $("adminPortalButton").classList.toggle("hidden", !isConfiguredAdmin());
     $("currentStatus").textContent = rtdb ? "● Connecting..." : "● Signed in";
     startPresence();
+    startAnnouncementsListener();
     startChatsListener();
   } catch (error) {
     showAuthError(friendlyAuthError(error));
@@ -1138,6 +1247,308 @@ async function ensureCommunityChat() {
   }
 }
 
+
+// -------------------- Site-wide announcements --------------------
+function announcementDate(value) {
+  const date = typeof value === "number" ? new Date(value) : timestampDate(value);
+  return date && !Number.isNaN(date.getTime()) ? date.toLocaleString([], {month:"short", day:"numeric", hour:"numeric", minute:"2-digit"}) : "Just now";
+}
+function renderAnnouncements() {
+  const list = $("announcementList");
+  if (!list) return;
+  list.innerHTML = "";
+  if (!announcementsCache.length) {
+    const empty = document.createElement("div");
+    empty.className = "admin-note";
+    empty.textContent = "No announcements yet.";
+    list.appendChild(empty);
+    return;
+  }
+  announcementsCache.slice().reverse().forEach(item => {
+    const card = document.createElement("article");
+    card.className = "announcement-card";
+    const title = document.createElement("strong");
+    title.textContent = item.title || "Announcement";
+    const body = document.createElement("p");
+    body.textContent = item.text || "";
+    const meta = document.createElement("small");
+    meta.textContent = `${item.createdByName || "Admin"} · ${announcementDate(item.createdAt)}`;
+    card.append(title, body, meta);
+    list.appendChild(card);
+  });
+}
+function showAnnouncementBanner(item) {
+  $("announcementBannerTitle").textContent = item.title || "Announcement";
+  $("announcementBannerText").textContent = item.text || "";
+  $("announcementBanner").classList.add("show");
+}
+function dismissAnnouncementBanner() { $("announcementBanner").classList.remove("show"); }
+function openAnnouncements() { renderAnnouncements(); openModal("announcementsModal"); }
+function startAnnouncementsListener() {
+  if (!rtdb || !currentUser) return;
+  if (announcementsUnsubscribe) announcementsUnsubscribe();
+  announcementsInitialized = false;
+  announcementIds = new Set();
+  const postsRef = rtdbQuery(ref(rtdb, "announcements/posts"), orderByChild("createdAt"), limitToLast(30));
+  announcementsUnsubscribe = onValue(postsRef, snapshot => {
+    const raw = snapshot.val() || {};
+    const posts = Object.entries(raw).map(([id, item]) => ({id, ...item})).sort((a,b) => (a.createdAt || 0) - (b.createdAt || 0));
+    if (!announcementsInitialized) {
+      posts.forEach(post => announcementIds.add(post.id));
+      announcementsInitialized = true;
+    } else {
+      const fresh = posts.filter(post => !announcementIds.has(post.id));
+      fresh.forEach(post => announcementIds.add(post.id));
+      if (fresh.length) {
+        const newest = fresh[fresh.length - 1];
+        showAnnouncementBanner(newest);
+        showBrowserNotification("Announcement: " + (newest.title || "Whisper Math"), newest.text, "announcements");
+      }
+    }
+    announcementsCache = posts;
+    renderAnnouncements();
+  }, error => console.warn("Announcement listener failed:", error.message));
+}
+async function publishAnnouncement() {
+  if (!isConfiguredAdmin() || !rtdb) { showToast("Only the configured administrator can publish announcements."); return; }
+  const title = $("announcementTitleInput").value.trim();
+  const text = $("announcementTextInput").value.trim();
+  if (!title || title.length > 70 || !text || text.length > 600) {
+    showToast("Enter a title and message. The title limit is 70 characters; the message limit is 600.");
+    return;
+  }
+  try {
+    const postRef = push(ref(rtdb, "announcements/posts"));
+    await set(postRef, {title, text, createdBy:currentUser.uid, createdByName:username, createdAt:rtdbServerTimestamp()});
+    $("announcementTitleInput").value = "";
+    $("announcementTextInput").value = "";
+    showToast("Announcement sent to everyone.");
+  } catch (error) {
+    showToast("Couldn't publish announcement: " + error.message);
+  }
+}
+
+// -------------------- Shared multiplayer platformer --------------------
+const GAME_WORLD_WIDTH = 4200;
+const GAME_VIEW_WIDTH = 960;
+const GAME_VIEW_HEIGHT = 540;
+const GAME_PLAYER_WIDTH = 32;
+const GAME_PLAYER_HEIGHT = 46;
+const GAME_GRAVITY = 1500;
+const GAME_MOVE_SPEED = 285;
+const GAME_JUMP_SPEED = 610;
+const gamePlatforms = [
+  {x:0,y:490,w:4200,h:100},
+  {x:270,y:390,w:190,h:16},{x:580,y:330,w:185,h:16},{x:900,y:410,w:185,h:16},
+  {x:1200,y:345,w:190,h:16},{x:1515,y:280,w:185,h:16},{x:1820,y:385,w:220,h:16},
+  {x:2185,y:320,w:185,h:16},{x:2490,y:250,w:205,h:16},{x:2830,y:370,w:220,h:16},
+  {x:3190,y:305,w:190,h:16},{x:3500,y:230,w:210,h:16},{x:3820,y:380,w:180,h:16}
+];
+const gameCoins = [
+  {x:355,y:357},{x:670,y:297},{x:990,y:377},{x:1295,y:312},{x:1605,y:247},
+  {x:1925,y:352},{x:2278,y:287},{x:2590,y:217},{x:2940,y:337},{x:3280,y:272},
+  {x:3600,y:197},{x:3905,y:347},{x:770,y:450},{x:1730,y:450},{x:2700,y:450},{x:3400,y:450}
+];
+function gameSpawnX() {
+  let hash = 0;
+  for (const ch of currentUser.uid) hash = (hash * 31 + ch.charCodeAt(0)) >>> 0;
+  return 90 + (hash % 7) * 34;
+}
+function gamePlayerPayload() {
+  return {uid:currentUser.uid, username, x:Math.round(gamePlayer.x), y:Math.round(gamePlayer.y), facing:gamePlayer.facing, score:gamePlayer.score, updatedAt:rtdbServerTimestamp()};
+}
+function updateGameLeaderboard() {
+  if (!rtdb || !currentUser || !gamePlayer) return;
+  const previous = Number(gameLeaderboardData[currentUser.uid]?.score || 0);
+  if (gamePlayer.score <= Math.max(previous, gameLastLeaderboardScore)) return;
+  gameLastLeaderboardScore = gamePlayer.score;
+  set(ref(rtdb, `game/leaderboard/${currentUser.uid}`), {uid:currentUser.uid, username, score:gamePlayer.score, updatedAt:rtdbServerTimestamp()})
+    .catch(error => console.warn("Leaderboard update failed:", error.message));
+}
+function renderGameLeaderboard() {
+  const list = $("gameLeaderboard");
+  if (!list) return;
+  const rows = Object.values(gameLeaderboardData).sort((a,b) => Number(b.score || 0) - Number(a.score || 0)).slice(0,10);
+  list.innerHTML = "";
+  if (!rows.length) {
+    const empty = document.createElement("div"); empty.className = "game-side-note"; empty.textContent = "Collect stars to set the first score."; list.appendChild(empty); return;
+  }
+  rows.forEach((entry,index) => {
+    const row = document.createElement("div"); row.className = "game-leader-row";
+    const rank = document.createElement("span"); rank.className = "rank"; rank.textContent = `#${index+1}`;
+    const name = document.createElement("strong"); name.textContent = entry.username || "Player";
+    const score = document.createElement("span"); score.textContent = `★ ${Number(entry.score || 0)}`;
+    row.append(rank,name,score); list.appendChild(row);
+  });
+}
+function renderGameChat() {
+  const list = $("gameChatList");
+  if (!list) return;
+  const messages = Object.entries(gameChatData || {}).map(([id,item]) => ({id,...item})).sort((a,b) => (a.createdAt || 0) - (b.createdAt || 0)).slice(-35);
+  list.innerHTML = "";
+  if (!messages.length) {
+    const empty = document.createElement("div"); empty.className = "game-side-note"; empty.textContent = "No game messages yet. Say hello!"; list.appendChild(empty); return;
+  }
+  messages.forEach(message => {
+    const row = document.createElement("div"); row.className = "game-chat-message";
+    const name = document.createElement("strong"); name.textContent = message.username || "Player";
+    const body = document.createElement("span"); body.textContent = message.text || "";
+    const time = document.createElement("time"); time.textContent = message.createdAt ? new Date(message.createdAt).toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"}) : "";
+    row.append(name,body,time); list.appendChild(row);
+  });
+  list.scrollTop = list.scrollHeight;
+}
+async function sendGameChat() {
+  if (!gameActive || !rtdb || !currentUser) return;
+  const input = $("gameChatInput");
+  const text = input.value.trim();
+  if (!text) return;
+  if (text.length > 180) { showToast("Game chat messages are limited to 180 characters."); return; }
+  input.disabled = true;
+  try {
+    const messageRef = push(ref(rtdb, "game/chat"));
+    await set(messageRef, {uid:currentUser.uid, username, text, createdAt:rtdbServerTimestamp()});
+    input.value = "";
+  } catch (error) { showToast("Couldn't send game chat message: " + error.message); }
+  finally { input.disabled = false; input.focus(); }
+}
+function gameKeyIsDown(...keys) { return keys.some(key => gameKeys.has(key)); }
+function drawPlatformer() {
+  const canvas = $("platformerCanvas");
+  if (!canvas || !gamePlayer) return;
+  const ctx = canvas.getContext("2d");
+  const cameraX = Math.max(0, Math.min(GAME_WORLD_WIDTH - GAME_VIEW_WIDTH, gamePlayer.x - GAME_VIEW_WIDTH * 0.43));
+  const cameraY = 0;
+  const gradient = ctx.createLinearGradient(0,0,0,GAME_VIEW_HEIGHT);
+  gradient.addColorStop(0,"#172544"); gradient.addColorStop(1,"#38506b");
+  ctx.fillStyle = gradient; ctx.fillRect(0,0,GAME_VIEW_WIDTH,GAME_VIEW_HEIGHT);
+  // Distant hills make the shared world recognizable without external assets.
+  ctx.fillStyle = "#243a4c";
+  for (let i=0;i<9;i++) { const x=i*540-(cameraX*.18%540); ctx.beginPath(); ctx.moveTo(x,480); ctx.lineTo(x+160,300+(i%3)*35); ctx.lineTo(x+370,480); ctx.fill(); }
+  ctx.save(); ctx.translate(-cameraX,-cameraY);
+  // Platforms and ground
+  gamePlatforms.forEach((platform,index) => {
+    ctx.fillStyle = index===0 ? "#355b48" : "#526a85";
+    ctx.fillRect(platform.x,platform.y,platform.w,platform.h);
+    ctx.fillStyle = index===0 ? "#5d9b64" : "#91a9c4";
+    ctx.fillRect(platform.x,platform.y,platform.w,5);
+  });
+  // Coins respawn individually for each player. Scores are personal, map coordinates are shared.
+  const now = Date.now();
+  gameCoins.forEach((coin,index) => {
+    if ((gameCoinCooldowns.get(index)||0) > now) return;
+    const bob = Math.sin(now/260 + index)*4;
+    ctx.fillStyle = "#fbbf24"; ctx.beginPath(); ctx.arc(coin.x,coin.y+bob,10,0,Math.PI*2); ctx.fill();
+    ctx.fillStyle = "#fff3b0"; ctx.beginPath(); ctx.arc(coin.x-3,coin.y-3+bob,3,0,Math.PI*2); ctx.fill();
+  });
+  // Other players' avatars are synchronized from Realtime Database.
+  Object.entries(gameRemotePlayers).forEach(([uid,player]) => {
+    if (uid===currentUser.uid || !player || typeof player.x!=="number" || typeof player.y!=="number") return;
+    if (Date.now() - Number(player.updatedAt||0) > 18000) return;
+    const hue = Array.from(uid).reduce((sum,ch)=>sum+ch.charCodeAt(0),0)%360;
+    ctx.fillStyle = `hsl(${hue} 72% 62%)`;
+    ctx.fillRect(player.x-cameraX,player.y,GAME_PLAYER_WIDTH,GAME_PLAYER_HEIGHT);
+    ctx.fillStyle = "#101827"; ctx.fillRect(player.x-cameraX+7,player.y+12,5,5); ctx.fillRect(player.x-cameraX+20,player.y+12,5,5);
+    ctx.fillStyle = "#ffffff"; ctx.font="12px Arial"; ctx.textAlign="center"; ctx.fillText(String(player.username||"Player").slice(0,20),player.x-cameraX+GAME_PLAYER_WIDTH/2,player.y-8);
+  });
+  // Local player
+  ctx.fillStyle = "#a78bfa"; ctx.fillRect(gamePlayer.x-cameraX,gamePlayer.y,GAME_PLAYER_WIDTH,GAME_PLAYER_HEIGHT);
+  ctx.fillStyle = "#17162c"; const eyeX = gamePlayer.facing>=0 ? 21 : 7; ctx.fillRect(gamePlayer.x-cameraX+eyeX,gamePlayer.y+12,5,5);
+  ctx.restore();
+  $("gameScore").textContent = `Score: ${gamePlayer.score}`;
+  $("gameOnline").textContent = `Players online: ${Object.keys(gameRemotePlayers).length}`;
+}
+function platformerFrame(timestamp) {
+  if (!gameActive || !gamePlayer) return;
+  const dt = Math.min(0.035, Math.max(0.001, (timestamp-(gameLastFrameTime||timestamp))/1000));
+  gameLastFrameTime = timestamp;
+  const left = gameKeyIsDown("ArrowLeft","KeyA");
+  const right = gameKeyIsDown("ArrowRight","KeyD");
+  const jumpDown = gameKeyIsDown("Space","ArrowUp","KeyW");
+  gamePlayer.vx = left===right ? 0 : (left ? -GAME_MOVE_SPEED : GAME_MOVE_SPEED);
+  if (gamePlayer.vx) gamePlayer.facing = Math.sign(gamePlayer.vx);
+  gamePlayer.x = Math.max(0,Math.min(GAME_WORLD_WIDTH-GAME_PLAYER_WIDTH,gamePlayer.x+gamePlayer.vx*dt));
+  if (jumpDown && !gameLastJumpDown && gamePlayer.grounded) { gamePlayer.vy = -GAME_JUMP_SPEED; gamePlayer.grounded = false; }
+  gameLastJumpDown = jumpDown;
+  const oldBottom = gamePlayer.y + GAME_PLAYER_HEIGHT;
+  gamePlayer.vy = Math.min(950,gamePlayer.vy + GAME_GRAVITY*dt);
+  gamePlayer.y += gamePlayer.vy*dt;
+  gamePlayer.grounded = false;
+  if (gamePlayer.vy >= 0) {
+    for (const platform of gamePlatforms) {
+      const horizontalOverlap = gamePlayer.x+GAME_PLAYER_WIDTH > platform.x && gamePlayer.x < platform.x+platform.w;
+      if (horizontalOverlap && oldBottom <= platform.y+2 && gamePlayer.y+GAME_PLAYER_HEIGHT >= platform.y) {
+        gamePlayer.y = platform.y-GAME_PLAYER_HEIGHT; gamePlayer.vy = 0; gamePlayer.grounded = true;
+      }
+    }
+  }
+  if (gamePlayer.y > GAME_VIEW_HEIGHT+100) { gamePlayer.x = gameSpawnX(); gamePlayer.y = 610-GAME_PLAYER_HEIGHT; gamePlayer.vy=0; }
+  const now = Date.now();
+  gameCoins.forEach((coin,index) => {
+    if ((gameCoinCooldowns.get(index)||0)>now) return;
+    const dx = gamePlayer.x+GAME_PLAYER_WIDTH/2-coin.x;
+    const dy = gamePlayer.y+GAME_PLAYER_HEIGHT/2-coin.y;
+    if (dx*dx+dy*dy < 24*24) {
+      gamePlayer.score += 1; gameCoinCooldowns.set(index,now+6500); updateGameLeaderboard();
+    }
+  });
+  drawPlatformer();
+  if (now-gameLastSync > 110 && !gameWriteBusy && gameActive) {
+    gameLastSync = now; gameWriteBusy = true;
+    set(gamePlayerDisconnectRef,gamePlayerPayload()).catch(error => {
+      $("gameConnection").textContent = "Connection issue";
+      console.warn("Player sync failed:",error.message);
+    }).finally(() => { gameWriteBusy = false; });
+  }
+  gameAnimationFrame = requestAnimationFrame(platformerFrame);
+}
+async function openGame() {
+  if (!currentUser || !rtdb) { showToast("The Realtime Database URL is not configured. Restore the URL in index.html first."); return; }
+  if (gameActive) return;
+  gameActive = true;
+  gameKeys.clear(); gameCoinCooldowns.clear(); gameLastFrameTime = 0; gameLastJumpDown = false; gameLastLeaderboardScore = -1;
+  gamePlayer = {x:gameSpawnX(),y:490-GAME_PLAYER_HEIGHT,vx:0,vy:0,facing:1,grounded:true,score:0};
+  gameRemotePlayers = {}; gameLeaderboardData = {}; gameChatData = {};
+  $("gameConnection").textContent = "Connecting…";
+  $("gameModal").style.display = "flex";
+  drawPlatformer();
+  gamePlayerDisconnectRef = ref(rtdb,`game/players/${currentUser.uid}`);
+  try {
+    await onDisconnect(gamePlayerDisconnectRef).remove();
+    await set(gamePlayerDisconnectRef,gamePlayerPayload());
+    gamePlayersUnsubscribe = onValue(ref(rtdb,"game/players"),snapshot => {
+      gameRemotePlayers = snapshot.val() || {};
+      $("gameOnline").textContent = `Players online: ${Object.keys(gameRemotePlayers).length}`;
+    },error => { $("gameConnection").textContent="Player sync unavailable"; showToast("Game player sync: "+error.message); });
+    gameLeaderboardUnsubscribe = onValue(ref(rtdb,"game/leaderboard"),snapshot => {
+      gameLeaderboardData = snapshot.val() || {}; renderGameLeaderboard();
+    },error => console.warn("Leaderboard listener:",error.message));
+    const chatQuery = rtdbQuery(ref(rtdb,"game/chat"),orderByChild("createdAt"),limitToLast(35));
+    gameChatUnsubscribe = onValue(chatQuery,snapshot => { gameChatData = snapshot.val() || {}; renderGameChat(); },error => console.warn("Game chat listener:",error.message));
+    $("gameConnection").textContent = "Connected to shared world";
+    gameLastSync = 0;
+    gameAnimationFrame = requestAnimationFrame(platformerFrame);
+  } catch (error) {
+    $("gameConnection").textContent = "Couldn't connect";
+    showToast("Couldn't enter shared world: "+error.message);
+    await exitGame();
+  }
+}
+async function exitGame() {
+  gameActive = false;
+  gameKeys.clear();
+  if (gameAnimationFrame) cancelAnimationFrame(gameAnimationFrame);
+  gameAnimationFrame = null;
+  if (gamePlayersUnsubscribe) gamePlayersUnsubscribe(); gamePlayersUnsubscribe = null;
+  if (gameLeaderboardUnsubscribe) gameLeaderboardUnsubscribe(); gameLeaderboardUnsubscribe = null;
+  if (gameChatUnsubscribe) gameChatUnsubscribe(); gameChatUnsubscribe = null;
+  if (gamePlayerDisconnectRef && currentUser) {
+    try { await remove(gamePlayerDisconnectRef); } catch (error) { console.warn("Could not remove game player presence:",error.message); }
+  }
+  gamePlayerDisconnectRef = null;
+  $("gameModal").style.display = "none";
+}
+
 function startPresence() {
   if (!rtdb || !currentUser) return;
   if (presenceConnectionUnsubscribe) presenceConnectionUnsubscribe();
@@ -1384,7 +1795,7 @@ function openModal(id) { $(id).style.display = "flex"; }
 function closeModal(id) { $(id).style.display = "none"; }
 function goBack() { $("app").classList.remove("chat-open"); }
 async function signOutUser() { if (confirm("Sign out of Whisper Math?")) { try { await Promise.allSettled(myPresenceConnections.map(connectionRef => remove(connectionRef))); myPresenceConnections = []; sessionStorage.removeItem("whisperMathAccessPassed"); sessionStorage.removeItem("whisperMathAccessCodeHash"); siteGatePassed = false; await signOut(auth); $("siteGate").classList.remove("hidden"); } catch (error) { showToast("Couldn't sign out: " + error.message); } } }
-window.addEventListener("pagehide", () => { stopLocalTyping(); });
+window.addEventListener("pagehide", () => { stopLocalTyping(); gameKeys.clear(); });
 document.addEventListener("visibilitychange", () => { if (document.hidden) stopLocalTyping(); });
 
 $("siteGateForm").addEventListener("submit", submitSiteGate);
@@ -1403,11 +1814,28 @@ $("searchInput").addEventListener("input", searchChats);
 $("messageInput").addEventListener("keydown", event => { if (event.key === "Enter" && !event.shiftKey) { event.preventDefault(); sendMessage(); } });
 $("messageInput").addEventListener("input", handleLocalTyping);
 $("messageInput").addEventListener("blur", () => stopLocalTyping());
+$("gameChatForm").addEventListener("submit", event => { event.preventDefault(); sendGameChat(); });
+window.addEventListener("keydown", event => {
+  if (!gameActive) return;
+  if (["ArrowLeft","ArrowRight","ArrowUp","Space"].includes(event.code)) event.preventDefault();
+  if (!event.repeat) gameKeys.add(event.code);
+});
+window.addEventListener("keyup", event => { gameKeys.delete(event.code); });
+window.addEventListener("blur", () => gameKeys.clear());
+document.querySelectorAll("[data-game-key]").forEach(button => {
+  const key = button.dataset.gameKey;
+  const press = event => { event.preventDefault(); gameKeys.add(key); };
+  const release = event => { event.preventDefault(); gameKeys.delete(key); };
+  button.addEventListener("pointerdown", press);
+  button.addEventListener("pointerup", release);
+  button.addEventListener("pointerleave", release);
+  button.addEventListener("pointercancel", release);
+});
 document.querySelectorAll(".modal-backdrop").forEach(modal => modal.addEventListener("click", event => { if (event.target === modal) modal.style.display = "none"; }));
 initializeEmojis();
 $("adminPortalButton").classList.add("hidden");
 
-Object.assign(window, {openModal, closeModal, createPrivateChat, createGroup, joinGroup, copyCode, sendMessage, replyToMessage, cancelReply, toggleEmoji, showGroupInfo, showToast, searchChats, goBack, signOutUser, renameGroup, leaveGroup, copyCurrentGroupCode, openSettings, changeAccountPassword, openAdminPortal, createSiteAccessCode});
+Object.assign(window, {openModal, closeModal, createPrivateChat, createGroup, joinGroup, copyCode, sendMessage, replyToMessage, cancelReply, toggleEmoji, showGroupInfo, showToast, searchChats, goBack, signOutUser, renameGroup, leaveGroup, copyCurrentGroupCode, openSettings, changeAccountPassword, openAdminPortal, createSiteAccessCode, openAnnouncements, dismissAnnouncementBanner, publishAnnouncement, openGame, exitGame});
 if (siteGatePassed) $("siteGate").classList.add("hidden");
 onAuthStateChanged(auth, async user => {
   // Re-check a remembered access code against Firebase. This makes an admin's
