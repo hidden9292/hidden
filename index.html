@@ -117,7 +117,7 @@ body.theme-light .message-reaction-picker{box-shadow:0 8px 24px #0002}
 .game-main{padding:14px;display:flex;flex-direction:column;gap:10px;min-width:0;min-height:0}
 .game-hud{display:flex;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:12px}
 .game-hud strong{color:var(--text)}
-#platformerCanvas{display:block;width:100%;height:auto;max-height:calc(100% - 95px);aspect-ratio:16/9;background:#10192b;border:1px solid var(--border);border-radius:12px;image-rendering:pixelated;touch-action:none}
+#platformerCanvas{display:block;width:100%;height:auto;max-height:calc(100% - 95px);aspect-ratio:16/9;background:#090b20;border:1px solid #765cff;border-radius:12px;box-shadow:0 0 14px #7c3aed66, inset 0 0 26px #00e5ff18;image-rendering:pixelated;touch-action:none}
 .game-help{font-size:11px;color:var(--muted);line-height:1.4}
 .game-touch-controls{display:none;gap:10px;justify-content:center;align-items:center}
 .game-touch-controls button{min-width:56px;height:46px;border-radius:10px;background:var(--panel3);border:1px solid var(--border);font-size:18px;touch-action:none;user-select:none}
@@ -134,8 +134,14 @@ body.theme-light .message-reaction-picker{box-shadow:0 8px 24px #0002}
 #gameChatForm{display:flex;gap:6px;margin-top:10px}
 #gameChatInput{min-width:0;flex:1;padding:10px;background:var(--panel);border:1px solid var(--border);border-radius:8px;color:var(--text);outline:none}
 #gameChatForm button{padding:0 12px;border-radius:8px;background:var(--accent2)}
-.game-side-note{color:var(--muted);font-size:10px;line-height:1.4;margin-top:8px}
-@media(max-width:850px){.game-layout{grid-template-columns:1fr;grid-template-rows:minmax(250px,1fr) 250px;overflow:auto}.game-sidebar{border-left:0;border-top:1px solid var(--border);display:grid;grid-template-columns:1fr 1.2fr}.game-sidebar .game-side-section:first-child{border-right:1px solid var(--border)}#gameLeaderboard{max-height:180px}.game-chat-section{min-height:230px}.game-window{height:96vh}.game-touch-controls{display:flex}.game-help{display:none}}
+ .game-side-note{color:var(--muted);font-size:10px;line-height:1.4;margin-top:8px}
+.game-idle-section{background:linear-gradient(135deg,#15112d,#111c32);border-bottom:1px solid #5942a8}
+.game-idle-balance{font-size:18px;font-weight:800;color:#fff;margin:3px 0;text-shadow:0 0 10px #00eaff}
+.game-idle-rate{font-size:11px;color:#9be7ff;margin-bottom:9px}
+#gameUpgradeButton{width:100%;padding:9px 10px;border-radius:8px;border:1px solid #9a5cff;background:linear-gradient(90deg,#5422a8,#086a91);color:#fff;font-weight:700;font-size:11px;box-shadow:0 0 12px #7c3aed55}
+#gameUpgradeButton:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
+.game-idle-note{font-size:10px;color:#c4b5fd;margin-top:6px;line-height:1.35}
+@media(max-width:850px){.game-layout{grid-template-columns:1fr;grid-template-rows:minmax(250px,1fr) auto;overflow:auto}.game-sidebar{border-left:0;border-top:1px solid var(--border);display:grid;grid-template-columns:1fr 1fr}.game-sidebar .game-side-section:first-child{border-right:1px solid var(--border)}.game-chat-section{grid-column:1/-1;min-height:230px}#gameLeaderboard{max-height:150px}.game-window{height:96vh}.game-touch-controls{display:flex}.game-help{display:none}}
 @media(max-width:520px){.game-backdrop{padding:0}.game-window{height:100vh;width:100%;border-radius:0}.game-main{padding:9px}.game-sidebar{grid-template-columns:1fr}.game-sidebar .game-side-section:first-child{border-right:0;border-bottom:1px solid var(--border)}#gameLeaderboard{max-height:100px}.game-chat-section{min-height:220px}.sidebar-extra-actions{grid-template-columns:1fr 1fr}}
 
 </style>
@@ -324,16 +330,17 @@ body.theme-light .message-reaction-picker{box-shadow:0 8px 24px #0002}
 
 <div class="game-backdrop" id="gameModal" aria-label="Shared platformer game">
   <div class="game-window">
-    <div class="game-topbar"><div class="game-topbar-copy"><h2>Shared World Platformer</h2><p>One shared map · Live players · Collect stars · Chat together</p></div><button class="game-close" type="button" onclick="exitGame()" title="Exit game">✕</button></div>
+    <div class="game-topbar"><div class="game-topbar-copy"><h2>RGB Neon World · Idle Platformer</h2><p>Shared multiplayer map · Rainbow platforms · Collect stars · Build your idle reactor</p></div><button class="game-close" type="button" onclick="exitGame()" title="Exit game">✕</button></div>
     <div class="game-layout">
       <div class="game-main">
-        <div class="game-hud"><span><strong id="gameScore">Score: 0</strong></span><span id="gameOnline">Players online: 0</span><span id="gameConnection">Connecting…</span></div>
+        <div class="game-hud"><span><strong id="gameScore">Stars collected: 0</strong></span><span id="gameOnline">Players online: 0</span><span id="gameIdleHud">Idle stars: 0</span><span id="gameConnection">Connecting…</span></div>
         <canvas id="platformerCanvas" width="960" height="540" aria-label="Platformer game world"></canvas>
-        <div class="game-help">Move: A / D or ← / → · Jump: W / ↑ / Space · Collect the gold stars. Everyone uses the same world coordinates.</div>
+        <div class="game-help">Move: A / D or ← / → · Jump: W / ↑ / Space · Collect neon stars, buy reactor upgrades, and earn idle stars while you're away. Everyone uses the same world coordinates.</div>
         <div class="game-touch-controls"><button type="button" data-game-key="ArrowLeft">◀</button><button type="button" data-game-key="Space">⬆ Jump</button><button type="button" data-game-key="ArrowRight">▶</button></div>
       </div>
       <aside class="game-sidebar">
         <section class="game-side-section"><h3>🏆 Leaderboard</h3><div id="gameLeaderboard"><div class="game-side-note">Loading scores…</div></div><p class="game-side-note">Scores are stored on the free client-side setup and are not cheat-proof.</p></section>
+        <section class="game-side-section game-idle-section"><h3>⚡ RGB Idle Reactor</h3><div class="game-idle-balance" id="gameIdleBalance">0.0 ★</div><div class="game-idle-rate" id="gameIdleRate">0.2 stars / minute</div><button id="gameUpgradeButton" type="button" onclick="buyIdleUpgrade()">Upgrade reactor · 25 ★</button><div class="game-idle-note" id="gameIdleLevel">Reactor level 0 · Up to 8 hours of offline earnings</div></section>
         <section class="game-side-section game-chat-section"><h3>💬 Game chat</h3><div id="gameChatList" aria-live="polite"><div class="game-side-note">Joining game chat…</div></div><form id="gameChatForm"><input id="gameChatInput" maxlength="180" autocomplete="off" placeholder="Say something…"><button type="submit">Send</button></form><p class="game-side-note">Keep chat friendly. Don't share personal information.</p></section>
       </aside>
     </div>
@@ -346,7 +353,7 @@ body.theme-light .message-reaction-picker{box-shadow:0 8px 24px #0002}
 import { initializeApp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, EmailAuthProvider, reauthenticateWithCredential, updatePassword } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
 import { getFirestore, collection, doc, getDoc, getDocs, setDoc, addDoc, updateDoc, deleteDoc, deleteField, arrayUnion, serverTimestamp, query, where, onSnapshot, orderBy, limit } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-firestore.js";
-import { getDatabase, ref, push, set, remove, onValue, onDisconnect, query as rtdbQuery, orderByChild, limitToLast, serverTimestamp as rtdbServerTimestamp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-database.js";
+import { getDatabase, ref, push, set, get as rtdbGet, remove, onValue, onDisconnect, query as rtdbQuery, orderByChild, limitToLast, serverTimestamp as rtdbServerTimestamp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-database.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCp3j9EjAL8nGvLbiKqJPW3311w3DeIrxs",
@@ -362,7 +369,8 @@ const auth = getAuth(firebaseApp);
 const db = getFirestore(firebaseApp);
 // After creating Realtime Database, replace this placeholder with the exact URL shown in Firebase.
 // Example formats are https://PROJECT-default-rtdb.firebaseio.com or https://PROJECT.REGION.firebasedatabase.app
-const REALTIME_DATABASE_URL = "https://hidden-937e5-default-rtdb.firebaseio.com";
+const REALTIME_DATABASE_URL = "https://hidden-937e5-default-rtdb.firebaseio.com/
+";
 const rtdb = REALTIME_DATABASE_URL.startsWith("https://") ? getDatabase(firebaseApp, REALTIME_DATABASE_URL) : null;
 const INTERNAL_EMAIL_DOMAIN = "@users.whisper.invalid";
 // Replace this placeholder with the Firebase Authentication UID of the account named "hidden".
@@ -416,6 +424,9 @@ let gameLastLeaderboardScore = -1;
 let gameCoinCooldowns = new Map();
 let gameLastFrameTime = 0;
 let gameLastJumpDown = false;
+let gameIdleWallet = {stars:0, generatorLevel:0, lastClaimAt:0};
+let gameLastIdleSave = 0;
+let gameIdleSaveBusy = false;
 
 const $ = (id) => document.getElementById(id);
 const normalizeUsername = (value) => value.trim().toLowerCase();
@@ -1412,51 +1423,192 @@ async function sendGameChat() {
   } catch (error) { showToast("Couldn't send game chat message: " + error.message); }
   finally { input.disabled = false; input.focus(); }
 }
+const GAME_IDLE_SAVE_PATH = uid => `game/idle/${uid}`;
+const GAME_IDLE_MAX_OFFLINE_SECONDS = 8 * 60 * 60;
+function gameIdleRatePerMinute() {
+  return 0.2 + Math.max(0, Number(gameIdleWallet.generatorLevel || 0)) * 0.65;
+}
+function gameIdleUpgradeCost() {
+  return Math.floor(25 * Math.pow(1.62, Math.max(0, Number(gameIdleWallet.generatorLevel || 0))));
+}
+function renderGameIdle() {
+  if (!gameIdleWallet) return;
+  const stars = Math.max(0, Number(gameIdleWallet.stars || 0));
+  const level = Math.max(0, Number(gameIdleWallet.generatorLevel || 0));
+  const rate = gameIdleRatePerMinute();
+  if ($("gameIdleBalance")) $("gameIdleBalance").textContent = `${stars.toFixed(1)} ★`;
+  if ($("gameIdleRate")) $("gameIdleRate").textContent = `${rate.toFixed(2)} stars / minute`;
+  if ($("gameIdleHud")) $("gameIdleHud").textContent = `Idle stars: ${stars.toFixed(1)}`;
+  if ($("gameIdleLevel")) $("gameIdleLevel").textContent = `Reactor level ${level} · Offline earnings capped at 8 hours`;
+  if ($("gameUpgradeButton")) {
+    const cost = gameIdleUpgradeCost();
+    $("gameUpgradeButton").textContent = `Upgrade reactor · ${cost} ★`;
+    $("gameUpgradeButton").disabled = stars < cost || level >= 40;
+  }
+}
+async function saveGameIdleWallet(force=false) {
+  if (!rtdb || !currentUser || !gameIdleWallet || gameIdleSaveBusy) return;
+  const now = Date.now();
+  if (!force && now - gameLastIdleSave < 60000) return;
+  gameIdleSaveBusy = true;
+  try {
+    gameIdleWallet.lastClaimAt = now;
+    await set(ref(rtdb, GAME_IDLE_SAVE_PATH(currentUser.uid)), {
+      uid: currentUser.uid,
+      stars: Math.round(Math.max(0, Number(gameIdleWallet.stars || 0)) * 100) / 100,
+      generatorLevel: Math.max(0, Math.min(40, Math.floor(Number(gameIdleWallet.generatorLevel || 0)))),
+      lastClaimAt: rtdbServerTimestamp()
+    });
+    gameLastIdleSave = now;
+  } catch (error) {
+    console.warn("Idle progress could not be saved:", error.message);
+    if ($("gameConnection")) $("gameConnection").textContent = "Idle save delayed";
+  } finally { gameIdleSaveBusy = false; }
+}
+async function loadGameIdleWallet() {
+  gameIdleWallet = {stars:0, generatorLevel:0, lastClaimAt:0};
+  const snapshot = await rtdbGet(ref(rtdb, GAME_IDLE_SAVE_PATH(currentUser.uid)));
+  if (snapshot.exists()) {
+    const saved = snapshot.val() || {};
+    gameIdleWallet.stars = Math.max(0, Number(saved.stars || 0));
+    gameIdleWallet.generatorLevel = Math.max(0, Math.min(40, Math.floor(Number(saved.generatorLevel || 0))));
+    gameIdleWallet.lastClaimAt = Math.max(0, Number(saved.lastClaimAt || 0));
+  }
+  const now = Date.now();
+  if (gameIdleWallet.lastClaimAt > 0) {
+    const offlineSeconds = Math.min(GAME_IDLE_MAX_OFFLINE_SECONDS, Math.max(0, (now - gameIdleWallet.lastClaimAt) / 1000));
+    gameIdleWallet.stars += offlineSeconds * gameIdleRatePerMinute() / 60;
+    if (offlineSeconds >= 60) showToast(`Welcome back! Your reactor earned ${(offlineSeconds * gameIdleRatePerMinute() / 60).toFixed(1)} idle stars.`);
+  }
+  gameIdleWallet.lastClaimAt = now;
+  gameLastIdleSave = 0;
+  renderGameIdle();
+  await saveGameIdleWallet(true);
+}
+async function buyIdleUpgrade() {
+  if (!gameActive || !gameIdleWallet) return;
+  const cost = gameIdleUpgradeCost();
+  if (gameIdleWallet.generatorLevel >= 40) { showToast("Your reactor is at maximum level."); return; }
+  if (gameIdleWallet.stars < cost) { showToast(`You need ${cost} idle stars for this upgrade.`); return; }
+  gameIdleWallet.stars -= cost;
+  gameIdleWallet.generatorLevel += 1;
+  renderGameIdle();
+  await saveGameIdleWallet(true);
+  showToast(`RGB Reactor upgraded to level ${gameIdleWallet.generatorLevel}!`);
+}
 function gameKeyIsDown(...keys) { return keys.some(key => gameKeys.has(key)); }
 function drawPlatformer() {
   const canvas = $("platformerCanvas");
   if (!canvas || !gamePlayer) return;
   const ctx = canvas.getContext("2d");
-  const cameraX = Math.max(0, Math.min(GAME_WORLD_WIDTH - GAME_VIEW_WIDTH, gamePlayer.x - GAME_VIEW_WIDTH * 0.43));
-  const cameraY = 0;
-  const gradient = ctx.createLinearGradient(0,0,0,GAME_VIEW_HEIGHT);
-  gradient.addColorStop(0,"#172544"); gradient.addColorStop(1,"#38506b");
-  ctx.fillStyle = gradient; ctx.fillRect(0,0,GAME_VIEW_WIDTH,GAME_VIEW_HEIGHT);
-  // Distant hills make the shared world recognizable without external assets.
-  ctx.fillStyle = "#243a4c";
-  for (let i=0;i<9;i++) { const x=i*540-(cameraX*.18%540); ctx.beginPath(); ctx.moveTo(x,480); ctx.lineTo(x+160,300+(i%3)*35); ctx.lineTo(x+370,480); ctx.fill(); }
-  ctx.save(); ctx.translate(-cameraX,-cameraY);
-  // Platforms and ground
-  gamePlatforms.forEach((platform,index) => {
-    ctx.fillStyle = index===0 ? "#355b48" : "#526a85";
-    ctx.fillRect(platform.x,platform.y,platform.w,platform.h);
-    ctx.fillStyle = index===0 ? "#5d9b64" : "#91a9c4";
-    ctx.fillRect(platform.x,platform.y,platform.w,5);
-  });
-  // Coins respawn individually for each player. Scores are personal, map coordinates are shared.
   const now = Date.now();
+  const hue = (now / 42) % 360;
+  const cameraX = Math.max(0, Math.min(GAME_WORLD_WIDTH - GAME_VIEW_WIDTH, gamePlayer.x - GAME_VIEW_WIDTH * 0.43));
+
+  // Deep neon sky with a slowly cycling RGB horizon.
+  const sky = ctx.createLinearGradient(0,0,0,GAME_VIEW_HEIGHT);
+  sky.addColorStop(0, `hsl(${(hue + 230) % 360} 75% 10%)`);
+  sky.addColorStop(0.58, `hsl(${(hue + 280) % 360} 72% 16%)`);
+  sky.addColorStop(1, `hsl(${(hue + 320) % 360} 78% 9%)`);
+  ctx.fillStyle = sky; ctx.fillRect(0,0,GAME_VIEW_WIDTH,GAME_VIEW_HEIGHT);
+
+  // Neon grid floor and star particles.
+  ctx.save();
+  ctx.globalAlpha = 0.28;
+  ctx.strokeStyle = `hsl(${(hue + 35) % 360} 100% 68%)`;
+  ctx.lineWidth = 1;
+  for (let x = -((cameraX * 0.35) % 48); x < GAME_VIEW_WIDTH; x += 48) {
+    ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,GAME_VIEW_HEIGHT); ctx.stroke();
+  }
+  for (let y = 24; y < GAME_VIEW_HEIGHT; y += 44) {
+    ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(GAME_VIEW_WIDTH,y); ctx.stroke();
+  }
+  ctx.globalAlpha = 0.75;
+  for (let i=0;i<45;i++) {
+    const x = ((i*197 - cameraX*0.12) % (GAME_VIEW_WIDTH+30) + GAME_VIEW_WIDTH+30) % (GAME_VIEW_WIDTH+30);
+    const y = 25 + ((i*83) % 390);
+    const pulse = 1 + Math.sin(now/360+i)*0.8;
+    ctx.fillStyle = `hsl(${(hue+i*19)%360} 100% 78%)`;
+    ctx.fillRect(x,y,pulse,pulse);
+  }
+  ctx.restore();
+
+  // Distant neon skyline silhouettes.
+  for (let i=0;i<12;i++) {
+    const x = i*180 - ((cameraX*0.16)%180);
+    const height = 75 + ((i*47)%120);
+    ctx.fillStyle = "#100f2d";
+    ctx.fillRect(x,485-height,88,height);
+    ctx.strokeStyle = `hsla(${(hue+i*29)%360},100%,68%,.52)`;
+    ctx.lineWidth = 2; ctx.strokeRect(x,485-height,88,height);
+  }
+
+  ctx.save(); ctx.translate(-cameraX,0);
+  gamePlatforms.forEach((platform,index) => {
+    const platformHue = (hue + index*31) % 360;
+    const fill = ctx.createLinearGradient(platform.x,platform.y,platform.x,platform.y+platform.h);
+    fill.addColorStop(0,`hsl(${platformHue} 90% 35%)`);
+    fill.addColorStop(1,`hsl(${(platformHue+48)%360} 88% 13%)`);
+    ctx.shadowColor = `hsl(${platformHue} 100% 60%)`;
+    ctx.shadowBlur = index===0 ? 24 : 17;
+    ctx.fillStyle = fill; ctx.fillRect(platform.x,platform.y,platform.w,platform.h);
+    ctx.shadowBlur = 0;
+    ctx.strokeStyle = `hsl(${platformHue} 100% 72%)`;
+    ctx.lineWidth = 2; ctx.strokeRect(platform.x+1,platform.y+1,platform.w-2,platform.h-2);
+    ctx.fillStyle = `hsl(${(platformHue+60)%360} 100% 82%)`;
+    ctx.fillRect(platform.x+3,platform.y+2,Math.max(0,platform.w-6),3);
+  });
+
+  // Collectible RGB stars.
   gameCoins.forEach((coin,index) => {
     if ((gameCoinCooldowns.get(index)||0) > now) return;
-    const bob = Math.sin(now/260 + index)*4;
-    ctx.fillStyle = "#fbbf24"; ctx.beginPath(); ctx.arc(coin.x,coin.y+bob,10,0,Math.PI*2); ctx.fill();
-    ctx.fillStyle = "#fff3b0"; ctx.beginPath(); ctx.arc(coin.x-3,coin.y-3+bob,3,0,Math.PI*2); ctx.fill();
+    const bob = Math.sin(now/260+index)*4;
+    const starHue = (hue+index*43)%360;
+    ctx.save(); ctx.translate(coin.x,coin.y+bob); ctx.rotate(now/900+index*0.25);
+    ctx.shadowColor = `hsl(${starHue} 100% 65%)`; ctx.shadowBlur = 22;
+    ctx.fillStyle = `hsl(${starHue} 100% 68%)`;
+    ctx.beginPath();
+    for (let point=0;point<10;point++) {
+      const radius = point%2===0 ? 13 : 6;
+      const angle = -Math.PI/2 + point*Math.PI/5;
+      const px = Math.cos(angle)*radius, py = Math.sin(angle)*radius;
+      if (point===0) ctx.moveTo(px,py); else ctx.lineTo(px,py);
+    }
+    ctx.closePath(); ctx.fill();
+    ctx.shadowBlur = 0; ctx.fillStyle = "#ffffff"; ctx.beginPath(); ctx.arc(0,0,2.3,0,Math.PI*2); ctx.fill(); ctx.restore();
   });
-  // Other players' avatars are synchronized from Realtime Database.
+
+  // Other players glow in distinct hues derived from their user IDs.
   Object.entries(gameRemotePlayers).forEach(([uid,player]) => {
     if (uid===currentUser.uid || !player || typeof player.x!=="number" || typeof player.y!=="number") return;
-    if (Date.now() - Number(player.updatedAt||0) > 18000) return;
-    const hue = Array.from(uid).reduce((sum,ch)=>sum+ch.charCodeAt(0),0)%360;
-    ctx.fillStyle = `hsl(${hue} 72% 62%)`;
-    ctx.fillRect(player.x-cameraX,player.y,GAME_PLAYER_WIDTH,GAME_PLAYER_HEIGHT);
-    ctx.fillStyle = "#101827"; ctx.fillRect(player.x-cameraX+7,player.y+12,5,5); ctx.fillRect(player.x-cameraX+20,player.y+12,5,5);
-    ctx.fillStyle = "#ffffff"; ctx.font="12px Arial"; ctx.textAlign="center"; ctx.fillText(String(player.username||"Player").slice(0,20),player.x-cameraX+GAME_PLAYER_WIDTH/2,player.y-8);
+    if (Date.now()-Number(player.updatedAt||0)>18000) return;
+    const playerHue = (Array.from(uid).reduce((sum,ch)=>sum+ch.charCodeAt(0),0)*7)%360;
+    const px = player.x-cameraX, py = player.y;
+    ctx.save(); ctx.shadowColor=`hsl(${playerHue} 100% 65%)`; ctx.shadowBlur=24;
+    const playerGradient = ctx.createLinearGradient(px,py,px+GAME_PLAYER_WIDTH,py+GAME_PLAYER_HEIGHT);
+    playerGradient.addColorStop(0,`hsl(${playerHue} 100% 72%)`);
+    playerGradient.addColorStop(1,`hsl(${(playerHue+65)%360} 100% 52%)`);
+    ctx.fillStyle=playerGradient; ctx.fillRect(px,py,GAME_PLAYER_WIDTH,GAME_PLAYER_HEIGHT);
+    ctx.shadowBlur=0; ctx.strokeStyle="#ffffff"; ctx.lineWidth=1.5; ctx.strokeRect(px,py,GAME_PLAYER_WIDTH,GAME_PLAYER_HEIGHT);
+    ctx.fillStyle="#101827"; ctx.fillRect(px+7,py+12,5,5); ctx.fillRect(px+20,py+12,5,5);
+    ctx.fillStyle="#ffffff"; ctx.font="12px Arial"; ctx.textAlign="center"; ctx.shadowColor=`hsl(${playerHue} 100% 70%)`; ctx.shadowBlur=10; ctx.fillText(String(player.username||"Player").slice(0,20),px+GAME_PLAYER_WIDTH/2,py-8); ctx.restore();
   });
-  // Local player
-  ctx.fillStyle = "#a78bfa"; ctx.fillRect(gamePlayer.x-cameraX,gamePlayer.y,GAME_PLAYER_WIDTH,GAME_PLAYER_HEIGHT);
-  ctx.fillStyle = "#17162c"; const eyeX = gamePlayer.facing>=0 ? 21 : 7; ctx.fillRect(gamePlayer.x-cameraX+eyeX,gamePlayer.y+12,5,5);
-  ctx.restore();
-  $("gameScore").textContent = `Score: ${gamePlayer.score}`;
+
+  // Local player has a continuously cycling RGB gradient.
+  const localX = gamePlayer.x-cameraX, localY = gamePlayer.y;
+  ctx.save(); ctx.shadowColor=`hsl(${hue} 100% 65%)`; ctx.shadowBlur=28;
+  const localGradient = ctx.createLinearGradient(localX,localY,localX+GAME_PLAYER_WIDTH,localY+GAME_PLAYER_HEIGHT);
+  localGradient.addColorStop(0,`hsl(${hue} 100% 72%)`);
+  localGradient.addColorStop(.5,`hsl(${(hue+120)%360} 100% 62%)`);
+  localGradient.addColorStop(1,`hsl(${(hue+240)%360} 100% 62%)`);
+  ctx.fillStyle=localGradient; ctx.fillRect(localX,localY,GAME_PLAYER_WIDTH,GAME_PLAYER_HEIGHT);
+  ctx.shadowBlur=0; ctx.strokeStyle="#ffffff"; ctx.lineWidth=2; ctx.strokeRect(localX,localY,GAME_PLAYER_WIDTH,GAME_PLAYER_HEIGHT);
+  ctx.fillStyle="#101827"; const eyeX=gamePlayer.facing>=0?21:7; ctx.fillRect(localX+eyeX,localY+12,5,5);
+  ctx.restore(); ctx.restore();
+
+  $("gameScore").textContent = `Stars collected: ${gamePlayer.score}`;
   $("gameOnline").textContent = `Players online: ${Object.keys(gameRemotePlayers).length}`;
+  renderGameIdle();
 }
 function platformerFrame(timestamp) {
   if (!gameActive || !gamePlayer) return;
@@ -1484,14 +1636,21 @@ function platformerFrame(timestamp) {
   }
   if (gamePlayer.y > GAME_VIEW_HEIGHT+100) { gamePlayer.x = gameSpawnX(); gamePlayer.y = 610-GAME_PLAYER_HEIGHT; gamePlayer.vy=0; }
   const now = Date.now();
+  gameIdleWallet.stars += gameIdleRatePerMinute() * dt / 60;
   gameCoins.forEach((coin,index) => {
     if ((gameCoinCooldowns.get(index)||0)>now) return;
     const dx = gamePlayer.x+GAME_PLAYER_WIDTH/2-coin.x;
     const dy = gamePlayer.y+GAME_PLAYER_HEIGHT/2-coin.y;
     if (dx*dx+dy*dy < 24*24) {
-      gamePlayer.score += 1; gameCoinCooldowns.set(index,now+6500); updateGameLeaderboard();
+      gamePlayer.score += 1;
+      gameIdleWallet.stars += 1;
+      gameCoinCooldowns.set(index,now+6500);
+      updateGameLeaderboard();
+      saveGameIdleWallet(true);
     }
   });
+  renderGameIdle();
+  if (now-gameLastIdleSave > 60000) saveGameIdleWallet();
   drawPlatformer();
   if (now-gameLastSync > 110 && !gameWriteBusy && gameActive) {
     gameLastSync = now; gameWriteBusy = true;
@@ -1508,12 +1667,15 @@ async function openGame() {
   gameActive = true;
   gameKeys.clear(); gameCoinCooldowns.clear(); gameLastFrameTime = 0; gameLastJumpDown = false; gameLastLeaderboardScore = -1;
   gamePlayer = {x:gameSpawnX(),y:490-GAME_PLAYER_HEIGHT,vx:0,vy:0,facing:1,grounded:true,score:0};
+  gameIdleWallet = {stars:0,generatorLevel:0,lastClaimAt:0};
+  gameLastIdleSave = 0;
   gameRemotePlayers = {}; gameLeaderboardData = {}; gameChatData = {};
   $("gameConnection").textContent = "Connecting…";
   $("gameModal").style.display = "flex";
   drawPlatformer();
   gamePlayerDisconnectRef = ref(rtdb,`game/players/${currentUser.uid}`);
   try {
+    await loadGameIdleWallet();
     await onDisconnect(gamePlayerDisconnectRef).remove();
     await set(gamePlayerDisconnectRef,gamePlayerPayload());
     gamePlayersUnsubscribe = onValue(ref(rtdb,"game/players"),snapshot => {
@@ -1535,6 +1697,7 @@ async function openGame() {
   }
 }
 async function exitGame() {
+  if (gameActive && currentUser && rtdb) await saveGameIdleWallet(true);
   gameActive = false;
   gameKeys.clear();
   if (gameAnimationFrame) cancelAnimationFrame(gameAnimationFrame);
@@ -1835,7 +1998,7 @@ document.querySelectorAll(".modal-backdrop").forEach(modal => modal.addEventList
 initializeEmojis();
 $("adminPortalButton").classList.add("hidden");
 
-Object.assign(window, {openModal, closeModal, createPrivateChat, createGroup, joinGroup, copyCode, sendMessage, replyToMessage, cancelReply, toggleEmoji, showGroupInfo, showToast, searchChats, goBack, signOutUser, renameGroup, leaveGroup, copyCurrentGroupCode, openSettings, changeAccountPassword, openAdminPortal, createSiteAccessCode, openAnnouncements, dismissAnnouncementBanner, publishAnnouncement, openGame, exitGame});
+Object.assign(window, {openModal, closeModal, createPrivateChat, createGroup, joinGroup, copyCode, sendMessage, replyToMessage, cancelReply, toggleEmoji, showGroupInfo, showToast, searchChats, goBack, signOutUser, renameGroup, leaveGroup, copyCurrentGroupCode, openSettings, changeAccountPassword, openAdminPortal, createSiteAccessCode, openAnnouncements, dismissAnnouncementBanner, publishAnnouncement, openGame, exitGame, buyIdleUpgrade});
 if (siteGatePassed) $("siteGate").classList.add("hidden");
 onAuthStateChanged(auth, async user => {
   // Re-check a remembered access code against Firebase. This makes an admin's
