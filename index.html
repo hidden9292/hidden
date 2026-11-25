@@ -6,8 +6,8 @@
 <title>Whisper Math</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#0b0e14;--panel:#121722;--panel2:#191f2b;--panel3:#222b39;--border:#283142;--text:#edf1fa;--muted:#8c98aa;--accent:#818cf8;--accent2:#6366f1;--green:#4ade80;--red:#fb7185}
-body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);height:100vh;overflow:hidden}
+:root{--bg:#0b0e14;--panel:#121722;--panel2:#191f2b;--panel3:#222b39;--border:#283142;--text:#edf1fa;--muted:#8c98aa;--accent:#818cf8;--accent2:#6366f1;--green:#4ade80;--red:#fb7185;--message-font-size:14px;--message-radius:15px;--message-max-width:80%;--sidebar-width:310px;--message-gap:18px;--app-font:Arial,Helvetica,sans-serif}
+body{font-family:var(--app-font);background:var(--bg);color:var(--text);height:100vh;overflow:hidden;transition:background .2s,color .2s}
 button,input{font-family:inherit}button{cursor:pointer;border:0;color:inherit}
 .hidden{display:none!important}
 #authScreen{position:fixed;inset:0;z-index:500;background:radial-gradient(circle at top,#202849 0,#0b0e14 55%);display:flex;align-items:center;justify-content:center;padding:20px}
@@ -24,7 +24,7 @@ button,input{font-family:inherit}button{cursor:pointer;border:0;color:inherit}
 .auth-note{color:var(--muted);font-size:11px;line-height:1.5;margin-top:16px}
 .auth-error{background:#4c1d2b;border:1px solid #87344b;color:#fecdd3;padding:10px;border-radius:8px;font-size:12px;margin-top:13px;display:none}
 .app{display:flex;height:100vh;width:100%}
-.sidebar{width:310px;min-width:310px;background:var(--panel);border-right:1px solid var(--border);display:flex;flex-direction:column}
+.sidebar{width:var(--sidebar-width);min-width:var(--sidebar-width);background:var(--panel);border-right:1px solid var(--border);display:flex;flex-direction:column}
 .logo{display:flex;align-items:center;gap:12px;padding:23px;border-bottom:1px solid var(--border)}
 .logo h1{font-size:23px;letter-spacing:1px}.logo small{color:var(--muted);font-size:11px}
 .search{margin:17px}.search input{width:100%;padding:12px 15px;border-radius:10px;background:var(--panel2);border:1px solid var(--border);color:white;outline:none}.search input:focus{border-color:var(--accent)}
@@ -35,7 +35,7 @@ button,input{font-family:inherit}button{cursor:pointer;border:0;color:inherit}
 .chat-info{flex:1;min-width:0}.chat-info-top{display:flex;justify-content:space-between;gap:5px}.chat-name{font-size:14px;font-weight:bold}.chat-time{font-size:10px;color:var(--muted)}.chat-preview{color:var(--muted);font-size:12px;margin-top:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .sidebar-footer{padding:15px;border-top:1px solid var(--border)}.profile{display:flex;align-items:center;gap:12px}.profile .avatar{width:38px;height:38px}.profile-info{flex:1;min-width:0}.profile-info strong{font-size:13px}.profile-info small{display:block;margin-top:4px;color:var(--green);font-size:11px}.settings-button{background:transparent;font-size:20px;color:var(--muted)}
 .main{flex:1;display:flex;flex-direction:column;min-width:0}.chat-header{height:76px;min-height:76px;border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 24px;gap:13px;background:var(--panel)}.header-info{flex:1;min-width:0}.header-info h2{font-size:16px}.header-info p{color:var(--muted);font-size:12px;margin-top:5px}.header-actions{display:flex;gap:8px}.header-actions button{width:38px;height:38px;border-radius:10px;background:var(--panel2);color:var(--muted);font-size:17px}.header-actions button:hover{background:var(--panel3);color:white}
-.messages{flex:1;overflow-y:auto;padding:25px;display:flex;flex-direction:column;gap:18px}.date-divider{text-align:center;font-size:11px;color:var(--muted);margin:10px 0}.message{display:flex;gap:10px;max-width:80%;align-items:flex-end}.message.mine{align-self:flex-end;flex-direction:row-reverse}.message-avatar{width:32px;height:32px;border-radius:50%;background:#45536b;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}.message-content{min-width:0}.message-author{font-size:11px;color:var(--muted);margin-bottom:5px}.message.mine .message-author{text-align:right}.bubble{background:var(--panel2);padding:12px 15px;border-radius:15px 15px 15px 4px;font-size:14px;line-height:1.5;word-break:break-word;white-space:pre-wrap}.message.mine .bubble{background:var(--accent2);border-radius:15px 15px 4px 15px}.message-time{font-size:10px;color:var(--muted);margin-top:5px}.message.mine .message-time{text-align:right}.message-read-receipt{font-size:10px;color:#a5b4fc;margin-top:4px;max-width:320px;line-height:1.35}.message.mine .message-read-receipt{text-align:right}.reply-preview{background:#0003;border-left:3px solid var(--accent);padding:8px;margin-bottom:8px;border-radius:4px;font-size:11px;color:#d0d5ff}.message-actions{display:flex;gap:6px;margin-top:5px;opacity:.4}.message:hover .message-actions{opacity:1}.message-actions button{background:var(--panel3);border-radius:5px;padding:4px 7px;font-size:11px}.message-actions button:hover{background:var(--accent2)}.message-reactions{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px}.message-reactions button{background:#30384a;border:1px solid #46516a;color:#f4f5fb;border-radius:999px;padding:4px 8px;font-size:12px}.message-reactions button:hover{border-color:var(--accent);background:#3b4560}.message-reactions button.selected{border-color:var(--accent);background:#45406f}.message-reaction-picker{display:none;flex-wrap:wrap;gap:4px;max-width:290px;margin-top:8px;padding:9px;background:var(--panel);border:1px solid var(--border);border-radius:12px;box-shadow:0 8px 24px #0006}.message-reaction-picker.open{display:flex}.message-reaction-picker button{width:34px;height:34px;background:var(--panel2);border-radius:8px;font-size:20px}.message-reaction-picker button:hover{background:var(--panel3);transform:scale(1.08)}.message-reaction-picker button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.messages{flex:1;overflow-y:auto;padding:25px;display:flex;flex-direction:column;gap:var(--message-gap);background-color:transparent;background-size:28px 28px}.date-divider{text-align:center;font-size:11px;color:var(--muted);margin:10px 0}.message{display:flex;gap:10px;max-width:var(--message-max-width);align-items:flex-end}.message.mine{align-self:flex-end;flex-direction:row-reverse}.message-avatar{width:32px;height:32px;border-radius:50%;background:#45536b;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}.message-content{min-width:0}.message-author{font-size:11px;color:var(--muted);margin-bottom:5px}.message.mine .message-author{text-align:right}.bubble{background:var(--panel2);padding:12px 15px;border-radius:var(--message-radius) var(--message-radius) var(--message-radius) 4px;font-size:var(--message-font-size);line-height:1.5;word-break:break-word;white-space:pre-wrap}.message.mine .bubble{background:var(--accent2);border-radius:var(--message-radius) var(--message-radius) 4px var(--message-radius)}.message-time{font-size:10px;color:var(--muted);margin-top:5px}.message.mine .message-time{text-align:right}.message-read-receipt{font-size:10px;color:#a5b4fc;margin-top:4px;max-width:320px;line-height:1.35}.message.mine .message-read-receipt{text-align:right}.reply-preview{background:#0003;border-left:3px solid var(--accent);padding:8px;margin-bottom:8px;border-radius:4px;font-size:11px;color:#d0d5ff}.message-actions{display:flex;gap:6px;margin-top:5px;opacity:.4}.message:hover .message-actions{opacity:1}.message-actions button{background:var(--panel3);border-radius:5px;padding:4px 7px;font-size:11px}.message-actions button:hover{background:var(--accent2)}.message-reactions{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px}.message-reactions button{background:#30384a;border:1px solid #46516a;color:#f4f5fb;border-radius:999px;padding:4px 8px;font-size:12px}.message-reactions button:hover{border-color:var(--accent);background:#3b4560}.message-reactions button.selected{border-color:var(--accent);background:#45406f}.message-reaction-picker{display:none;flex-wrap:wrap;gap:4px;max-width:290px;margin-top:8px;padding:9px;background:var(--panel);border:1px solid var(--border);border-radius:12px;box-shadow:0 8px 24px #0006}.message-reaction-picker.open{display:flex}.message-reaction-picker button{width:34px;height:34px;background:var(--panel2);border-radius:8px;font-size:20px}.message-reaction-picker button:hover{background:var(--panel3);transform:scale(1.08)}.message-reaction-picker button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
  .input-area{padding:17px 24px 22px;background:var(--panel);border-top:1px solid var(--border)}
 .typing-indicator{min-height:18px;padding:0 3px 7px;color:var(--muted);font-size:11px;font-style:italic}
 .status-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);margin-right:5px;vertical-align:middle}
@@ -61,6 +61,35 @@ button,input{font-family:inherit}button{cursor:pointer;border:0;color:inherit}
 .admin-code-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px;background:var(--panel2);border-radius:8px;margin:7px 0;font-size:12px}
 .admin-code-row button{padding:7px 10px;background:#4c1d2b;border-radius:7px;font-size:11px}
 .admin-note{font-size:11px;color:var(--muted);line-height:1.5;margin:10px 0}
+
+/* Personal appearance controls */
+.settings-modal{max-width:650px;max-height:90vh;overflow:auto}
+.customization-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px}
+.custom-field{display:flex;flex-direction:column;gap:7px;min-width:0;color:var(--muted);font-size:12px}
+.custom-field select,.custom-field input[type="color"]{width:100%;min-height:40px;padding:8px;background:var(--panel2);border:1px solid var(--border);border-radius:9px;color:var(--text)}
+.custom-field input[type="range"]{width:100%;accent-color:var(--accent2)}
+.custom-field output{color:var(--text);font-weight:bold}
+.custom-checks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 12px;margin-top:12px}
+.custom-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.custom-actions button{background:var(--panel2);padding:10px 12px;border-radius:9px}
+.custom-preview{border:1px solid var(--border);border-radius:12px;padding:12px;background:var(--panel2);margin-top:12px}
+.custom-preview .preview-bubble{display:inline-block;padding:9px 12px;border-radius:var(--message-radius);background:var(--accent2);color:#fff;font-size:var(--message-font-size);max-width:100%}
+body.wallpaper-gradient .messages{background-image:radial-gradient(ellipse at top left,color-mix(in srgb,var(--accent2) 15%,transparent),transparent 55%)}
+body.wallpaper-dots .messages{background-image:radial-gradient(color-mix(in srgb,var(--muted) 22%,transparent) 1px,transparent 1px)}
+body.wallpaper-grid .messages{background-image:linear-gradient(color-mix(in srgb,var(--muted) 12%,transparent) 1px,transparent 1px),linear-gradient(90deg,color-mix(in srgb,var(--muted) 12%,transparent) 1px,transparent 1px)}
+body.wallpaper-lines .messages{background-image:repeating-linear-gradient(135deg,transparent 0 18px,color-mix(in srgb,var(--muted) 8%,transparent) 19px 20px)}
+body.compact-mode .chat-item{padding-top:8px;padding-bottom:8px}
+body.compact-mode .messages{gap:9px;padding-top:16px;padding-bottom:16px}
+body.compact-mode .bubble{padding:8px 11px}
+body.hide-message-avatars .message-avatar{display:none}
+body.square-avatars .avatar,body.square-avatars .message-avatar{border-radius:12px}
+body.hide-message-times .message-time{display:none}
+body.no-motion *,body.no-motion *::before,body.no-motion *::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}
+body.theme-light .message-avatar{background:#cbd5e1;color:#1e293b}
+body.theme-light .message-reactions button{background:#e8edf5;border-color:#cbd5e1;color:#253047}
+body.theme-light .reply-preview{color:#39435c;background:#e9edf7}
+body.theme-light .message-reaction-picker{box-shadow:0 8px 24px #0002}
+@media(max-width:520px){.customization-grid,.custom-checks{grid-template-columns:1fr}.settings-modal{max-height:94vh;padding:18px}}
 
 </style>
 </head>
@@ -138,12 +167,76 @@ button,input{font-family:inherit}button{cursor:pointer;border:0;color:inherit}
 <div class="modal-backdrop" id="codeModal"><div class="modal"><h2>Group created!</h2><p>Share this join code privately with the people you want to invite.</p><div class="generated-code" id="generatedCode"></div><div class="modal-buttons"><button onclick="copyCode()">📋 Copy code</button><button class="primary" onclick="closeModal('codeModal')">Done</button></div></div></div>
 <div class="modal-backdrop" id="groupInfoModal"><div class="modal"><h2 id="groupInfoTitle">Group information</h2><p id="groupInfoSummary">Group details</p><div class="group-member-list" id="groupMembers"></div><div id="groupOwnerControls"><input id="renameGroupInput" maxlength="40" placeholder="New group name"><div class="modal-buttons"><button onclick="closeModal('groupInfoModal')">Close</button><button class="primary" onclick="renameGroup()">Rename group</button></div></div><div class="modal-buttons" id="groupInfoButtons"><button onclick="copyCurrentGroupCode()">📋 Copy invite code</button><button onclick="leaveGroup()">Leave group</button></div><div class="modal-buttons" id="privateInfoButtons"><button class="primary" onclick="closeModal('groupInfoModal')">Close</button></div></div></div>
 
-<div class="modal-backdrop" id="settingsModal"><div class="modal">
-  <h2>Settings</h2><p>Manage your notifications and account password.</p>
+<div class="modal-backdrop" id="settingsModal"><div class="modal settings-modal">
+  <h2>Settings & customization</h2><p>Personalize how Whisper Math looks on this device. Appearance settings are saved locally to this browser and do not change other members' screens.</p>
   <div class="settings-section">
     <strong>Notifications</strong>
     <label class="settings-row"><input type="checkbox" id="notificationsToggle"> Enable browser notifications on this device</label>
     <div class="admin-note">Turning this off stops Whisper Math from showing browser notifications on this device. It does not change the browser's site permission.</div>
+  </div>
+  <div class="settings-section">
+    <strong>Appearance and layout</strong>
+    <div class="customization-grid">
+      <label class="custom-field">Theme preset
+        <select id="customTheme">
+          <option value="midnight">Midnight</option>
+          <option value="lavender">Lavender</option>
+          <option value="ocean">Deep ocean</option>
+          <option value="forest">Forest</option>
+          <option value="rose">Rose</option>
+          <option value="slate">Slate</option>
+          <option value="light">Light</option>
+        </select>
+      </label>
+      <label class="custom-field">Accent color
+        <input type="color" id="customAccent" value="#6366f1">
+      </label>
+      <label class="custom-field">Font
+        <select id="customFont">
+          <option value="arial">Arial</option>
+          <option value="system">System default</option>
+          <option value="verdana">Verdana</option>
+          <option value="trebuchet">Trebuchet</option>
+          <option value="georgia">Georgia</option>
+          <option value="mono">Monospace</option>
+        </select>
+      </label>
+      <label class="custom-field">Chat background
+        <select id="customWallpaper">
+          <option value="plain">Plain</option>
+          <option value="gradient">Soft gradient</option>
+          <option value="dots">Dots</option>
+          <option value="grid">Grid</option>
+          <option value="lines">Diagonal lines</option>
+        </select>
+      </label>
+      <label class="custom-field">Message text size · <output id="customFontSizeValue">14 px</output>
+        <input type="range" id="customFontSize" min="12" max="20" step="1" value="14">
+      </label>
+      <label class="custom-field">Bubble roundness · <output id="customRadiusValue">15 px</output>
+        <input type="range" id="customRadius" min="4" max="28" step="1" value="15">
+      </label>
+      <label class="custom-field">Message width · <output id="customWidthValue">80%</output>
+        <input type="range" id="customWidth" min="60" max="100" step="5" value="80">
+      </label>
+      <label class="custom-field">Sidebar width · <output id="customSidebarValue">310 px</output>
+        <input type="range" id="customSidebar" min="250" max="420" step="10" value="310">
+      </label>
+    </div>
+    <div class="custom-checks">
+      <label class="settings-row"><input type="checkbox" id="customCompact"> Compact layout</label>
+      <label class="settings-row"><input type="checkbox" id="customAvatars" checked> Show message avatars</label>
+      <label class="settings-row"><input type="checkbox" id="customTimes" checked> Show message timestamps</label>
+      <label class="settings-row"><input type="checkbox" id="customMotion" checked> Enable animations</label>
+      <label class="settings-row"><input type="checkbox" id="customSquareAvatars"> Rounded-square avatars</label>
+    </div>
+    <div class="custom-preview"><div class="admin-note">Live preview</div><div class="preview-bubble">This is how your messages will look.</div></div>
+    <div class="custom-actions">
+      <button type="button" id="resetCustomizationButton">Reset appearance</button>
+      <button type="button" id="copyCustomizationButton">Copy settings backup</button>
+      <button type="button" id="importCustomizationButton">Import settings backup</button>
+    </div>
+    <div class="admin-note">These options are saved on this browser only. Other devices and other users keep their own preferences.</div>
   </div>
   <div class="settings-section">
     <strong>Change password</strong>
@@ -749,8 +842,142 @@ function notificationsEnabled() {
   return localStorage.getItem(NOTIFICATIONS_STORAGE_KEY) === "on";
 }
 
+const CUSTOMIZATION_STORAGE_KEY = "whisperMathAppearanceV1";
+const DEFAULT_CUSTOMIZATION = {
+  theme:"midnight", accent:"#6366f1", font:"arial", wallpaper:"plain",
+  fontSize:14, radius:15, width:80, sidebar:310,
+  compact:false, avatars:true, times:true, motion:true, squareAvatars:false
+};
+const THEME_PRESETS = {
+  midnight:{bg:"#0b0e14",panel:"#121722",panel2:"#191f2b",panel3:"#222b39",border:"#283142",text:"#edf1fa",muted:"#8c98aa",accent:"#6366f1"},
+  lavender:{bg:"#100f1c",panel:"#19172a",panel2:"#211e35",panel3:"#302a49",border:"#3d3658",text:"#f0edff",muted:"#aaa2c4",accent:"#9b87f5"},
+  ocean:{bg:"#071520",panel:"#0d2030",panel2:"#143047",panel3:"#1d405b",border:"#28516b",text:"#e5f6ff",muted:"#8baebe",accent:"#0ea5e9"},
+  forest:{bg:"#0b1712",panel:"#12231a",panel2:"#1a3024",panel3:"#254331",border:"#315540",text:"#e9f8ee",muted:"#9bb9a5",accent:"#16a36a"},
+  rose:{bg:"#1a1018",panel:"#261722",panel2:"#35202f",panel3:"#492b3f",border:"#5a3850",text:"#fff0f7",muted:"#c5a3b6",accent:"#e05b9b"},
+  slate:{bg:"#101820",panel:"#19232e",panel2:"#222f3d",panel3:"#2d3d4e",border:"#3a4b5e",text:"#edf3f8",muted:"#a0afbd",accent:"#647f9e"},
+  light:{bg:"#f2f5fa",panel:"#ffffff",panel2:"#e9eef6",panel3:"#dce4ef",border:"#cbd5e1",text:"#202a3a",muted:"#64748b",accent:"#5969d8"}
+};
+const FONT_PRESETS = {
+  arial:"Arial, Helvetica, sans-serif",
+  system:"system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+  verdana:"Verdana, Geneva, sans-serif",
+  trebuchet:"'Trebuchet MS', sans-serif",
+  georgia:"Georgia, 'Times New Roman', serif",
+  mono:"ui-monospace, SFMono-Regular, Consolas, monospace"
+};
+function validHexColor(value) { return /^#[0-9a-fA-F]{6}$/.test(String(value || "")); }
+function loadCustomization() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(CUSTOMIZATION_STORAGE_KEY) || "{}");
+    const result = {...DEFAULT_CUSTOMIZATION, ...saved};
+    if (!THEME_PRESETS[result.theme]) result.theme = DEFAULT_CUSTOMIZATION.theme;
+    if (!FONT_PRESETS[result.font]) result.font = DEFAULT_CUSTOMIZATION.font;
+    if (!['plain','gradient','dots','grid','lines'].includes(result.wallpaper)) result.wallpaper = 'plain';
+    if (!validHexColor(result.accent)) result.accent = THEME_PRESETS[result.theme].accent;
+    result.fontSize = Math.min(20, Math.max(12, Number(result.fontSize) || 14));
+    result.radius = Math.min(28, Math.max(4, Number(result.radius) || 15));
+    result.width = Math.min(100, Math.max(60, Number(result.width) || 80));
+    result.sidebar = Math.min(420, Math.max(250, Number(result.sidebar) || 310));
+    return result;
+  } catch { return {...DEFAULT_CUSTOMIZATION}; }
+}
+function lightenHex(hex, amount=0.22) {
+  const raw = hex.replace('#','');
+  const values = [0,2,4].map(i => parseInt(raw.slice(i,i+2),16));
+  return '#' + values.map(v => Math.round(v + (255-v)*amount).toString(16).padStart(2,'0')).join('');
+}
+function applyCustomization(config, persist=true) {
+  const c = {...DEFAULT_CUSTOMIZATION, ...config};
+  const palette = THEME_PRESETS[c.theme] || THEME_PRESETS.midnight;
+  const root = document.documentElement;
+  root.style.setProperty('--bg', palette.bg);
+  root.style.setProperty('--panel', palette.panel);
+  root.style.setProperty('--panel2', palette.panel2);
+  root.style.setProperty('--panel3', palette.panel3);
+  root.style.setProperty('--border', palette.border);
+  root.style.setProperty('--text', palette.text);
+  root.style.setProperty('--muted', palette.muted);
+  root.style.setProperty('--accent2', c.accent);
+  root.style.setProperty('--accent', lightenHex(c.accent));
+  root.style.setProperty('--app-font', FONT_PRESETS[c.font] || FONT_PRESETS.arial);
+  root.style.setProperty('--message-font-size', `${c.fontSize}px`);
+  root.style.setProperty('--message-radius', `${c.radius}px`);
+  root.style.setProperty('--message-max-width', `${c.width}%`);
+  root.style.setProperty('--sidebar-width', `${c.sidebar}px`);
+  document.body.classList.toggle('wallpaper-gradient', c.wallpaper === 'gradient');
+  document.body.classList.toggle('wallpaper-dots', c.wallpaper === 'dots');
+  document.body.classList.toggle('wallpaper-grid', c.wallpaper === 'grid');
+  document.body.classList.toggle('wallpaper-lines', c.wallpaper === 'lines');
+  document.body.classList.toggle('compact-mode', !!c.compact);
+  document.body.classList.toggle('hide-message-avatars', !c.avatars);
+  document.body.classList.toggle('hide-message-times', !c.times);
+  document.body.classList.toggle('no-motion', !c.motion);
+  document.body.classList.toggle('square-avatars', !!c.squareAvatars);
+  document.body.classList.toggle('theme-light', c.theme === 'light');
+  document.documentElement.style.colorScheme = c.theme === 'light' ? 'light' : 'dark';
+  if (persist) {
+    try { localStorage.setItem(CUSTOMIZATION_STORAGE_KEY, JSON.stringify(c)); }
+    catch { showToast('Your browser could not save appearance settings.'); }
+  }
+  return c;
+}
+function syncCustomizationControls(c=loadCustomization()) {
+  const values = {
+    customTheme:c.theme, customAccent:c.accent, customFont:c.font, customWallpaper:c.wallpaper,
+    customFontSize:c.fontSize, customRadius:c.radius, customWidth:c.width, customSidebar:c.sidebar,
+    customCompact:c.compact, customAvatars:c.avatars, customTimes:c.times, customMotion:c.motion,
+    customSquareAvatars:c.squareAvatars
+  };
+  Object.entries(values).forEach(([id,value]) => { const el = $(id); if (!el) return; if (el.type === 'checkbox') el.checked = !!value; else el.value = value; });
+  updateCustomizationValueLabels(c);
+}
+function readCustomizationControls() {
+  return {
+    theme:$('customTheme').value, accent:$('customAccent').value, font:$('customFont').value,
+    wallpaper:$('customWallpaper').value, fontSize:Number($('customFontSize').value),
+    radius:Number($('customRadius').value), width:Number($('customWidth').value),
+    sidebar:Number($('customSidebar').value), compact:$('customCompact').checked,
+    avatars:$('customAvatars').checked, times:$('customTimes').checked,
+    motion:$('customMotion').checked, squareAvatars:$('customSquareAvatars').checked
+  };
+}
+function updateCustomizationValueLabels(c=readCustomizationControls()) {
+  $('customFontSizeValue').textContent = `${c.fontSize} px`;
+  $('customRadiusValue').textContent = `${c.radius} px`;
+  $('customWidthValue').textContent = `${c.width}%`;
+  $('customSidebarValue').textContent = `${c.sidebar} px`;
+}
+function updateCustomizationFromControls() {
+  const c = readCustomizationControls();
+  applyCustomization(c);
+  updateCustomizationValueLabels(c);
+}
+function resetCustomization() {
+  applyCustomization({...DEFAULT_CUSTOMIZATION});
+  syncCustomizationControls({...DEFAULT_CUSTOMIZATION});
+  showToast('Appearance reset to the default design.');
+}
+async function copyCustomizationBackup() {
+  const backup = JSON.stringify(loadCustomization(), null, 2);
+  try { await navigator.clipboard.writeText(backup); showToast('Appearance backup copied.'); }
+  catch { window.prompt('Copy your appearance backup:', backup); }
+}
+function importCustomizationBackup() {
+  const pasted = window.prompt('Paste a previously copied appearance settings backup:');
+  if (!pasted) return;
+  try {
+    const parsed = JSON.parse(pasted);
+    const safe = {...DEFAULT_CUSTOMIZATION, ...parsed};
+    if (!THEME_PRESETS[safe.theme] || !FONT_PRESETS[safe.font] || !validHexColor(safe.accent)) throw new Error('Invalid settings');
+    const applied = applyCustomization(safe);
+    syncCustomizationControls(applied);
+    showToast('Appearance backup imported.');
+  } catch { showToast('That settings backup is not valid.'); }
+}
+
 function openSettings() {
   $("notificationsToggle").checked = notificationsEnabled();
+  syncCustomizationControls(loadCustomization());
   $("currentPasswordInput").value = "";
   $("newPasswordInput").value = "";
   $("confirmPasswordInput").value = "";
@@ -1164,6 +1391,14 @@ $("siteGateForm").addEventListener("submit", submitSiteGate);
 $("authForm").addEventListener("submit", submitAuth);
 $("authSwitchButton").addEventListener("click", switchAuthMode);
 $("notificationsToggle").addEventListener("change", event => saveNotificationPreference(event.target.checked));
+["customTheme","customAccent","customFont","customWallpaper","customFontSize","customRadius","customWidth","customSidebar","customCompact","customAvatars","customTimes","customMotion","customSquareAvatars"].forEach(id => {
+  $(id).addEventListener("input", updateCustomizationFromControls);
+  $(id).addEventListener("change", updateCustomizationFromControls);
+});
+$("resetCustomizationButton").addEventListener("click", resetCustomization);
+$("copyCustomizationButton").addEventListener("click", copyCustomizationBackup);
+$("importCustomizationButton").addEventListener("click", importCustomizationBackup);
+applyCustomization(loadCustomization(), false);
 $("searchInput").addEventListener("input", searchChats);
 $("messageInput").addEventListener("keydown", event => { if (event.key === "Enter" && !event.shiftKey) { event.preventDefault(); sendMessage(); } });
 $("messageInput").addEventListener("input", handleLocalTyping);
